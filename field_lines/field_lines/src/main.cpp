@@ -9,12 +9,15 @@
 * DONE
 */
 
+// Playword (window) dimentions
 #define WINDOW_LENGHT 1920
 #define WINDOW_HEIGHT 1080
 
+// Single field line dimentions
 #define LINE_LENGHT 5
 #define LINE_HEIGHT 1
 
+// Field stepping when calculating lines
 #define X_STEP 5
 #define Y_STEP 5
 
