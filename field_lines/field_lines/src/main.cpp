@@ -9,7 +9,7 @@
 * DONE
 */
 
-// Playword (window) dimentions
+// Playworld (window) dimentions
 #define WINDOW_LENGHT 1920
 #define WINDOW_HEIGHT 1080
 
