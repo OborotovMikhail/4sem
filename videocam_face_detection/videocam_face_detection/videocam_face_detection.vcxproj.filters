@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include=".build">
+      <UniqueIdentifier>{1fb019b2-27b6-4039-9506-28a6432422e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty">
+      <UniqueIdentifier>{e4476cb7-c68c-4c18-abdb-61cfe23fd12c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="bin">
+      <UniqueIdentifier>{ba66ba2c-ea8f-4a70-8c86-1e606dcf9862}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="docs">
+      <UniqueIdentifier>{9978f63c-11d0-4ec0-852a-4d5feb87aefd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{7e22e440-d185-4fc8-8623-5b34183630d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty\my_include">
+      <UniqueIdentifier>{d11352b4-d1de-404e-92d0-9116f63e59c2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="docs\README.txt">
+      <Filter>docs</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="3rdparty\my_include\helloworld.h">
+      <Filter>3rdparty\my_include</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
