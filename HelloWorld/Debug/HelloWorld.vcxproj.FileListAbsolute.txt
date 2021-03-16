@@ -1,2 +1,0 @@
-D:\STUDY\MIPT\4_SEM\PROGA\4sem\HelloWorld\Debug\HelloWorld.exe
-D:\STUDY\MIPT\4_SEM\PROGA\4sem\HelloWorld\Debug\HelloWorld.pdb
