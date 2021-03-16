@@ -1,0 +1,2 @@
+﻿main.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/INCREMENTAL:NO' specification
+  most_used_word.vcxproj -> D:\STUDY\MIPT\4_SEM\PROGA\4sem\most_used_word\most_used_word\bin\Debug\most_used_word.exe
