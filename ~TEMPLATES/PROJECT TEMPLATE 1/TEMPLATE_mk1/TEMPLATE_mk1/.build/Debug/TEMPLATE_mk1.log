@@ -1,0 +1,2 @@
+﻿main.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/INCREMENTAL:NO' specification
+  TEMPLATE_mk1.vcxproj -> D:\STUDY\MIPT\4_SEM\PROGA\4sem\~TEMPLATES\PROJECT TEMPLATE 1\TEMPLATE_mk1\TEMPLATE_mk1\bin\Debug\TEMPLATE_mk1.exe
