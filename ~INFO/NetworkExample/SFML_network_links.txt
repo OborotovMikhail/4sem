@@ -1,0 +1,22 @@
+SFML network материалы:
+
+
+Вот еще ссылки на материалы по теме:
+https://github.com/Hopson97/Multiplayer-Pong
+
+Введение в сети с sfml:
+http://what-when-how.com/Tutorial/topic-2762f9jsf/SFML-Essentials-193.html
+
+Работает с большими огрехами, зато просто:
+https://www.youtube.com/watch?v=P2oXfz87Aqs
+
+https://www.youtube.com/watch?v=CB8prxPZn1M
+для подключения новых игроков и т.п. tcp, вот время игры положения игроков/врагов/пуль - udp.
+https://github.com/Nubbin72/MULTIPLAYER
+
+Не просто, но очень хорошо:
+https://www.youtube.com/watch?v=B-qvW1c78eA
+
+https://github.com/matzar/SFML-Networking
+
+https://www.youtube.com/watch?v=8psz0Gav-f4
