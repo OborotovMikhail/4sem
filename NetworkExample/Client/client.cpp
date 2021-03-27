@@ -118,7 +118,6 @@ private:
 };
 
 
-
 int main()
 {
   World world;
