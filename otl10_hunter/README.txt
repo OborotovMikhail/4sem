@@ -1,6 +1,6 @@
 OTL10 HUNTER
 
 Pac-man type game for true botaniks
-Possibly with multiplayer ability
+With multiplayer ability
 
 TODO
