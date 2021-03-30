@@ -8,19 +8,29 @@
 // Player id type
 using PlayerId = int;
 
+// Game world structure
 struct World
 {
     // Players map
     std::unordered_map<PlayerId, Player> players;
 
-    // 
+    // Mutex
+    // (a primitive for controlling threads accessing shared memory)
+    std::mutex m;
+
+    // World size
+    static const sf::Vector2i Size;
+
+    // Update world function
+    // (Updates all players positions)
     void update(float dt)
     {
         std::lock_guard<std::mutex> guard(m);
-        for (auto& it : players)
-            it.second.update(dt);
-    }
-    std::mutex m;
 
-    static const sf::Vector2i Size;
+        // Updating players positions
+        for (auto& it : players)
+        {
+            it.second.update(dt);
+        }
+    }
 };

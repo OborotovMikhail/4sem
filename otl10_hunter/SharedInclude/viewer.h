@@ -4,6 +4,7 @@
 
 #include "world.h"
 
+// Creating world viewer (displayer) class
 class Viewer : public sf::RenderWindow
 {
 public:
@@ -12,6 +13,7 @@ public:
         setFramerateLimit(60);
     }
 
+    // Handling events function
     void handleEvents()
     {
         sf::Event event;
@@ -22,21 +24,27 @@ public:
         }
     }
 
+    // Draw (display) world function
     void draw(const World& world)
     {
+        // Colors
         static const sf::Color colors[] = { sf::Color::Red, sf::Color::Green, sf::Color::Blue };
 
+        // Setting black color as a background
         clear(sf::Color::Black);
 
+        // Drawing players
         for (const auto& it : world.players)
         {
+            // Creating circle (player)
             sf::CircleShape s(25);
 
-            s.setFillColor(colors[it.first]);
-            s.setPosition(it.second.pos);
-            sf::RenderWindow::draw(s);
+            s.setFillColor(colors[it.first]); // Setting player color
+            s.setPosition(it.second.pos); // Setting player position
+            sf::RenderWindow::draw(s); // Drawing player in a window
         }
 
+        // Displaying
         display();
     }
 };
