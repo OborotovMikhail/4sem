@@ -217,17 +217,15 @@ int main()
 {
     World world; // Creating world
 
-    Viewer viewer("My server"); // Creating server viewer
+    // Viewer viewer("My server"); // Creating server viewer
     Server server(1234, world); // Creating server
 
     sf::Clock gameClock;
     sf::Time tick;
 
     // Main cycle
-    while (server.isRunning() && viewer.isOpen())
+    while (server.isRunning())
     {
-        viewer.handleEvents(); // Handling viewer events
-
         auto dt = gameClock.restart(); // Calculating dt
         server.update(dt.asSeconds()); // Updating
 
@@ -241,7 +239,7 @@ int main()
         }
 
         // Drawing world (server side)
-        viewer.draw(world);
+        // viewer.draw(world);
     }
 
     return 0;

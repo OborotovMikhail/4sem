@@ -37,7 +37,7 @@ public:
         for (const auto& it : world.players)
         {
             // Creating circle (player)
-            sf::CircleShape s(25);
+            sf::CircleShape s(20);
 
             s.setFillColor(colors[it.first]); // Setting player color
             s.setPosition(it.second.pos); // Setting player position
