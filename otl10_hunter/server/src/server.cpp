@@ -57,11 +57,11 @@ public:
             return;
         }
 
+        world.new_target(); // Creating first target
+
         // Creating and detaching a thread for receiving packets
         syncThread = std::thread(&Server::receive, this);
         syncThread.detach();
-
-        world.new_target(); // Creating first target
     }
 
     // Server destructor
@@ -192,10 +192,11 @@ public:
         // Checking if anybody reached the target
         for (auto& it : world.players)
         {
-            if ((world.target.pos.x > it.second.pos.x - 5) && (world.target.pos.x < it.second.pos.x + 5) && 
-                (world.target.pos.y > it.second.pos.y - 5) && (world.target.pos.y < it.second.pos.y + 5))
+            if ((world.target.pos.x > it.second.pos.x - 30) && (world.target.pos.x < it.second.pos.x + 30) && 
+                (world.target.pos.y > it.second.pos.y - 30) && (world.target.pos.y < it.second.pos.y + 30))
             {
                 world.new_target();
+                it.second.rad += 5;
             }
         }
     }
@@ -216,8 +217,15 @@ public:
         toSend << Message::UpdateWorld << world.players.size();
         for (const auto &elem : world.players)
         {
-            toSend << elem.first << elem.second.pos.x << elem.second.pos.y << elem.second.v.x << elem.second.v.y;
+            // Players position and velocity to packet
+            toSend << elem.first << elem.second.pos.x << elem.second.pos.y << elem.second.v.x << elem.second.v.y << elem.second.rad;
         }
+
+        // Pushing target position to packet
+        toSend << world.target.pos.x;
+        toSend << world.target.pos.y;
+
+        // Pushing server elapsed time to packet
         toSend << clock.getElapsedTime().asSeconds();
 
         // Sending packets to all clients

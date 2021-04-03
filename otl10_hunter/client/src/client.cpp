@@ -63,26 +63,39 @@ class Client
                 if (type == Message::UpdateWorld)
                 {
                     {
-                        int n;
-                        packet >> n;
+                        int n; // Number of players
+                        packet >> n; // Getting number of players from packet
                         std::lock_guard<std::mutex> m(world.m);
 
                         for (int i = 0; i < n; ++i)
                         {
-                            int index;
-                            sf::Vector2f pos, v;
+                            int index; // Player id
+                            sf::Vector2f pos, v; // Positon and velocity from server
+                            int rad;
 
-                            packet >> index >> pos.x >> pos.y >> v.x >> v.y;
+                            packet >> index >> pos.x >> pos.y >> v.x >> v.y >> rad;
 
-                            world.players[index].pos = pos;
+                            world.players[index].pos = pos; // Updating position for players
+                            world.players[index].rad = rad; // Updating radius for players
 
                             if (index != id())
+                            {
+                                // Updating velocity for other players
+                                // Not for this client!
                                 world.players[index].v = v;
+                            }
                         }
                     }
+
+                    // Updating target position
+                    packet >> world.target.pos.x;
+                    packet >> world.target.pos.y;
+
+                    // Getting elapsed server time from packet
                     float ts;
                     packet >> ts;
 
+                    // Updating world
                     world.update(clock.getElapsedTime().asSeconds() - (ts - serverTime));
                 }
             }
@@ -160,7 +173,7 @@ int main()
         sf::Vector2f v; // Velocity vector
         
         // Checking if keyboard buttons are pressed
-        // Getting new velocity
+        // Getting new velocity (client controls code)
         if (client.id() == 0)
         {
             // Arrow controls for client 0

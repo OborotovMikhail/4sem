@@ -1,4 +1,5 @@
-﻿  server.cpp
+﻿  player.cpp
+  server.cpp
 D:\STUDY\MIPT\4_SEM\PROGA\4sem\otl10_hunter\SharedInclude\world.h(45,23): warning C4244: 'initializing': conversion from '_Rep' to 'unsigned int', possible loss of data
           with
           [
@@ -24,6 +25,7 @@ D:\STUDY\MIPT\4_SEM\PROGA\4sem\otl10_hunter\SharedInclude\world.h(48,83): warnin
           [
               _Ty=float
           ]
+D:\STUDY\MIPT\4_SEM\PROGA\4sem\otl10_hunter\SharedInclude\viewer.h(40,40): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
 D:\STUDY\MIPT\4_SEM\PROGA\4sem\otl10_hunter\server\src\server.cpp(109,43): warning C4244: 'initializing': conversion from '_Rep' to 'unsigned int', possible loss of data
           with
           [
@@ -76,8 +78,8 @@ D:\STUDY\MIPT\4_SEM\PROGA\4sem\otl10_hunter\SharedInclude\world.h(48,83): warnin
               _Ty=float
           ]
   Generating code
-  24 of 516 functions ( 4.7%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+  39 of 517 functions ( 7.5%) were compiled, the rest were copied from previous compilation.
+    1 functions were new in current compilation
+    14 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   server.vcxproj -> D:\STUDY\MIPT\4_SEM\PROGA\4sem\otl10_hunter\server\bin\Release\server.exe

@@ -37,8 +37,8 @@ public:
         for (const auto& it : world.players)
         {
             // Creating circle (player)
-            sf::CircleShape s(20);
-
+            sf::CircleShape s(it.second.rad);
+            s.setOrigin(s.getRadius(), s.getRadius());
             s.setFillColor(colors[it.first]); // Setting player color
             s.setPosition(it.second.pos); // Setting player position
             sf::RenderWindow::draw(s); // Drawing player in a window
@@ -46,6 +46,7 @@ public:
 
         // Creating target
         sf::CircleShape target_display(10);
+        target_display.setOrigin(target_display.getRadius(), target_display.getRadius());
         target_display.setFillColor(sf::Color::White);
         target_display.setPosition(world.target.pos);
         sf::RenderWindow::draw(target_display);

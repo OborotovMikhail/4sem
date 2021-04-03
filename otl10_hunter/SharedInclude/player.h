@@ -8,6 +8,7 @@ struct Player
 {
     sf::Vector2f pos; // Position
     sf::Vector2f v; // Velocity
+    int rad = 20;
 
     // Update player position
     void update(float dt)

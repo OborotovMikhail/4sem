@@ -4,5 +4,5 @@ enum Message
 {
 	ClientCreated,
 	UpdateWorld,
-	Movement
+	Movement,
 };
