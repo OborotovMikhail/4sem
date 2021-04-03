@@ -3,6 +3,7 @@
 #include <mutex>
 #include <unordered_map>
 #include <iostream>
+#include <random>
 
 #include "player.h"
 #include "target.h"
@@ -41,14 +42,12 @@ struct World
 
     // Set new target position
     void new_target() {
-        // sf::Vector2f pos(float(rand() % 800), float(rand() % 800));
-        // std::cout << pos.x << ' ' << pos.y;
-        // target.pos = pos;
+        unsigned seed = std::chrono::steady_clock::now().time_since_epoch().count(); // Random seed
+        std::default_random_engine generator(seed); // Generator
+        std::uniform_real_distribution<float> distribution_x(float(World::Size.x) * 0.05, float(World::Size.x) * 0.95); // Creating x distribution
+        std::uniform_real_distribution<float> distribution_y(float(World::Size.y) * 0.05, float(World::Size.y) * 0.95); // Creating y distribution
 
-        target.pos.x = float(rand() * World::Size.x / RAND_MAX);
-        target.pos.y = float(rand() * World::Size.y / RAND_MAX);
-
-        // std::cout << "target pos: " << target.pos.x << ' ' << target.pos.y << std::endl;
-        // std::cout << rand() << ' ' << rand() << ' ' << rand() << ' ' << RAND_MAX;
+        target.pos.x = distribution_x(generator); // Generating new x target pos
+        target.pos.y = distribution_y(generator); // Generating new y target pos
     }
 };

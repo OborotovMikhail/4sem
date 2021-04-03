@@ -9,6 +9,7 @@
 #include <thread>
 #include <iostream>
 #include <atomic>
+#include <random>
 
 // TODO
 
@@ -105,8 +106,12 @@ public:
                             std::lock_guard<std::mutex> guard(newPlayerMutex);
 
                             // Setting random spawn position
-                            sf::Vector2f pos(float(rand() % World::Size.x), float(rand() % World::Size.y));
-                            world.players[currentPlayerId] = { pos, sf::Vector2f() };
+                            unsigned seed = std::chrono::steady_clock::now().time_since_epoch().count(); // Random seed
+                            std::default_random_engine generator(seed); // Generator
+                            std::uniform_real_distribution<float> distribution_x(float(World::Size.x) * 0.05, float(World::Size.x) * 0.95); // Creating x distribution
+                            std::uniform_real_distribution<float> distribution_y(float(World::Size.y) * 0.05, float(World::Size.y) * 0.95); // Creating y distribution
+                            sf::Vector2f pos(distribution_x(generator), distribution_y(generator)); // Generating position
+                            world.players[currentPlayerId] = { pos, sf::Vector2f() }; // Setting player pos to just generated one
 
                             // Adding new client's socket
                             selector.add(*tempSocket);

@@ -1,8 +1,83 @@
 ﻿  server.cpp
+D:\STUDY\MIPT\4_SEM\PROGA\4sem\otl10_hunter\SharedInclude\world.h(45,23): warning C4244: 'initializing': conversion from '_Rep' to 'unsigned int', possible loss of data
+          with
+          [
+              _Rep=__int64
+          ]
+D:\STUDY\MIPT\4_SEM\PROGA\4sem\otl10_hunter\SharedInclude\world.h(47,112): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+D:\STUDY\MIPT\4_SEM\PROGA\4sem\otl10_hunter\SharedInclude\world.h(47,83): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+D:\STUDY\MIPT\4_SEM\PROGA\4sem\otl10_hunter\SharedInclude\world.h(48,112): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+D:\STUDY\MIPT\4_SEM\PROGA\4sem\otl10_hunter\SharedInclude\world.h(48,83): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+D:\STUDY\MIPT\4_SEM\PROGA\4sem\otl10_hunter\server\src\server.cpp(109,43): warning C4244: 'initializing': conversion from '_Rep' to 'unsigned int', possible loss of data
+          with
+          [
+              _Rep=__int64
+          ]
+D:\STUDY\MIPT\4_SEM\PROGA\4sem\otl10_hunter\server\src\server.cpp(111,132): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+D:\STUDY\MIPT\4_SEM\PROGA\4sem\otl10_hunter\server\src\server.cpp(111,103): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+D:\STUDY\MIPT\4_SEM\PROGA\4sem\otl10_hunter\server\src\server.cpp(112,132): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+D:\STUDY\MIPT\4_SEM\PROGA\4sem\otl10_hunter\server\src\server.cpp(112,103): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
   world.cpp
+D:\STUDY\MIPT\4_SEM\PROGA\4sem\otl10_hunter\SharedInclude\world.h(45,23): warning C4244: 'initializing': conversion from '_Rep' to 'unsigned int', possible loss of data
+          with
+          [
+              _Rep=__int64
+          ]
+D:\STUDY\MIPT\4_SEM\PROGA\4sem\otl10_hunter\SharedInclude\world.h(47,112): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+D:\STUDY\MIPT\4_SEM\PROGA\4sem\otl10_hunter\SharedInclude\world.h(47,83): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+D:\STUDY\MIPT\4_SEM\PROGA\4sem\otl10_hunter\SharedInclude\world.h(48,112): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+D:\STUDY\MIPT\4_SEM\PROGA\4sem\otl10_hunter\SharedInclude\world.h(48,83): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
   Generating code
-  7 of 494 functions ( 1.4%) were compiled, the rest were copied from previous compilation.
+  24 of 516 functions ( 4.7%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    4 functions had inline decision re-evaluated but remain unchanged
+    0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   server.vcxproj -> D:\STUDY\MIPT\4_SEM\PROGA\4sem\otl10_hunter\server\bin\Release\server.exe
