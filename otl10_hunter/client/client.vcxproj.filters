@@ -55,5 +55,8 @@
     <ClInclude Include="..\SharedInclude\world.h">
       <Filter>3rdparty\SharedInclude</Filter>
     </ClInclude>
+    <ClInclude Include="..\SharedInclude\target.h">
+      <Filter>3rdparty\SharedInclude</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

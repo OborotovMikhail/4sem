@@ -59,6 +59,8 @@ public:
         // Creating and detaching a thread for receiving packets
         syncThread = std::thread(&Server::receive, this);
         syncThread.detach();
+
+        world.new_target(); // Creating first target
     }
 
     // Server destructor

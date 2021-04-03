@@ -44,6 +44,12 @@ public:
             sf::RenderWindow::draw(s); // Drawing player in a window
         }
 
+        // Creating target
+        sf::CircleShape target_display(10);
+        target_display.setFillColor(sf::Color::White);
+        target_display.setPosition(world.target.pos);
+        sf::RenderWindow::draw(target_display);
+
         // Displaying
         display();
     }

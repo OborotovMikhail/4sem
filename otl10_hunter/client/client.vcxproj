@@ -171,6 +171,7 @@
   <ItemGroup>
     <ClInclude Include="..\SharedInclude\network.h" />
     <ClInclude Include="..\SharedInclude\player.h" />
+    <ClInclude Include="..\SharedInclude\target.h" />
     <ClInclude Include="..\SharedInclude\viewer.h" />
     <ClInclude Include="..\SharedInclude\world.h" />
     <ClInclude Include="3rdparty\my_include\helloworld.h" />
