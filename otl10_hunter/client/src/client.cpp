@@ -122,7 +122,7 @@ public:
     }
 
     // Notify server about velocity function
-    void notify()
+    void notify_mov()
     {
         // Creating a packet
         sf::Packet packet;
@@ -227,7 +227,7 @@ int main()
         // On any change (speed direction or magnitude) notify server
         if (v != prevVelocity)
         {
-            client.notify();
+            client.notify_mov();
             prevVelocity = v;
         }
 

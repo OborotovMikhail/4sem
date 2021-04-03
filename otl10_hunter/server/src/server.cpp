@@ -192,11 +192,10 @@ public:
         // Checking if anybody reached the target
         for (auto& it : world.players)
         {
-            if ((world.target.pos.x > it.second.pos.x - 30) && (world.target.pos.x < it.second.pos.x + 30) && 
-                (world.target.pos.y > it.second.pos.y - 30) && (world.target.pos.y < it.second.pos.y + 30))
+            if (sqrt(pow((world.target.pos.x-it.second.pos.x),2)+ pow((world.target.pos.y- it.second.pos.y),2)) < it.second.rad)
             {
                 world.new_target();
-                it.second.rad += 5;
+                it.second.rad += 10;
             }
         }
     }
@@ -244,14 +243,14 @@ int main()
 {
     World world; // Creating world
 
-    // Viewer viewer("My server"); // Creating server viewer
     Server server(1234, world); // Creating server
+    Viewer viewer("My server"); // Creating server viewer
 
     sf::Clock gameClock;
     sf::Time tick;
 
     // Main cycle
-    while (server.isRunning())
+    while (server.isRunning() && viewer.isOpen())
     {
         auto dt = gameClock.restart(); // Calculating dt
         server.update(dt.asSeconds()); // Updating
@@ -266,7 +265,7 @@ int main()
         }
 
         // Drawing world (server side)
-        // viewer.draw(world);
+        viewer.draw(world);
     }
 
     return 0;
