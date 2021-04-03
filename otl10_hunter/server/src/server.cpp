@@ -180,7 +180,19 @@ public:
 
         // Updating player's positions
         for (auto& it : world.players)
+        {
             it.second.update(dt);
+        }
+
+        // Checking if anybody reached the target
+        for (auto& it : world.players)
+        {
+            if ((world.target.pos.x > it.second.pos.x - 5) && (world.target.pos.x < it.second.pos.x + 5) && 
+                (world.target.pos.y > it.second.pos.y - 5) && (world.target.pos.y < it.second.pos.y + 5))
+            {
+                world.new_target();
+            }
+        }
     }
 
     // Synchronizing with all clients

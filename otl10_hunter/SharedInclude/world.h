@@ -47,7 +47,8 @@ struct World
 
         target.pos.x = float(rand() * World::Size.x / RAND_MAX);
         target.pos.y = float(rand() * World::Size.y / RAND_MAX);
-        std::cout << "target pos: " << target.pos.x << ' ' << target.pos.y << std::endl;
-        std::cout << rand() << ' ' << rand() << ' ' << rand() << ' ' << RAND_MAX;
+
+        // std::cout << "target pos: " << target.pos.x << ' ' << target.pos.y << std::endl;
+        // std::cout << rand() << ' ' << rand() << ' ' << rand() << ' ' << RAND_MAX;
     }
 };
