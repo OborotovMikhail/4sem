@@ -167,23 +167,20 @@ int main()
 
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
             {
-                v = { -Player::MaxSpeed, 0.f };
+                v.x = -Player::MaxSpeed;
             }
-            else
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-                {
-                    v = { Player::MaxSpeed, 0.f };
-                }
-                else
-                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-                    {
-                        v = { 0.f, -Player::MaxSpeed };
-                    }
-                    else
-                        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-                        {
-                            v = { 0.f, Player::MaxSpeed };
-                        }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+            {
+                v.x = Player::MaxSpeed;
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+            {
+                v.y = -Player::MaxSpeed;
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+            {
+                v.y = Player::MaxSpeed;
+            }
         }
         else
         {
@@ -191,23 +188,20 @@ int main()
 
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
             {
-                v = { -Player::MaxSpeed, 0.f };
+                v.x = -Player::MaxSpeed;
             }
-            else
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-                {
-                    v = { Player::MaxSpeed, 0.f };
-                }
-                else
-                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-                    {
-                        v = { 0.f, -Player::MaxSpeed };
-                    }
-                    else
-                        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-                        {
-                            v = { 0.f, Player::MaxSpeed };
-                        }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+            {
+                v.x = Player::MaxSpeed;
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+            {
+                v.y = -Player::MaxSpeed;
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+            {
+                v.y = Player::MaxSpeed;
+            }
         }
 
         // Changing player's velocity to new velocity
