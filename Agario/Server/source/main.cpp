@@ -1,9 +1,10 @@
 #include <iostream>
 #include <SFML\Graphics.hpp>
 
+// Server main function
 int main()
 {
-    std::cout << "Hello World!" << std::endl;
+    
 
     return 0;
 }
