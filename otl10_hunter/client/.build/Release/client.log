@@ -1,5 +1,5 @@
 ﻿  client.cpp
-D:\STUDY\MIPT\4_SEM\PROGA\4sem\otl10_hunter\SharedInclude\world.h(45,23): warning C4244: 'initializing': conversion from '_Rep' to 'unsigned int', possible loss of data
+D:\STUDY\MIPT\4_SEM\PROGA\4sem\otl10_hunter\SharedInclude\world.h(45,27): warning C4244: 'initializing': conversion from '_Rep' to 'unsigned int', possible loss of data
           with
           [
               _Rep=__int64

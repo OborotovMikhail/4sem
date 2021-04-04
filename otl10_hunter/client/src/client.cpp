@@ -178,22 +178,70 @@ int main()
         {
             // Arrow controls for client 0
 
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+            // zero movement
+            if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Right) == sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+                && (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) == sf::Keyboard::isKeyPressed(sf::Keyboard::Down)))
+            {
+                v.x = 0;
+                v.y = 0;
+            }
+            // left movement
+            if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && sf::Keyboard::isKeyPressed(sf::Keyboard::Left)
+                && (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) == sf::Keyboard::isKeyPressed(sf::Keyboard::Down)))
             {
                 v.x = -Player::MaxSpeed;
+                v.y = 0;
             }
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+            // right movement
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Left)
+                && (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) == sf::Keyboard::isKeyPressed(sf::Keyboard::Down)))
             {
                 v.x = Player::MaxSpeed;
+                v.y = 0;
             }
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+            // down movement
+            if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Right) == sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+                && !sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
             {
-                v.y = -Player::MaxSpeed;
-            }
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-            {
+                v.x = 0;
                 v.y = Player::MaxSpeed;
             }
+            // up movement
+            if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Right) == sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+                && sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+            {
+                v.x = 0;
+                v.y = -Player::MaxSpeed;
+            }
+            // left-down movement
+            if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && sf::Keyboard::isKeyPressed(sf::Keyboard::Left)
+                && !sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+            {
+                v.x = -Player::MaxSpeed;
+                v.y = Player::MaxSpeed;
+            }
+            // left-up movement
+            if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && sf::Keyboard::isKeyPressed(sf::Keyboard::Left)
+                && sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+            {
+                v.x = -Player::MaxSpeed;
+                v.y = -Player::MaxSpeed;
+            }
+            // right-down movement
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Left)
+                && !sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+            {
+                v.x = Player::MaxSpeed;
+                v.y = Player::MaxSpeed;
+            }
+            // right-up movement
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Left)
+                && sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+            {
+                v.x = Player::MaxSpeed;
+                v.y = -Player::MaxSpeed;
+            }
+            
         }
         else
         {

@@ -1,5 +1,5 @@
 ﻿  server.cpp
-D:\STUDY\MIPT\4_SEM\PROGA\4sem\otl10_hunter\SharedInclude\world.h(45,23): warning C4244: 'initializing': conversion from '_Rep' to 'unsigned int', possible loss of data
+D:\STUDY\MIPT\4_SEM\PROGA\4sem\otl10_hunter\SharedInclude\world.h(45,27): warning C4244: 'initializing': conversion from '_Rep' to 'unsigned int', possible loss of data
           with
           [
               _Rep=__int64
@@ -50,8 +50,34 @@ D:\STUDY\MIPT\4_SEM\PROGA\4sem\otl10_hunter\server\src\server.cpp(112,103): warn
           [
               _Ty=float
           ]
+  world.cpp
+D:\STUDY\MIPT\4_SEM\PROGA\4sem\otl10_hunter\SharedInclude\world.h(45,27): warning C4244: 'initializing': conversion from '_Rep' to 'unsigned int', possible loss of data
+          with
+          [
+              _Rep=__int64
+          ]
+D:\STUDY\MIPT\4_SEM\PROGA\4sem\otl10_hunter\SharedInclude\world.h(47,112): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+D:\STUDY\MIPT\4_SEM\PROGA\4sem\otl10_hunter\SharedInclude\world.h(47,83): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+D:\STUDY\MIPT\4_SEM\PROGA\4sem\otl10_hunter\SharedInclude\world.h(48,112): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+D:\STUDY\MIPT\4_SEM\PROGA\4sem\otl10_hunter\SharedInclude\world.h(48,83): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
   Generating code
-  1 of 568 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
+  0 of 568 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
