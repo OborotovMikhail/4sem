@@ -3,28 +3,32 @@
 #include <random>
 #include "target.h"
 
-void Target::set_new_pos()
+// Set new target pos
+void Target::new_pos(World& world)
 {
     unsigned int seed = std::chrono::steady_clock::now().time_since_epoch().count(); // Random seed
     std::default_random_engine generator(seed); // Generator
-    std::uniform_real_distribution<float> distribution_x(float(World::Size.x) * 0.05, float(World::Size.x) * 0.95); // Creating x distribution
-    std::uniform_real_distribution<float> distribution_y(float(World::Size.y) * 0.05, float(World::Size.y) * 0.95); // Creating y distribution
+    std::uniform_real_distribution<float> distribution_x(float(world.get_size_x()) * 0.05, float(world.get_size_x()) * 0.95); // Creating x distribution
+    std::uniform_real_distribution<float> distribution_y(float(world.get_size_y()) * 0.05, float(world.get_size_y()) * 0.95); // Creating y distribution
 
     this->pos.x = distribution_x(generator); // Generating new x target pos
     this->pos.y = distribution_y(generator); // Generating new y target pos
 }
 
+// Get target position func
 sf::Vector2f Target::get_pos()
 {
-	return sf::Vector2f();
+	return this->pos;
 }
 
+// Get x target coordinate func
 float Target::get_x()
 {
-	return 0.0f;
+	return this->pos.x;
 }
 
+// Get y target coordinate func
 float Target::get_y()
 {
-	return 0.0f;
+	return this->pos.y;
 }

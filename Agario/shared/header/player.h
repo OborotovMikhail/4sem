@@ -9,5 +9,6 @@ class Player
     float MaxSpeed; // Pixels per second, used as a reference to calculate velocity
 
 public:
-    void update(float dt); // Update player position
+    // Update player position
+    void update(float dt);
 };

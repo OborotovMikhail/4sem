@@ -39,6 +39,9 @@
     <ClCompile Include="source\safequeue.cpp">
       <Filter>this project\source</Filter>
     </ClCompile>
+    <ClCompile Include="source\server.cpp">
+      <Filter>this project\source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="header\debug_print.h">
@@ -60,6 +63,9 @@
       <Filter>shared\header</Filter>
     </ClInclude>
     <ClInclude Include="header\safequeue.h">
+      <Filter>this project\header</Filter>
+    </ClInclude>
+    <ClInclude Include="header\server.h">
       <Filter>this project\header</Filter>
     </ClInclude>
   </ItemGroup>

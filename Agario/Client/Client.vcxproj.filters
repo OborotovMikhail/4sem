@@ -36,6 +36,9 @@
     <ClCompile Include="..\shared\source\viewer.cpp">
       <Filter>shared\source</Filter>
     </ClCompile>
+    <ClCompile Include="source\client.cpp">
+      <Filter>this project\source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="header\debug_print.h">
@@ -55,6 +58,9 @@
     </ClInclude>
     <ClInclude Include="..\shared\header\viewer.h">
       <Filter>shared\header</Filter>
+    </ClInclude>
+    <ClInclude Include="header\client.h">
+      <Filter>this project\header</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

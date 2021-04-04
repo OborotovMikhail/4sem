@@ -25,6 +25,7 @@
     <ClCompile Include="..\shared\source\world.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\safequeue.cpp" />
+    <ClCompile Include="source\server.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\shared\header\network.h" />
@@ -34,6 +35,7 @@
     <ClInclude Include="..\shared\header\world.h" />
     <ClInclude Include="header\debug_print.h" />
     <ClInclude Include="header\safequeue.h" />
+    <ClInclude Include="header\server.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
