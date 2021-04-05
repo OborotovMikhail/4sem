@@ -17,19 +17,17 @@ class World
     std::unordered_map<PlayerId, Player> players; // Players map
     Target target; // Target class object
     std::mutex m; // Mutex
-    static const sf::Vector2i Size; // World size
 
 public:
+    static const sf::Vector2i Size; // World size
+
     // Update world function
     // (Updates all players positions)
     void update(float dt);
 
-    // Get world width (x dim)
-    int get_size_x();
+    // Get players map
+    std::unordered_map<PlayerId, Player> get_players();
 
-    // Get world height (y dim)
-    int get_size_y();
-
-    // Get mutex func
-    std::mutex get_mutex();
+    // Get target function
+    Target get_target();
 };

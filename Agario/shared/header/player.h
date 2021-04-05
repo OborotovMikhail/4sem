@@ -11,4 +11,10 @@ class Player
 public:
     // Update player position
     void update(float dt);
+
+    // Get player position
+    sf::Vector2f get_pos();
+
+    // Get player radius
+    int get_rad();
 };
