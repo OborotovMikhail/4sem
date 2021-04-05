@@ -62,13 +62,8 @@ void Server::receive()
                     {
                         std::lock_guard<std::mutex> guard(newPlayerMutex);
 
-                        // Setting random spawn position
-                        unsigned seed = std::chrono::steady_clock::now().time_since_epoch().count(); // Random seed
-                        std::default_random_engine generator(seed); // Generator
-                        std::uniform_real_distribution<float> distribution_x(float(World::Size.x) * 0.05, float(World::Size.x) * 0.95); // Creating x distribution
-                        std::uniform_real_distribution<float> distribution_y(float(World::Size.y) * 0.05, float(World::Size.y) * 0.95); // Creating y distribution
-                        sf::Vector2f pos(distribution_x(generator), distribution_y(generator)); // Generating position
-                        world.players[currentPlayerId] = { pos, sf::Vector2f() }; // Setting player pos to just generated one
+                        // Setting random player spawn position
+                        world.get_players()[currentPlayerId].new_pos();
 
                         // Adding new client's socket
                         selector.add(*tempSocket);
@@ -76,7 +71,8 @@ void Server::receive()
 
                         // Creating a spawn packet for the new client
                         sf::Packet outPacket;
-                        outPacket << Message::ClientCreated << currentPlayerId << pos.x << pos.y << clock.getElapsedTime().asSeconds();
+                        outPacket << Message::ClientCreated << currentPlayerId << world.get_players()[currentPlayerId].get_x() 
+                            << world.get_players()[currentPlayerId].get_y() << clock.getElapsedTime().asSeconds();
 
                         dirty = true; // Server dirty
 
@@ -86,7 +82,9 @@ void Server::receive()
                         else
                         {
                             std::cout << "Player " << currentPlayerId << " connected\n";
-                            std::cout << "Player id " << currentPlayerId << ", spawn pos: " << pos.x << " " << pos.y << "\n";
+                            std::cout << "Player id " << currentPlayerId << ", spawn pos: " << 
+                                world.get_players()[currentPlayerId].get_x() << " " << 
+                                world.get_players()[currentPlayerId].get_y() << "\n";
                         }
 
                         sockets[currentPlayerId] = std::move(tempSocket);
@@ -101,7 +99,7 @@ void Server::receive()
             else
             {
                 // Receiving packets from all players
-                for (const std::pair<const PlayerId, Player>& elem : world.players)
+                for (const std::pair<const PlayerId, Player>& elem : world.get_players())
                 {
                     auto& socket = *sockets[elem.first]; // Selecting player socket
                     if (selector.isReady(socket))
@@ -120,6 +118,7 @@ void Server::receive()
     }
 }
 
+
 void Server::update(float dt)
 {
     while (!receivedPackets.empty())
@@ -128,30 +127,31 @@ void Server::update(float dt)
         int clientId; // Client id
 
         // Processing the "front" packet
-        auto packet = receivedPackets.dequeue();
+        sf::Packet packet = receivedPackets.dequeue();
         packet >> messageType;
         if (messageType == Message::Movement)
         {
             sf::Vector2f v; // Velocity vector
             packet >> clientId >> v.x >> v.y; // Data from packet
-            world.players[clientId].v = v; // Updating player velocity
+            world.get_players()[clientId].upd_vel(v); // Updating player velocity
             dirty = true; // Server dirty
         }
     }
 
     // Updating player's positions
-    for (auto& it : world.players)
+    for (auto& it : world.get_players())
     {
         it.second.update(dt);
     }
 
     // Checking if anybody reached the target
-    for (auto& it : world.players)
+    for (auto& it : world.get_players())
     {
-        if (sqrt(pow((world.target.pos.x - it.second.pos.x), 2) + pow((world.target.pos.y - it.second.pos.y), 2)) < it.second.rad)
+        if (sqrt(pow((world.get_target().get_x() - it.second.get_x()), 2) 
+            + pow((world.get_target().get_y() - it.second.get_y()), 2)) < it.second.get_rad())
         {
-            world.new_target();
-            it.second.rad += 10;
+            world.get_target().new_pos(); // Setting new target pos
+            it.second.increase_rad(); // Increasing player radius
         }
     }
 }
@@ -167,16 +167,17 @@ void Server::synchronize()
 
     // Forming a packet to send to clients
     sf::Packet toSend;
-    toSend << Message::UpdateWorld << world.players.size();
-    for (const auto& elem : world.players)
+    toSend << Message::UpdateWorld << world.get_players().size();
+    for (auto& elem : world.get_players())
     {
         // Players position and velocity to packet
-        toSend << elem.first << elem.second.pos.x << elem.second.pos.y << elem.second.v.x << elem.second.v.y << elem.second.rad;
+        toSend << elem.first << elem.second.get_x() << elem.second.get_x() <<
+            elem.second.get_x_vel() << elem.second.get_y_vel() << elem.second.get_rad();
     }
 
     // Pushing target position to packet
-    toSend << world.target.pos.x;
-    toSend << world.target.pos.y;
+    toSend << world.get_target().get_x();
+    toSend << world.get_target().get_y();
 
     // Pushing server elapsed time to packet
     toSend << clock.getElapsedTime().asSeconds();
