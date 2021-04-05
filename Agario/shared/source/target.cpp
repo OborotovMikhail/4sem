@@ -4,7 +4,7 @@
 #include "target.h"
 
 // Set new target pos
-void Target::new_pos(World& world)
+void Target::new_pos()
 {
     unsigned int seed = std::chrono::steady_clock::now().time_since_epoch().count(); // Random seed
     std::default_random_engine generator(seed); // Generator

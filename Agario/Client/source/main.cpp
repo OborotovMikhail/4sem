@@ -1,10 +1,138 @@
 #include <iostream>
 #include <SFML\Graphics.hpp>
 
+#include "client.h"
+
 // Client main function
 int main()
 {
-    
+    // Creating game world
+    World world;
+
+    // Creating client (args: ip, port, World)
+    Client client("127.0.0.1", 1234, world);
+
+    Viewer viewer("My client"); // Creating viewer
+    sf::Clock gameClock; // Game clock
+    sf::Vector2f prevVelocity; // Previous player velocity vector
+
+    // Main cycle
+    while (viewer.isOpen() && client.isRunning())
+    {
+        viewer.handleEvents(); // Handling events
+
+        sf::Vector2f v; // Velocity vector
+
+        // Checking if keyboard buttons are pressed
+        // Getting new velocity (client controls code)
+        if (client.id() == 0)
+        {
+            // Arrow controls for client 0
+
+            // zero movement
+            if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Right) == sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+                && (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) == sf::Keyboard::isKeyPressed(sf::Keyboard::Down)))
+            {
+                v.x = 0;
+                v.y = 0;
+            }
+            // left movement
+            if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && sf::Keyboard::isKeyPressed(sf::Keyboard::Left)
+                && (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) == sf::Keyboard::isKeyPressed(sf::Keyboard::Down)))
+            {
+                v.x = -Player::MaxSpeed;
+                v.y = 0;
+            }
+            // right movement
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Left)
+                && (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) == sf::Keyboard::isKeyPressed(sf::Keyboard::Down)))
+            {
+                v.x = Player::MaxSpeed;
+                v.y = 0;
+            }
+            // down movement
+            if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Right) == sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+                && !sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+            {
+                v.x = 0;
+                v.y = Player::MaxSpeed;
+            }
+            // up movement
+            if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Right) == sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+                && sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+            {
+                v.x = 0;
+                v.y = -Player::MaxSpeed;
+            }
+            // left-down movement
+            if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && sf::Keyboard::isKeyPressed(sf::Keyboard::Left)
+                && !sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+            {
+                v.x = -Player::MaxSpeed;
+                v.y = Player::MaxSpeed;
+            }
+            // left-up movement
+            if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && sf::Keyboard::isKeyPressed(sf::Keyboard::Left)
+                && sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+            {
+                v.x = -Player::MaxSpeed;
+                v.y = -Player::MaxSpeed;
+            }
+            // right-down movement
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Left)
+                && !sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+            {
+                v.x = Player::MaxSpeed;
+                v.y = Player::MaxSpeed;
+            }
+            // right-up movement
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Left)
+                && sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+            {
+                v.x = Player::MaxSpeed;
+                v.y = -Player::MaxSpeed;
+            }
+
+        }
+        else
+        {
+            // WASD controls for client 1
+
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+            {
+                v.x = -Player::MaxSpeed;
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+            {
+                v.x = Player::MaxSpeed;
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+            {
+                v.y = -Player::MaxSpeed;
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+            {
+                v.y = Player::MaxSpeed;
+            }
+        }
+
+        // Changing player's velocity to new velocity
+        world.players[client.id()].v = v;
+
+        // Restarting clock and updating world
+        const auto dt = gameClock.restart();
+        world.update(dt.asSeconds());
+
+        // On any change (speed direction or magnitude) notify server
+        if (v != prevVelocity)
+        {
+            client.notify_mov();
+            prevVelocity = v;
+        }
+
+        // Drawing world
+        viewer.draw(world);
+    }
 
     return 0;
 }

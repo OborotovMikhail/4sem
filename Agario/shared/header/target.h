@@ -8,7 +8,7 @@ class Target
 
 public:
 	// Set new target pos
-	void new_pos(World& world);
+	void new_pos();
 
 	// Get target position
 	sf::Vector2f get_pos();
