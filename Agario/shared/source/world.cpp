@@ -6,7 +6,7 @@ const sf::Vector2i Size = { 800, 800 };
 
 void World::update(float dt)
 {
-    std::lock_guard<std::mutex> guard(m);
+    std::lock_guard<std::mutex> guard(mutex);
 
     // Updating players positions
     for (auto& it : players)

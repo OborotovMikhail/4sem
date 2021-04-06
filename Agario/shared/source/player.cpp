@@ -6,9 +6,19 @@ void Player::update(float dt)
 	pos += v * dt;
 }
 
+float Player::get_maxspeed()
+{
+	return this->MaxSpeed;
+}
+
 sf::Vector2f Player::get_pos()
 {
 	return this->pos;
+}
+
+void Player::set_pos(sf::Vector2f new_pos)
+{
+	this->pos = new_pos;
 }
 
 float Player::get_x()
@@ -19,6 +29,11 @@ float Player::get_x()
 float Player::get_y()
 {
 	return pos.y;
+}
+
+sf::Vector2f Player::get_vel()
+{
+	return this->v;
 }
 
 float Player::get_x_vel()
@@ -36,6 +51,11 @@ int Player::get_rad()
 	return this->rad;
 }
 
+void Player::set_rad(int new_rad)
+{
+	this->rad = new_rad;
+}
+
 void Player::new_pos()
 {
 	unsigned seed = std::chrono::steady_clock::now().time_since_epoch().count(); // Random seed
@@ -46,7 +66,7 @@ void Player::new_pos()
 	this->pos = pos;
 }
 
-void Player::upd_vel(sf::Vector2f vel)
+void Player::set_vel(sf::Vector2f vel)
 {
 	this->v = vel;
 }

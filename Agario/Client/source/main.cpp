@@ -2,6 +2,7 @@
 #include <SFML\Graphics.hpp>
 
 #include "client.h"
+#include "controls.h"
 
 // Client main function
 int main()
@@ -25,6 +26,7 @@ int main()
 
         // Checking if keyboard buttons are pressed
         // Getting new velocity (client controls code)
+        /*
         if (client.id() == 0)
         {
             // Arrow controls for client 0
@@ -115,10 +117,12 @@ int main()
                 v.y = Player::MaxSpeed;
             }
         }
+        */
+        v = speed_controls_arrows(world.get_players()[client.id()].get_maxspeed());
 
         // Changing player's velocity to new velocity
-        world.players[client.id()].v = v;
-
+        world.get_players()[client.id()].set_vel(v);
+            
         // Restarting clock and updating world
         const auto dt = gameClock.restart();
         world.update(dt.asSeconds());

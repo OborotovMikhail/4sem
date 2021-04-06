@@ -18,14 +18,23 @@ public:
     // Update player position
     void update(float dt);
 
+    // Get maximum player speed
+    float get_maxspeed();
+
     // Get player position
     sf::Vector2f get_pos();
+
+    // Set new player position
+    void set_pos(sf::Vector2f new_pos);
 
     // Get player's x coordinate
     float get_x();
 
     // Get player's y coordinate
     float get_y();
+
+    // Get player velocity
+    sf::Vector2f get_vel();
 
     // Get player's x velocity
     float get_x_vel();
@@ -36,11 +45,14 @@ public:
     // Get player radius
     int get_rad();
 
+    // Set new player radius
+    void set_rad(int new_rad);
+
     // Set new random player position
     void new_pos();
 
     // Update player velocity to new value
-    void upd_vel(sf::Vector2f vel);
+    void set_vel(sf::Vector2f vel);
 
     // Increase player rad
     void increase_rad();

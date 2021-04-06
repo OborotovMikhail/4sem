@@ -16,9 +16,9 @@ class World
 {
     std::unordered_map<PlayerId, Player> players; // Players map
     Target target; // Target class object
-    std::mutex m; // Mutex
 
 public:
+    std::mutex mutex; // Mutex
     static const sf::Vector2i Size; // World size
 
     // Update world function

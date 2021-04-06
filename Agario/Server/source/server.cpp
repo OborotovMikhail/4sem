@@ -133,7 +133,7 @@ void Server::update(float dt)
         {
             sf::Vector2f v; // Velocity vector
             packet >> clientId >> v.x >> v.y; // Data from packet
-            world.get_players()[clientId].upd_vel(v); // Updating player velocity
+            world.get_players()[clientId].set_vel(v); // Updating player velocity
             dirty = true; // Server dirty
         }
     }

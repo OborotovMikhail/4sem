@@ -27,7 +27,7 @@ void Client::start()
             {
                 sf::Vector2f pos;
                 packet >> clientId >> pos.x >> pos.y >> serverTime;
-                world.players[clientId] = { pos, sf::Vector2f() };
+                world.get_players()[clientId].set_pos(pos);
                 std::cout << "Client created: " << clientId << "\n";
                 clock.restart();
             }
@@ -38,7 +38,7 @@ void Client::start()
                 {
                     int n; // Number of players
                     packet >> n; // Getting number of players from packet
-                    std::lock_guard<std::mutex> m(world.m);
+                    std::lock_guard<std::mutex> m(world.mutex);
 
                     for (int i = 0; i < n; ++i)
                     {
@@ -48,21 +48,22 @@ void Client::start()
 
                         packet >> index >> pos.x >> pos.y >> v.x >> v.y >> rad;
 
-                        world.players[index].pos = pos; // Updating position for players
-                        world.players[index].rad = rad; // Updating radius for players
+                        world.get_players()[index].set_pos(pos); // Updating position for players
+                        world.get_players()[index].set_rad(rad); // Updating radius for players
 
                         if (index != id())
                         {
                             // Updating velocity for other players
                             // Not for this client!
-                            world.players[index].v = v;
+                            world.get_players()[index].set_vel(v);
                         }
                     }
                 }
 
                 // Updating target position
-                packet >> world.target.pos.x;
-                packet >> world.target.pos.y;
+                sf::Vector2f target_pos;
+                packet >> target_pos.x >> target_pos.y;
+                world.get_target().set_pos(target_pos);
 
                 // Getting elapsed server time from packet
                 float ts;
@@ -97,7 +98,7 @@ void Client::notify_mov()
     sf::Packet packet;
 
     // This client's player velocity
-    const auto& v = world.players[id()].v;
+    const auto& v = world.get_players()[id()].get_vel();
 
     // Creating a packet for sending velocity
     packet << Message::Movement << clientId << v.x << v.y;

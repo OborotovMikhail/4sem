@@ -21,6 +21,11 @@ sf::Vector2f Target::get_pos()
 	return this->pos;
 }
 
+void Target::set_pos(sf::Vector2f new_pos)
+{
+    this->pos = new_pos;
+}
+
 // Get x target coordinate func
 float Target::get_x()
 {

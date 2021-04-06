@@ -24,6 +24,7 @@
     <ClCompile Include="..\shared\source\viewer.cpp" />
     <ClCompile Include="..\shared\source\world.cpp" />
     <ClCompile Include="source\client.cpp" />
+    <ClCompile Include="source\controls.cpp" />
     <ClCompile Include="source\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -33,6 +34,7 @@
     <ClInclude Include="..\shared\header\viewer.h" />
     <ClInclude Include="..\shared\header\world.h" />
     <ClInclude Include="header\client.h" />
+    <ClInclude Include="header\controls.h" />
     <ClInclude Include="header\debug_print.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
