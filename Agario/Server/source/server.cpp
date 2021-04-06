@@ -18,7 +18,19 @@ Server::Server(int port, World& world) :
         return;
     }
 
-    world.get_target().set_pos(world.get_random_pos()); // Creating first target
+    sf::Vector2f new_pos = world.get_random_pos();
+    // Debug
+    std::cout << "random gen pos for targ: " << new_pos.x << ' '
+        << new_pos.y << std::endl;
+    // Debug
+    std::cout << "targ pos before: " << world.get_target().get_pos().x << ' '
+        << world.get_target().get_pos().y << std::endl;
+
+    world.get_target().set_pos(new_pos); // Creating first target
+
+    // Debug
+    std::cout << "targ pos after: " << world.get_target().get_pos().x << ' '
+        << world.get_target().get_pos().y << std::endl;
 
     // Creating and detaching a thread for receiving packets
     syncThread = std::thread(&Server::receive, this);
@@ -64,11 +76,26 @@ void Server::receive()
                         std::lock_guard<std::mutex> guard(newPlayerMutex);
 
                         // Setting random player spawn position
-                        world.get_players()[currentPlayerId].set_pos(world.get_random_pos());
+
+                        // Debug
+                        std::cout << "world size: " << world.get_size().x << ' ' 
+                            << world.get_size().y << std::endl;
+
+                        sf::Vector2f new_pos = world.get_random_pos();
+
+                        // Debug
+                        std::cout << "random generated pos: " << new_pos.x << ' ' 
+                            << new_pos.y << std::endl;
+
+                        world.get_players()[currentPlayerId].set_pos(new_pos);
 
                         // Adding new client's socket
                         selector.add(*tempSocket);
                         ++playersConnected;
+
+                        // Debug
+                        std::cout << "server new player pos: " << world.get_players()[currentPlayerId].get_x() << ' '
+                            << world.get_players()[currentPlayerId].get_y() << std::endl;
 
                         // Creating a spawn packet for the new client
                         sf::Packet outPacket;
@@ -118,7 +145,6 @@ void Server::receive()
         }
     }
 }
-
 
 void Server::update(float dt)
 {

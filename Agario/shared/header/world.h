@@ -16,7 +16,7 @@ class World
 {
     std::unordered_map<PlayerId, Player> players; // Players map
     Target target; // Target class object
-    sf::Vector2i Size; // World size
+    sf::Vector2i Size = { 800, 800 };; // World size
 
 public:
     std::mutex mutex; // Mutex
@@ -26,10 +26,10 @@ public:
     void update(float dt);
 
     // Get players map
-    std::unordered_map<PlayerId, Player> get_players();
+    std::unordered_map<PlayerId, Player>& get_players();
 
     // Get target function
-    Target get_target();
+    Target& get_target();
     
     // Get random position on map
     sf::Vector2f get_random_pos();

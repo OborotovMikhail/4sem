@@ -6,6 +6,8 @@ class Target
 	sf::Vector2f pos; // Target position
 
 public:
+	Target();
+
 	// Get target position
 	sf::Vector2f get_pos();
 

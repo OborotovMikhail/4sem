@@ -22,7 +22,7 @@ public:
     int playersConnected = 0; // Number of connected players
 
     std::unordered_map<PlayerId, std::unique_ptr<sf::TcpSocket>> sockets; // Sockets map
-
+    
     SafeQueue<sf::Packet> receivedPackets; // Recieved packets (from clients)
 
     std::thread syncThread; // Thread

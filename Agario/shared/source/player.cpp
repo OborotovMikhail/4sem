@@ -19,7 +19,8 @@ sf::Vector2f Player::get_pos()
 
 void Player::set_pos(sf::Vector2f new_pos)
 {
-	this->pos = new_pos;
+	this->pos.x = new_pos.x;
+	this->pos.y = new_pos.y;
 }
 
 float Player::get_x()

@@ -26,7 +26,7 @@ int main()
 
         // Checking if keyboard buttons are pressed
         // Getting new velocity (client controls code)
-        /*
+        
         if (client.id() == 0)
         {
             // Arrow controls for client 0
@@ -42,14 +42,14 @@ int main()
             if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && sf::Keyboard::isKeyPressed(sf::Keyboard::Left)
                 && (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) == sf::Keyboard::isKeyPressed(sf::Keyboard::Down)))
             {
-                v.x = -Player::MaxSpeed;
+                v.x = -world.get_players()[client.id()].get_maxspeed();
                 v.y = 0;
             }
             // right movement
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Left)
                 && (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) == sf::Keyboard::isKeyPressed(sf::Keyboard::Down)))
             {
-                v.x = Player::MaxSpeed;
+                v.x = world.get_players()[client.id()].get_maxspeed();
                 v.y = 0;
             }
             // down movement
@@ -57,42 +57,42 @@ int main()
                 && !sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
             {
                 v.x = 0;
-                v.y = Player::MaxSpeed;
+                v.y = world.get_players()[client.id()].get_maxspeed();
             }
             // up movement
             if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Right) == sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
                 && sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
             {
                 v.x = 0;
-                v.y = -Player::MaxSpeed;
+                v.y = -world.get_players()[client.id()].get_maxspeed();
             }
             // left-down movement
             if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && sf::Keyboard::isKeyPressed(sf::Keyboard::Left)
                 && !sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
             {
-                v.x = -Player::MaxSpeed;
-                v.y = Player::MaxSpeed;
+                v.x = -world.get_players()[client.id()].get_maxspeed();
+                v.y = world.get_players()[client.id()].get_maxspeed();
             }
             // left-up movement
             if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && sf::Keyboard::isKeyPressed(sf::Keyboard::Left)
                 && sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
             {
-                v.x = -Player::MaxSpeed;
-                v.y = -Player::MaxSpeed;
+                v.x = -world.get_players()[client.id()].get_maxspeed();
+                v.y = -world.get_players()[client.id()].get_maxspeed();
             }
             // right-down movement
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Left)
                 && !sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
             {
-                v.x = Player::MaxSpeed;
-                v.y = Player::MaxSpeed;
+                v.x = world.get_players()[client.id()].get_maxspeed();
+                v.y = world.get_players()[client.id()].get_maxspeed();
             }
             // right-up movement
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Left)
                 && sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
             {
-                v.x = Player::MaxSpeed;
-                v.y = -Player::MaxSpeed;
+                v.x = world.get_players()[client.id()].get_maxspeed();
+                v.y = -world.get_players()[client.id()].get_maxspeed();
             }
 
         }
@@ -102,23 +102,23 @@ int main()
 
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
             {
-                v.x = -Player::MaxSpeed;
+                v.x = -world.get_players()[client.id()].get_maxspeed();
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
             {
-                v.x = Player::MaxSpeed;
+                v.x = world.get_players()[client.id()].get_maxspeed();
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
             {
-                v.y = -Player::MaxSpeed;
+                v.y = -world.get_players()[client.id()].get_maxspeed();
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
             {
-                v.y = Player::MaxSpeed;
+                v.y = world.get_players()[client.id()].get_maxspeed();
             }
         }
-        */
-        v = speed_controls_arrows(world.get_players()[client.id()].get_maxspeed());
+        
+        // v = speed_controls_arrows(world.get_players()[client.id()].get_maxspeed());
 
         // Changing player's velocity to new velocity
         world.get_players()[client.id()].set_vel(v);

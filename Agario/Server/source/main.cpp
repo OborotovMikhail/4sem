@@ -17,6 +17,8 @@ int main()
     // Main cycle
     while (server.isRunning() && viewer.isOpen())
     {
+        viewer.handleEvents(); // Handling events
+
         auto dt = gameClock.restart(); // Calculating dt
         server.update(dt.asSeconds()); // Updating
 
