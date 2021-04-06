@@ -1,3 +1,5 @@
+#pragma once
+
 #include "controls.h"
 
 sf::Vector2f speed_controls_arrows(float maxspeed)

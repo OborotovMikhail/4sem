@@ -1,4 +1,5 @@
 #pragma once
+
 #include "server.h"
 
 Server::Server(int port, World& world) :
@@ -17,7 +18,7 @@ Server::Server(int port, World& world) :
         return;
     }
 
-    world.get_target().new_pos(); // Creating first target
+    world.get_target().set_pos(world.get_random_pos()); // Creating first target
 
     // Creating and detaching a thread for receiving packets
     syncThread = std::thread(&Server::receive, this);
@@ -63,7 +64,7 @@ void Server::receive()
                         std::lock_guard<std::mutex> guard(newPlayerMutex);
 
                         // Setting random player spawn position
-                        world.get_players()[currentPlayerId].new_pos();
+                        world.get_players()[currentPlayerId].set_pos(world.get_random_pos());
 
                         // Adding new client's socket
                         selector.add(*tempSocket);
@@ -150,7 +151,7 @@ void Server::update(float dt)
         if (sqrt(pow((world.get_target().get_x() - it.second.get_x()), 2) 
             + pow((world.get_target().get_y() - it.second.get_y()), 2)) < it.second.get_rad())
         {
-            world.get_target().new_pos(); // Setting new target pos
+            world.get_target().set_pos(world.get_random_pos()); // Setting new target pos
             it.second.increase_rad(); // Increasing player radius
         }
     }

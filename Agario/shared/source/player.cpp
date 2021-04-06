@@ -1,4 +1,5 @@
 #pragma once
+
 #include "player.h"
 
 void Player::update(float dt)
@@ -54,16 +55,6 @@ int Player::get_rad()
 void Player::set_rad(int new_rad)
 {
 	this->rad = new_rad;
-}
-
-void Player::new_pos()
-{
-	unsigned seed = std::chrono::steady_clock::now().time_since_epoch().count(); // Random seed
-	std::default_random_engine generator(seed); // Generator
-	std::uniform_real_distribution<float> distribution_x(float(World::Size.x) * 0.05, float(World::Size.x) * 0.95); // Creating x distribution
-	std::uniform_real_distribution<float> distribution_y(float(World::Size.y) * 0.05, float(World::Size.y) * 0.95); // Creating y distribution
-	sf::Vector2f pos(distribution_x(generator), distribution_y(generator)); // Generating position
-	this->pos = pos;
 }
 
 void Player::set_vel(sf::Vector2f vel)

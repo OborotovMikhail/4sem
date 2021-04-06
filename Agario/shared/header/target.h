@@ -1,15 +1,11 @@
 #pragma once
 #include <SFML\System.hpp>
-#include "world.h"
 
 class Target
 {
 	sf::Vector2f pos; // Target position
 
 public:
-	// Set new target pos
-	void new_pos();
-
 	// Get target position
 	sf::Vector2f get_pos();
 

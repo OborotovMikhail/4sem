@@ -2,7 +2,7 @@
 
 #include "viewer.h"
 
-Viewer::Viewer(const std::string& name) : sf::RenderWindow(sf::VideoMode(World::Size.x, World::Size.y), name)
+Viewer::Viewer(const std::string& name) : sf::RenderWindow(sf::VideoMode(800, 800), name)
 {
     setFramerateLimit(60);
 }

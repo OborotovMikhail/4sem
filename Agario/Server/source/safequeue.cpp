@@ -1,4 +1,8 @@
+// Does not seem to work when in cpp, so moved to header file
+
+/*
 #pragma once
+
 #include "safequeue.h"
 
 template<class T>
@@ -24,3 +28,4 @@ T SafeQueue<T>::dequeue(void)
     q.pop();
     return val;
 }
+*/

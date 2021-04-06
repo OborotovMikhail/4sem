@@ -3,10 +3,9 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>
 
-#include "world.h"
 #include "network.h"
 #include "viewer.h"
-#include "SafeQueue.h"
+#include "safequeue.h"
 
 class Server
 {

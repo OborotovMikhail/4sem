@@ -1,6 +1,5 @@
 #pragma once
 #include "SFML\System.hpp"
-#include "world.h"
 
 // POSSIBLE PROBLEM WITH PLAYER CLASS
 // UPD_VEL GIVES ACCESS TO VELOCITY
@@ -47,9 +46,6 @@ public:
 
     // Set new player radius
     void set_rad(int new_rad);
-
-    // Set new random player position
-    void new_pos();
 
     // Update player velocity to new value
     void set_vel(sf::Vector2f vel);

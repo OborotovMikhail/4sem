@@ -4,7 +4,6 @@
 #include <iostream>
 #include <atomic>
 
-#include "world.h"
 #include "network.h"
 #include "viewer.h"
 

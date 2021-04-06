@@ -1,71 +1,36 @@
-﻿  player.cpp
-D:\STUDY\MIPT\4_SEM\PROGA\4sem\Agario\shared\header\world.h(17,34): error C2065: 'Player': undeclared identifier
-D:\STUDY\MIPT\4_SEM\PROGA\4sem\Agario\shared\header\world.h(17,10): error C2923: 'std::unordered_map': 'Player' is not a valid template type argument for parameter '_Ty'
-D:\STUDY\MIPT\4_SEM\PROGA\4sem\Agario\shared\header\world.h(17,10): error C2976: 'std::unordered_map': too few template arguments
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\unordered_map(69): message : see declaration of 'std::unordered_map'
-D:\STUDY\MIPT\4_SEM\PROGA\4sem\Agario\shared\header\world.h(29,34): error C2065: 'Player': undeclared identifier
-D:\STUDY\MIPT\4_SEM\PROGA\4sem\Agario\shared\header\world.h(29,10): error C2923: 'std::unordered_map': 'Player' is not a valid template type argument for parameter '_Ty'
-D:\STUDY\MIPT\4_SEM\PROGA\4sem\Agario\shared\header\world.h(29,10): error C2976: 'std::unordered_map': too few template arguments
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\unordered_map(69): message : see declaration of 'std::unordered_map'
-D:\STUDY\MIPT\4_SEM\PROGA\4sem\Agario\shared\source\player.cpp(61,16): warning C4244: 'initializing': conversion from '_Rep' to 'unsigned int', possible loss of data
-          with
-          [
-              _Rep=__int64
-          ]
-D:\STUDY\MIPT\4_SEM\PROGA\4sem\Agario\shared\source\player.cpp(63,105): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
-          with
-          [
-              _Ty=float
-          ]
-D:\STUDY\MIPT\4_SEM\PROGA\4sem\Agario\shared\source\player.cpp(63,76): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
-          with
-          [
-              _Ty=float
-          ]
-D:\STUDY\MIPT\4_SEM\PROGA\4sem\Agario\shared\source\player.cpp(64,105): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
-          with
-          [
-              _Ty=float
-          ]
-D:\STUDY\MIPT\4_SEM\PROGA\4sem\Agario\shared\source\player.cpp(64,76): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
-          with
-          [
-              _Ty=float
-          ]
-  target.cpp
-D:\STUDY\MIPT\4_SEM\PROGA\4sem\Agario\shared\header\world.h(18,18): error C3646: 'target': unknown override specifier
-D:\STUDY\MIPT\4_SEM\PROGA\4sem\Agario\shared\header\world.h(18,18): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-D:\STUDY\MIPT\4_SEM\PROGA\4sem\Agario\shared\header\world.h(32,22): error C3646: 'get_target': unknown override specifier
-D:\STUDY\MIPT\4_SEM\PROGA\4sem\Agario\shared\header\world.h(32,22): error C2059: syntax error: '('
-D:\STUDY\MIPT\4_SEM\PROGA\4sem\Agario\shared\header\world.h(32,24): error C2238: unexpected token(s) preceding ';'
-D:\STUDY\MIPT\4_SEM\PROGA\4sem\Agario\shared\source\target.cpp(9,23): warning C4244: 'initializing': conversion from '_Rep' to 'unsigned int', possible loss of data
-          with
-          [
-              _Rep=__int64
-          ]
-D:\STUDY\MIPT\4_SEM\PROGA\4sem\Agario\shared\source\target.cpp(11,108): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
-          with
-          [
-              _Ty=float
-          ]
-D:\STUDY\MIPT\4_SEM\PROGA\4sem\Agario\shared\source\target.cpp(11,79): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
-          with
-          [
-              _Ty=float
-          ]
-D:\STUDY\MIPT\4_SEM\PROGA\4sem\Agario\shared\source\target.cpp(12,108): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
-          with
-          [
-              _Ty=float
-          ]
-D:\STUDY\MIPT\4_SEM\PROGA\4sem\Agario\shared\source\target.cpp(12,79): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
-          with
-          [
-              _Ty=float
-          ]
-  viewer.cpp
+﻿  viewer.cpp
 D:\STUDY\MIPT\4_SEM\PROGA\4sem\Agario\shared\source\viewer.cpp(32,44): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   world.cpp
+D:\STUDY\MIPT\4_SEM\PROGA\4sem\Agario\shared\source\world.cpp(30,19): warning C4244: 'initializing': conversion from '_Rep' to 'unsigned int', possible loss of data
+          with
+          [
+              _Rep=__int64
+          ]
+D:\STUDY\MIPT\4_SEM\PROGA\4sem\Agario\shared\source\world.cpp(32,108): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+D:\STUDY\MIPT\4_SEM\PROGA\4sem\Agario\shared\source\world.cpp(32,79): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+D:\STUDY\MIPT\4_SEM\PROGA\4sem\Agario\shared\source\world.cpp(33,108): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+D:\STUDY\MIPT\4_SEM\PROGA\4sem\Agario\shared\source\world.cpp(33,79): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
   client.cpp
-  controls.cpp
   main.cpp
+  Generating code
+  376 of 376 functions (100.0%) were compiled.
+    366 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  Client.vcxproj -> D:\STUDY\MIPT\4_SEM\PROGA\4sem\Agario\bin\Release\Client.exe
