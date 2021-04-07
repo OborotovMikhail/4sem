@@ -32,6 +32,11 @@ void Viewer::draw(World& world)
         sf::CircleShape s(it.second.get_rad()); // Creating a circle
         s.setOrigin(s.getRadius(), s.getRadius()); // Moving the circle origin to it's center
         s.setFillColor(colors[it.first]); // Setting player color
+
+        // Debug
+        std::cout << "player pos when drawing (before): " << it.second.get_pos().x << ' '
+            << it.second.get_pos().y << std::endl;
+
         s.setPosition(it.second.get_pos()); // Setting player position
         sf::RenderWindow::draw(s); // Drawing player in a window
     }

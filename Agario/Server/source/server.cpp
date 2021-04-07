@@ -19,18 +19,8 @@ Server::Server(int port, World& world) :
     }
 
     sf::Vector2f new_pos = world.get_random_pos();
-    // Debug
-    std::cout << "random gen pos for targ: " << new_pos.x << ' '
-        << new_pos.y << std::endl;
-    // Debug
-    std::cout << "targ pos before: " << world.get_target().get_pos().x << ' '
-        << world.get_target().get_pos().y << std::endl;
 
     world.get_target().set_pos(new_pos); // Creating first target
-
-    // Debug
-    std::cout << "targ pos after: " << world.get_target().get_pos().x << ' '
-        << world.get_target().get_pos().y << std::endl;
 
     // Creating and detaching a thread for receiving packets
     syncThread = std::thread(&Server::receive, this);
