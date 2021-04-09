@@ -155,6 +155,8 @@ void Server::update(float dt)
         {
             world.get_target().set_pos(world.get_random_pos()); // Setting new target pos
             it.second.increase_rad(); // Increasing player radius
+
+            dirty = true;
         }
     }
 }

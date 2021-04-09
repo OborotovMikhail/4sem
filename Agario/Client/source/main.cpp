@@ -26,10 +26,12 @@ int main()
         sf::Vector2f v;
         if (client.id() == 0)
         {
+            // WASD for player 0
             v = controls_wasd(world.get_players()[client.id()].get_maxspeed());
         }
         else
         {
+            // Arrow controls for others
             v = controls_arrows(world.get_players()[client.id()].get_maxspeed());
         }
 
