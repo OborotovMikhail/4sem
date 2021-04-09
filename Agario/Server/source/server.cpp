@@ -66,26 +66,12 @@ void Server::receive()
                         std::lock_guard<std::mutex> guard(newPlayerMutex);
 
                         // Setting random player spawn position
-
-                        // Debug
-                        std::cout << "world size: " << world.get_size().x << ' ' 
-                            << world.get_size().y << std::endl;
-
                         sf::Vector2f new_pos = world.get_random_pos();
-
-                        // Debug
-                        std::cout << "random generated pos: " << new_pos.x << ' ' 
-                            << new_pos.y << std::endl;
-
                         world.get_players()[currentPlayerId].set_pos(new_pos);
 
                         // Adding new client's socket
                         selector.add(*tempSocket);
                         ++playersConnected;
-
-                        // Debug
-                        std::cout << "server new player pos: " << world.get_players()[currentPlayerId].get_x() << ' '
-                            << world.get_players()[currentPlayerId].get_y() << std::endl;
 
                         // Creating a spawn packet for the new client
                         sf::Packet outPacket;
@@ -188,7 +174,7 @@ void Server::synchronize()
     for (auto& elem : world.get_players())
     {
         // Players position and velocity to packet
-        toSend << elem.first << elem.second.get_x() << elem.second.get_x() <<
+        toSend << elem.first << elem.second.get_x() << elem.second.get_y() <<
             elem.second.get_x_vel() << elem.second.get_y_vel() << elem.second.get_rad();
     }
 

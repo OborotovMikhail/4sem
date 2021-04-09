@@ -1,17 +1,12 @@
 #pragma once
 #include "SFML\System.hpp"
 
-// POSSIBLE PROBLEM WITH PLAYER CLASS
-// UPD_VEL GIVES ACCESS TO VELOCITY
-
 class Player
 {
     sf::Vector2f pos; // Position
     sf::Vector2f v; // Velocity
     int rad = 20; // Radius
     float MaxSpeed = 300.0f; // Pixels per second, used as a reference to calculate velocity
-
-    // friend void Server::upd_player_v(sf::Vector2f v, int clientId);
 
 public:
     // Update player position

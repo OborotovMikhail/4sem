@@ -29,24 +29,8 @@ void Client::start()
                 sf::Vector2f pos;
                 packet >> clientId >> pos.x >> pos.y >> serverTime;
 
-                // Debug
-                std::cout << "world size: " << world.get_size().x << ' '
-                    << world.get_size().y << std::endl;
-
-                // Debug
-                std::cout << "pos from packet: " << pos.x << ' '
-                    << pos.y << std::endl;
-
-                // Debug
-                std::cout << "player pos before: " << world.get_players()[clientId].get_pos().x << ' '
-                    << world.get_players()[clientId].get_pos().y << std::endl;
-
                 world.get_players()[clientId].set_pos(pos);
                 std::cout << "Client created: " << clientId << "\n";
-
-                // Debug
-                std::cout << "player pos before: " << world.get_players()[clientId].get_pos().x << ' '
-                    << world.get_players()[clientId].get_pos().y << std::endl;
 
                 clock.restart();
             }
