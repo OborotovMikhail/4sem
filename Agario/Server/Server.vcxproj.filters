@@ -36,9 +36,6 @@
     <ClCompile Include="..\shared\source\world.cpp">
       <Filter>shared\source</Filter>
     </ClCompile>
-    <ClCompile Include="source\safequeue.cpp">
-      <Filter>this project\source</Filter>
-    </ClCompile>
     <ClCompile Include="source\server.cpp">
       <Filter>this project\source</Filter>
     </ClCompile>

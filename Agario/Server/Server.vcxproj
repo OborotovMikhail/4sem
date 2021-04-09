@@ -24,7 +24,6 @@
     <ClCompile Include="..\shared\source\viewer.cpp" />
     <ClCompile Include="..\shared\source\world.cpp" />
     <ClCompile Include="source\main.cpp" />
-    <ClCompile Include="source\safequeue.cpp" />
     <ClCompile Include="source\server.cpp" />
   </ItemGroup>
   <ItemGroup>
