@@ -1,0 +1,12 @@
+﻿  main.cpp
+D:\STUDY\MIPT\4_SEM\PROGA\4sem\synthesizer\synthesizer\source\main.cpp(24,46): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=sf::Int16
+          ]
+  Generating code
+  1 of 207 functions ( 0.5%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  synthesizer.vcxproj -> D:\STUDY\MIPT\4_SEM\PROGA\4sem\synthesizer\bin\Release\synthesizer.exe
