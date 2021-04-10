@@ -91,6 +91,7 @@ Client::Client(const std::string& ip, int port, World& world) :
 
 Client::~Client()
 {
+    this->disconnect();
     running = false; // No longer running 
     syncThread.join(); // Joining thread
 }
@@ -120,4 +121,19 @@ int Client::id() const
 bool Client::isRunning() const
 {
     return running;
+}
+
+void Client::disconnect()
+{
+    // Creating a packet
+    sf::Packet packet;
+
+    // Creating a packet for sending velocity
+    packet << Message::ClientDisconnect << clientId;
+
+    // Sending packet
+    if (socket.send(packet) != sf::Socket::Done)
+    {
+        std::cout << "Can't send disconnect packet to server\n";
+    }
 }

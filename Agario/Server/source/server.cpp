@@ -129,14 +129,27 @@ void Server::update(float dt)
         int messageType; // Message type
         int clientId; // Client id
 
-        // Processing the "front" packet
+        // Getting the "front" packet
         sf::Packet packet = receivedPackets.dequeue();
         packet >> messageType;
+
+        // Processing movement packets
         if (messageType == Message::Movement)
         {
             sf::Vector2f v; // Velocity vector
             packet >> clientId >> v.x >> v.y; // Data from packet
             world.get_players()[clientId].set_vel(v); // Updating player velocity
+            dirty = true; // Server dirty
+        }
+
+        // Processing disconnect packets
+        if (messageType == Message::ClientDisconnect)
+        {
+            packet >> clientId;
+            world.remove_player(clientId);
+
+            std::cout << "Player " << clientId << " disconnected\n";
+
             dirty = true; // Server dirty
         }
     }

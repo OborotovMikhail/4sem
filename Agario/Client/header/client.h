@@ -43,4 +43,6 @@ public:
 
     // Is client running function
     bool isRunning() const;
+
+    void disconnect();
 };

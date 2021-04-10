@@ -18,7 +18,7 @@ int main()
     sf::Vector2f prevVelocity; // Previous player velocity vector
 
     // Main cycle
-    while (viewer.isOpen() && client.isRunning())
+    while (client.isRunning() && viewer.isOpen())
     {
         viewer.handleEvents(); // Handling events
 
