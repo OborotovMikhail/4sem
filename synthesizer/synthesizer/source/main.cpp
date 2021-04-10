@@ -13,8 +13,8 @@ int main()
     // Vector of frequencies
     std::vector<double> frequency = { 261.63, 277.18, 293.66, 311.13, 329.63, 349.23, 369.99, 392.00, 415.30, 440.00, 466.16, 493.88 };
     
-    std::vector<sf::SoundBuffer> sound_buffer(12); // Sound buffer vector
     std::vector<std::vector<sf::Int16>> sound_samples(12); // Sound samples vector
+    std::vector<sf::SoundBuffer> sound_buffer(12); // Sound buffer vector
     std::vector<sf::Sound> sound(12); // Sound player vector
 
     for (int j = 0; j < 12; j++)
