@@ -47,4 +47,7 @@ public:
 
     // Increase player rad
     void increase_rad();
+
+    // Set initial player radius
+    void set_initial_rad();
 };

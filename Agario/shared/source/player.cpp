@@ -67,3 +67,8 @@ void Player::increase_rad()
 {
 	this->rad += 10;
 }
+
+void Player::set_initial_rad()
+{
+	this->rad = 20;
+}

@@ -156,7 +156,26 @@ void Server::update(float dt)
             world.get_target().set_pos(world.get_random_pos()); // Setting new target pos
             it.second.increase_rad(); // Increasing player radius
 
-            dirty = true;
+            dirty = true; // Server dirty now
+        }
+    }
+
+    // Checking if any player ate other player
+    for (auto& it : world.get_players())
+    {
+        for (auto& elem : world.get_players())
+        {
+            if (it.first != elem.first)
+            {
+                if (sqrt(pow((it.second.get_x() - elem.second.get_x()), 2)
+                    + pow((it.second.get_y() - elem.second.get_y()), 2)) < it.second.get_rad())
+                {
+                    elem.second.set_pos(world.get_random_pos()); // Set random pos for eaten player
+                    elem.second.set_initial_rad(); // Set his radius to default one
+
+                    dirty = true; // Server dirty now
+                }
+            }
         }
     }
 }
