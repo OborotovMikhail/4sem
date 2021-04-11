@@ -1,36 +1,7 @@
-﻿  viewer.cpp
-D:\STUDY\MIPT\4_SEM\PROGA\4sem\Agario\shared\source\viewer.cpp(32,44): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  world.cpp
-D:\STUDY\MIPT\4_SEM\PROGA\4sem\Agario\shared\source\world.cpp(41,23): warning C4244: 'initializing': conversion from '_Rep' to 'unsigned int', possible loss of data
-          with
-          [
-              _Rep=__int64
-          ]
-D:\STUDY\MIPT\4_SEM\PROGA\4sem\Agario\shared\source\world.cpp(43,122): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
-          with
-          [
-              _Ty=float
-          ]
-D:\STUDY\MIPT\4_SEM\PROGA\4sem\Agario\shared\source\world.cpp(43,88): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
-          with
-          [
-              _Ty=float
-          ]
-D:\STUDY\MIPT\4_SEM\PROGA\4sem\Agario\shared\source\world.cpp(44,122): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
-          with
-          [
-              _Ty=float
-          ]
-D:\STUDY\MIPT\4_SEM\PROGA\4sem\Agario\shared\source\world.cpp(44,88): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
-          with
-          [
-              _Ty=float
-          ]
-  client.cpp
-  main.cpp
+﻿  client.cpp
   Generating code
-  33 of 349 functions ( 9.5%) were compiled, the rest were copied from previous compilation.
+  1 of 357 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    11 functions had inline decision re-evaluated but remain unchanged
+    1 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Client.vcxproj -> D:\STUDY\MIPT\4_SEM\PROGA\4sem\Agario\bin\Release\Client.exe

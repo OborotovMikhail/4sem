@@ -67,3 +67,13 @@ void World::remove_player(PlayerId clientId)
 {
     this->players.erase(clientId);
 }
+
+void World::show_players()
+{
+    std::cout << std::endl << "PLAYERS:" << std::endl;
+    for (auto it : this->get_players())
+    {
+        std::cout << "Player " << it.first << ", pos: " << it.second.get_pos().x << ' ' << it.second.get_pos().y
+            << std::endl;
+    }
+}

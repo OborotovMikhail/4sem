@@ -46,7 +46,7 @@ void Server::receive()
 {
     selector.add(listener);
 
-    int currentPlayerId = 0;
+    this->currentPlayerId = 0;
 
     while (isRunning())
     {
@@ -67,7 +67,7 @@ void Server::receive()
 
                         // Setting random player spawn position
                         sf::Vector2f new_pos = world.get_random_pos();
-                        world.get_players()[currentPlayerId].set_pos(new_pos);
+                        world.get_players()[this->currentPlayerId].set_pos(new_pos);
 
                         // Adding new client's socket
                         selector.add(*tempSocket);
@@ -75,8 +75,8 @@ void Server::receive()
 
                         // Creating a spawn packet for the new client
                         sf::Packet outPacket;
-                        outPacket << Message::ClientCreated << currentPlayerId << world.get_players()[currentPlayerId].get_x() 
-                            << world.get_players()[currentPlayerId].get_y() << clock.getElapsedTime().asSeconds();
+                        outPacket << Message::ClientCreated << this->currentPlayerId << world.get_players()[this->currentPlayerId].get_x()
+                            << world.get_players()[this->currentPlayerId].get_y() << clock.getElapsedTime().asSeconds();
 
                         dirty = true; // Server dirty
 
@@ -85,14 +85,16 @@ void Server::receive()
                             std::cout << "Error sending player index" << std::endl;
                         else
                         {
-                            std::cout << "Player " << currentPlayerId << " connected\n";
-                            std::cout << "Player id " << currentPlayerId << ", spawn pos: " << 
-                                world.get_players()[currentPlayerId].get_x() << " " << 
-                                world.get_players()[currentPlayerId].get_y() << "\n";
+                            std::cout << "Player " << this->currentPlayerId << " connected\n";
+                            std::cout << "Player id " << this->currentPlayerId << ", spawn pos: " <<
+                                world.get_players()[this->currentPlayerId].get_x() << " " <<
+                                world.get_players()[this->currentPlayerId].get_y() << "\n";
                         }
 
-                        sockets[currentPlayerId] = std::move(tempSocket);
-                        ++currentPlayerId;
+                        sockets[this->currentPlayerId] = std::move(tempSocket);
+                        this->currentPlayerId++;
+
+                        this->world.show_players();
                     }
                     else
                     {
@@ -146,9 +148,26 @@ void Server::update(float dt)
         if (messageType == Message::ClientDisconnect)
         {
             packet >> clientId;
+
+            sf::Packet toSend;
+            toSend << Message::RemovePlayer << clientId; // Forming packet
+
+            // Sending to everybody except the player who is disconnecting
+            for (const auto& elem : sockets)
+            {
+                if (elem.first != clientId)
+                {
+                    if (elem.second->send(toSend) != sf::Socket::Done)
+                    {
+                        std::cout << "Can't send disconnect packet to player " << elem.first << " \n";
+                    }
+                }
+            }
+
             world.remove_player(clientId);
 
             std::cout << "Player " << clientId << " disconnected\n";
+            this->world.show_players();
 
             dirty = true; // Server dirty
         }

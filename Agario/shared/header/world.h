@@ -38,4 +38,6 @@ public:
     sf::Vector2i get_size();
 
     void remove_player(PlayerId clientId);
+
+    void show_players();
 };

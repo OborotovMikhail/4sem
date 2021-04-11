@@ -5,5 +5,6 @@ enum Message
 	ClientCreated,
 	UpdateWorld,
 	Movement,
-	ClientDisconnect
+	ClientDisconnect,
+	RemovePlayer
 };

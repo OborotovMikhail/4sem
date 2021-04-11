@@ -9,6 +9,7 @@
 
 class Server
 {
+    int currentPlayerId;
 public:
     World& world; // World pointer
 

@@ -31,6 +31,7 @@ void Client::start()
 
                 world.get_players()[clientId].set_pos(pos);
                 std::cout << "Client created: " << clientId << "\n";
+                this->world.show_players();
 
                 clock.restart();
             }
@@ -74,6 +75,14 @@ void Client::start()
 
                 // Updating world
                 world.update(clock.getElapsedTime().asSeconds() - (ts - serverTime));
+            }
+
+            // Remove player packet processing
+            if (type == Message::RemovePlayer)
+            {
+                packet >> clientId;
+                world.remove_player(clientId);
+                world.show_players();
             }
         }
     }
