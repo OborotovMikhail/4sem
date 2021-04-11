@@ -6,6 +6,8 @@ Server::Server(int port, World& world) :
     port(port),
     world(world)
 {
+    this->currentPlayerId = 0;
+
     // Starting listener
     if (listener.listen(port) == sf::Socket::Done)
     {
@@ -46,8 +48,6 @@ void Server::receive()
 {
     selector.add(listener);
 
-    this->currentPlayerId = 0;
-
     while (isRunning())
     {
         if (selector.wait())
@@ -61,7 +61,7 @@ void Server::receive()
                 // If a new client is connected this code executes
                 if (listener.accept(*tempSocket) == sf::Socket::Done)
                 {
-                    if (playersConnected < MaxPlayers) //if server is not full
+                    if (this->world.get_players().size() < MaxPlayers) //if server is not full
                     {
                         std::lock_guard<std::mutex> guard(newPlayerMutex);
 
@@ -71,7 +71,6 @@ void Server::receive()
 
                         // Adding new client's socket
                         selector.add(*tempSocket);
-                        ++playersConnected;
 
                         // Creating a spawn packet for the new client
                         sf::Packet outPacket;
@@ -164,7 +163,9 @@ void Server::update(float dt)
                 }
             }
 
-            world.remove_player(clientId);
+            // this->selector.remove(sockets[clientId].get());
+            this->world.remove_player(clientId); // Removing player from the world
+            this->sockets.erase(clientId); // Removing player socket
 
             std::cout << "Player " << clientId << " disconnected\n";
             this->world.show_players();

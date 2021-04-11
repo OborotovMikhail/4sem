@@ -20,7 +20,7 @@ public:
 
     const int port; // Server port
     const unsigned short MaxPlayers = 3; // Max allowed players
-    int playersConnected = 0; // Number of connected players
+    // int playersConnected = 0; // Number of connected players
 
     std::unordered_map<PlayerId, std::unique_ptr<sf::TcpSocket>> sockets; // Sockets map
     
