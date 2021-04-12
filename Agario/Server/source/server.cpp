@@ -61,6 +61,7 @@ void Server::receive()
                 // If a new client is connected this code executes
                 if (listener.accept(*tempSocket) == sf::Socket::Done)
                 {
+                    std::cout << "New connection" << std::endl;
                     if (this->world.get_players().size() < MaxPlayers) //if server is not full
                     {
                         std::lock_guard<std::mutex> guard(newPlayerMutex);
@@ -163,7 +164,7 @@ void Server::update(float dt)
                 }
             }
 
-            // this->selector.remove(sockets[clientId].get());
+            this->selector.remove(*sockets[clientId].get());
             this->world.remove_player(clientId); // Removing player from the world
             this->sockets.erase(clientId); // Removing player socket
 
