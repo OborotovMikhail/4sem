@@ -70,11 +70,17 @@ void World::remove_player(PlayerId clientId)
 
 void World::show_players()
 {
-    std::cout << std::endl << "PLAYERS ONLINE:" << std::endl;
+    if (this->get_players().size() == 0)
+    {
+        std::cout << "No players online" << std::endl;
+        return;
+    }
+
+    std::cout << "Online players by their id\'s: ";
     for (auto it : this->get_players())
     {
-        std::cout << "Player " << it.first << ", pos: " << it.second.get_pos().x << ' ' << it.second.get_pos().y
-            << std::endl;
+        std::cout << it.first << " ";
     }
+    
     std::cout << std::endl;
 }

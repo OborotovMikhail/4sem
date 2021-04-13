@@ -30,8 +30,19 @@ void Client::start()
                 packet >> clientId >> pos.x >> pos.y >> serverTime;
 
                 world.get_players()[clientId].set_pos(pos);
-                std::cout << "Client created: " << clientId << "\n";
-                this->world.show_players();
+                std::cout << "Client created, id: " << clientId << std::endl;
+                
+                // Printing currently online players
+                std::cout << "Online players by their id\'s: ";
+                int online_players_num;
+                packet >> online_players_num;
+                for (int i = 0; i < online_players_num; i++)
+                {
+                    int id;
+                    packet >> id;
+                    std::cout << id << " ";
+                }
+                std::cout << std::endl;
 
                 clock.restart();
             }
@@ -80,9 +91,13 @@ void Client::start()
             // Remove player packet processing
             if (type == Message::RemovePlayer)
             {
-                packet >> clientId;
-                world.remove_player(clientId);
-                world.show_players();
+                int remove_id;
+                packet >> remove_id; // Getting player id
+                this->world.remove_player(remove_id); // Removing this player
+
+                std::cout << "Player " << remove_id << " disconnected\n";
+
+                this->world.show_players(); // Printing currently online players
             }
         }
     }
@@ -138,7 +153,7 @@ void Client::disconnect()
     sf::Packet packet;
 
     // Creating a packet for sending velocity
-    packet << Message::ClientDisconnect << clientId;
+    packet << Message::ClientDisconnect << this->id();
 
     // Sending packet
     if (socket.send(packet) != sf::Socket::Done)

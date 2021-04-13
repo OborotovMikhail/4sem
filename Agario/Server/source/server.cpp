@@ -61,7 +61,6 @@ void Server::receive()
                 // If a new client is connected this code executes
                 if (listener.accept(*tempSocket) == sf::Socket::Done)
                 {
-                    std::cout << "New connection" << std::endl;
                     if (this->world.get_players().size() < MaxPlayers) //if server is not full
                     {
                         std::lock_guard<std::mutex> guard(newPlayerMutex);
@@ -78,6 +77,13 @@ void Server::receive()
                         outPacket << Message::ClientCreated << this->currentPlayerId << world.get_players()[this->currentPlayerId].get_x()
                             << world.get_players()[this->currentPlayerId].get_y() << clock.getElapsedTime().asSeconds();
 
+                        // Sending online player id's to the new player
+                        outPacket << this->world.get_players().size();
+                        for (auto& it : this->world.get_players())
+                        {
+                            outPacket << it.first;
+                        }
+
                         dirty = true; // Server dirty
 
                         // Sending a packet to a new client
@@ -85,10 +91,9 @@ void Server::receive()
                             std::cout << "Error sending player index" << std::endl;
                         else
                         {
-                            std::cout << "Player " << this->currentPlayerId << " connected\n";
-                            std::cout << "Player id " << this->currentPlayerId << ", spawn pos: " <<
-                                world.get_players()[this->currentPlayerId].get_x() << " " <<
-                                world.get_players()[this->currentPlayerId].get_y() << "\n";
+                            std::cout << "Player " << this->currentPlayerId << " connected (spawn position: "
+                            << world.get_players()[this->currentPlayerId].get_x() << " " <<
+                                world.get_players()[this->currentPlayerId].get_y() << ")\n";
                         }
 
                         sockets[this->currentPlayerId] = std::move(tempSocket);
