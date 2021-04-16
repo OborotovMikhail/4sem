@@ -44,9 +44,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="header\debug_print.h">
-      <Filter>this project\header</Filter>
-    </ClInclude>
     <ClInclude Include="..\shared\header\network.h">
       <Filter>shared\header</Filter>
     </ClInclude>

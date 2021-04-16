@@ -29,6 +29,7 @@ x86/
 bld/
 #[Bb]in/
 [Bb]uild/
+.build/
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/

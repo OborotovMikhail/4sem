@@ -1,2 +1,0 @@
-﻿main.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/INCREMENTAL:NO' specification
-  field_lines.vcxproj -> D:\STUDY\MIPT\4_SEM\PROGA\4sem\field_lines\field_lines\bin\Debug\field_lines.exe

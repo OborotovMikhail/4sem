@@ -1,3 +1,0 @@
-﻿  main.cpp
-main.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/INCREMENTAL:NO' specification
-  unique_strings.vcxproj -> D:\STUDY\MIPT\4_SEM\PROGA\4sem\unique_strings\unique_strings\bin\Debug\unique_strings.exe

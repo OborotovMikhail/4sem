@@ -35,7 +35,6 @@
     <ClInclude Include="..\shared\header\world.h" />
     <ClInclude Include="header\client.h" />
     <ClInclude Include="header\controls.h" />
-    <ClInclude Include="header\debug_print.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -115,7 +114,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)3rdparty\SFML-2.3.2\include;$(SolutionDir)shared\header;$(SolutionDir)shared\source;$(SolutionDir)$(ProjectName)\header;$(SolutionDir)$(ProjectName)\source;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdparty\my_include;$(SolutionDir)3rdparty\SFML-2.3.2\include;$(SolutionDir)shared\header;$(SolutionDir)shared\source;$(SolutionDir)$(ProjectName)\header;$(SolutionDir)$(ProjectName)\source;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -132,7 +131,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)3rdparty\SFML-2.3.2\include;$(SolutionDir)shared\header;$(SolutionDir)shared\source;$(SolutionDir)$(ProjectName)\header;$(SolutionDir)$(ProjectName)\source;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdparty\my_include;$(SolutionDir)3rdparty\SFML-2.3.2\include;$(SolutionDir)shared\header;$(SolutionDir)shared\source;$(SolutionDir)$(ProjectName)\header;$(SolutionDir)$(ProjectName)\source;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -149,7 +148,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)3rdparty\SFML-2.3.2\include;$(SolutionDir)shared\header;$(SolutionDir)shared\source;$(SolutionDir)$(ProjectName)\header;$(SolutionDir)$(ProjectName)\source;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdparty\my_include;$(SolutionDir)3rdparty\SFML-2.3.2\include;$(SolutionDir)shared\header;$(SolutionDir)shared\source;$(SolutionDir)$(ProjectName)\header;$(SolutionDir)$(ProjectName)\source;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -167,7 +166,7 @@
       </SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)3rdparty\SFML-2.3.2\include;$(SolutionDir)shared\header;$(SolutionDir)shared\source;$(SolutionDir)$(ProjectName)\header;$(SolutionDir)$(ProjectName)\source;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdparty\my_include;$(SolutionDir)3rdparty\SFML-2.3.2\include;$(SolutionDir)shared\header;$(SolutionDir)shared\source;$(SolutionDir)$(ProjectName)\header;$(SolutionDir)$(ProjectName)\source;</AdditionalIncludeDirectories>
       <PrecompiledHeader />
     </ClCompile>
     <Link>

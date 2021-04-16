@@ -1,8 +1,0 @@
-﻿  main.cpp
-D:\STUDY\MIPT\4_SEM\PROGA\4sem\synthesizer\synthesizer\source\main.cpp(23,46): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
-          with
-          [
-              _Ty=sf::Int16
-          ]
-main.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/INCREMENTAL:NO' specification
-  synthesizer.vcxproj -> D:\STUDY\MIPT\4_SEM\PROGA\4sem\synthesizer\bin\Debug\synthesizer.exe

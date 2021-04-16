@@ -1,8 +1,0 @@
-﻿  player.cpp
-  world.cpp
-  server.cpp
-  Generating code
-  Previous IPDB was built with incompatible compiler, fall back to full compilation.
-  All 542 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
-  Finished generating code
-  Server.vcxproj -> D:\STUDY\MIPT\4_SEM\PROGA\4sem\NetworkExample\Bin\Server.exe

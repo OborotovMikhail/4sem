@@ -1,3 +1,0 @@
-﻿  main.cpp
-main.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/INCREMENTAL:NO' specification
-  Client.vcxproj -> D:\STUDY\MIPT\4_SEM\PROGA\4sem\Agario\bin\Debug\Client.exe

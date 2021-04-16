@@ -1,8 +1,0 @@
-﻿  main.cpp
-D:\STUDY\MIPT\4_SEM\PROGA\4sem\MonteCarlo\MonteCarlo\src\main.cpp(16,19): warning C4244: 'initializing': conversion from '_Rep' to 'unsigned int', possible loss of data
-          with
-          [
-              _Rep=__int64
-          ]
-main.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/INCREMENTAL:NO' specification
-  MonteCarlo.vcxproj -> D:\STUDY\MIPT\4_SEM\PROGA\4sem\MonteCarlo\MonteCarlo\bin\Debug\MonteCarlo.exe
