@@ -246,7 +246,7 @@ void Server::update(float dt)
         if (it.second.get_pos().x < 0)
         {
             sf::Vector2f new_pos;
-            new_pos.x = it.second.get_pos().x + world.get_size().x;
+            new_pos.x = it.second.get_pos().x + float(world.get_size().x);
             new_pos.y = it.second.get_pos().y;
             it.second.set_pos(new_pos);
 
@@ -254,10 +254,10 @@ void Server::update(float dt)
         }
 
         // Checking right border
-        if (it.second.get_pos().x > world.get_size().x)
+        if (it.second.get_pos().x > float(world.get_size().x))
         {
             sf::Vector2f new_pos;
-            new_pos.x = it.second.get_pos().x - world.get_size().x;
+            new_pos.x = it.second.get_pos().x - float(world.get_size().x);
             new_pos.y = it.second.get_pos().y;
             it.second.set_pos(new_pos);
 
@@ -269,18 +269,18 @@ void Server::update(float dt)
         {
             sf::Vector2f new_pos;
             new_pos.x = it.second.get_pos().x;
-            new_pos.y = it.second.get_pos().y + world.get_size().y;
+            new_pos.y = it.second.get_pos().y + float(world.get_size().y);
             it.second.set_pos(new_pos);
 
             dirty = true; // Server dirty now
         }
 
         // Checking bottom border
-        if (it.second.get_pos().y > world.get_size().y)
+        if (it.second.get_pos().y > float(world.get_size().y))
         {
             sf::Vector2f new_pos;
             new_pos.x = it.second.get_pos().x;
-            new_pos.y = it.second.get_pos().y - world.get_size().y;
+            new_pos.y = it.second.get_pos().y - float(world.get_size().y);
             it.second.set_pos(new_pos);
 
             dirty = true; // Server dirty now

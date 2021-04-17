@@ -63,6 +63,30 @@ void Viewer::draw(World& world, int my_client_id)
         sf::RenderWindow::draw(s); // Drawing target in a window
     }
 
+    // Drawing fake targets (for pseudo infinite world)
+    for (int i = -1; i < 2; i++)
+    {
+        for (int j = -1; j < 2; j++)
+        {
+            if ((i != 0) || (j != 0))
+            {
+                for (auto& it : world.get_targets())
+                {
+                    sf::CircleShape s(it.second.get_rad()); // Creating a circle
+                    s.setOrigin(s.getRadius(), s.getRadius()); // Moving the circle origin to it's center
+                    s.setFillColor(sf::Color::White); // Setting target color
+
+                    sf::Vector2f fake_targ_pos; // Position for the fake target
+                    fake_targ_pos.x = it.second.get_pos().x + float(i * world.get_size().x);
+                    fake_targ_pos.y = it.second.get_pos().y + float(j * world.get_size().y);
+
+                    s.setPosition(fake_targ_pos); // Setting target position
+                    sf::RenderWindow::draw(s); // Drawing target in a window
+                }
+            }
+        }
+    }
+
     // Centering to player (only for players)
     if (my_client_id > -1)
     {
