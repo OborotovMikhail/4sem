@@ -6,7 +6,7 @@ Viewer::Viewer(const std::string& name) : sf::RenderWindow(sf::VideoMode(800, 80
 {
     // Loading background sprite
     this->mapTexture;
-    if (!this->mapTexture.loadFromFile("space_sprite.jpg"))
+    if (!this->mapTexture.loadFromFile("kit.jpg"))
     {
         std::cout << "Could not load background texture" << std::endl;
     }
@@ -70,6 +70,23 @@ void Viewer::draw(World& world, int my_client_id)
         {
             if ((i != 0) || (j != 0))
             {
+                // Fake players
+                for (auto& it : world.get_players())
+                {
+                    sf::CircleShape s(it.second.get_rad()); // Creating a circle
+                    s.setOrigin(s.getRadius(), s.getRadius()); // Moving the circle origin to it's center
+                    int color_number = it.first % 3;
+                    s.setFillColor(colors[color_number]); // Setting player color
+
+                    sf::Vector2f fake_player_pos; // Position for the fake player
+                    fake_player_pos.x = it.second.get_pos().x + float(i * world.get_size().x);
+                    fake_player_pos.y = it.second.get_pos().y + float(j * world.get_size().y);
+
+                    s.setPosition(fake_player_pos); // Setting fake player position
+                    sf::RenderWindow::draw(s); // Drawing player in a window
+                }
+
+                // Fake targets
                 for (auto& it : world.get_targets())
                 {
                     sf::CircleShape s(it.second.get_rad()); // Creating a circle
@@ -80,8 +97,8 @@ void Viewer::draw(World& world, int my_client_id)
                     fake_targ_pos.x = it.second.get_pos().x + float(i * world.get_size().x);
                     fake_targ_pos.y = it.second.get_pos().y + float(j * world.get_size().y);
 
-                    s.setPosition(fake_targ_pos); // Setting target position
-                    sf::RenderWindow::draw(s); // Drawing target in a window
+                    s.setPosition(fake_targ_pos); // Setting fake target position
+                    sf::RenderWindow::draw(s); // Drawing fake target in a window
                 }
             }
         }
