@@ -17,5 +17,5 @@ public:
     void handleEvents();
 
     // Draw (display) world function
-    void draw(World& world);
+    void draw(World& world, int my_client_id);
 };

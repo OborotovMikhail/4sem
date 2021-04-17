@@ -32,7 +32,7 @@ int main()
         }
 
         // Drawing world (server side)
-        viewer.draw(world);
+        viewer.draw(world, -1);
     }
 
     return 0;

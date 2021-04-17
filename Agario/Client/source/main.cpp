@@ -50,7 +50,7 @@ int main()
         }
 
         // Drawing world
-        viewer.draw(world);
+        viewer.draw(world, client.id());
     }
 
     return 0;

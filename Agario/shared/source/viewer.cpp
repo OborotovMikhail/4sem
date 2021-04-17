@@ -27,7 +27,7 @@ void Viewer::handleEvents()
     }
 }
 
-void Viewer::draw(World& world)
+void Viewer::draw(World& world, int my_client_id)
 {
     // Clearing window, setting black color
     clear(sf::Color::Black);
@@ -57,6 +57,14 @@ void Viewer::draw(World& world)
     target_display.setFillColor(sf::Color::White);
     target_display.setPosition(world.get_target().get_pos());
     sf::RenderWindow::draw(target_display);
+
+    // Centering to player (only for players)
+    if (my_client_id > -1)
+    {
+        sf::View gameView;
+        gameView.setCenter(world.get_players()[my_client_id].get_pos());
+        this->setView(gameView);
+    }
 
     // Displaying
     display();
