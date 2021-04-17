@@ -20,6 +20,11 @@ std::unordered_map<PlayerId, Player>& World::get_players()
     return this->players;
 }
 
+std::unordered_map<TargetId, Target>& World::get_targets()
+{
+    return this->targets;
+}
+
 Target& World::get_target()
 {
     return this->target;

@@ -24,6 +24,12 @@ Server::Server(int port, World& world) :
 
     world.get_target().set_pos(new_pos); // Creating first target
 
+    // Creating targets
+    for (int i = 0; i < TargetsNum; i++)
+    {
+        world.get_targets()[i].set_pos(world.get_random_pos());
+    }
+
     // Creating and detaching a thread for receiving packets
     syncThread = std::thread(&Server::receive, this);
     syncThread.detach();
@@ -84,6 +90,13 @@ void Server::receive()
                             outPacket << it.first;
                         }
 
+                        // Sending targets to new player
+                        outPacket << world.get_targets().size();
+                        for (auto& it : this->world.get_targets())
+                        {
+                            outPacket << it.second.get_pos().x << it.second.get_pos().y;
+                        }
+
                         dirty = true; // Server dirty
 
                         // Sending a packet to a new client
@@ -141,7 +154,7 @@ void Server::update(float dt)
         packet >> messageType;
 
         // Processing movement packets
-        if (messageType == Message::Movement)
+        if (messageType == Message::ClientMovement)
         {
             sf::Vector2f v; // Velocity vector
             packet >> clientId >> v.x >> v.y; // Data from packet
@@ -186,16 +199,19 @@ void Server::update(float dt)
         it.second.update(dt);
     }
 
-    // Checking if anybody reached the target
+    // Checking if anybody reached any target
     for (auto& it : world.get_players())
     {
-        if (sqrt(pow((world.get_target().get_x() - it.second.get_x()), 2) 
-            + pow((world.get_target().get_y() - it.second.get_y()), 2)) < it.second.get_rad())
+        for (auto& elem : world.get_targets())
         {
-            world.get_target().set_pos(world.get_random_pos()); // Setting new target pos
-            it.second.increase_rad(); // Increasing player radius
-
-            dirty = true; // Server dirty now
+            if (sqrt(pow((elem.second.get_pos().x - it.second.get_x()), 2)
+                + pow((elem.second.get_pos().y - it.second.get_y()), 2)) < it.second.get_rad())
+            {
+                elem.second.set_pos(world.get_random_pos()); // Setting new target pos
+                it.second.increase_rad(); // Increasing player radius
+                
+                dirty = true; // Server dirty now
+            }
         }
     }
 
@@ -211,7 +227,7 @@ void Server::update(float dt)
                 {
                     elem.second.set_pos(world.get_random_pos()); // Set random pos for eaten player
                     elem.second.set_initial_rad(); // Set his radius to default one
-
+                    
                     dirty = true; // Server dirty now
                 }
             }
@@ -238,9 +254,12 @@ void Server::synchronize()
             elem.second.get_x_vel() << elem.second.get_y_vel() << elem.second.get_rad();
     }
 
-    // Pushing target position to packet
-    toSend << world.get_target().get_x();
-    toSend << world.get_target().get_y();
+    // Sending targets to new player
+    toSend << world.get_targets().size();
+    for (auto& it : this->world.get_targets())
+    {
+        toSend << it.second.get_pos().x << it.second.get_pos().y;
+    }
 
     // Pushing server elapsed time to packet
     toSend << clock.getElapsedTime().asSeconds();

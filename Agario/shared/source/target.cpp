@@ -1,7 +1,6 @@
 #pragma once
 
 #include <mutex>
-#include <random>
 #include "target.h"
 
 Target::Target()
@@ -22,14 +21,7 @@ void Target::set_pos(sf::Vector2f new_pos)
     pos = x;
 }
 
-// Get x target coordinate func
-float Target::get_x()
+int Target::get_rad()
 {
-	return this->pos.x;
-}
-
-// Get y target coordinate func
-float Target::get_y()
-{
-	return this->pos.y;
+	return this->radius;
 }

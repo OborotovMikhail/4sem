@@ -44,6 +44,16 @@ void Client::start()
                 }
                 std::cout << std::endl;
 
+                // Getting target positions from the packet
+                int HowManyTargets;
+                packet >> HowManyTargets;
+                for (int i = 0; i < HowManyTargets; i++)
+                {
+                    sf::Vector2f targ_pos;
+                    packet >> targ_pos.x >> targ_pos.y;
+                    world.get_targets()[i].set_pos(targ_pos);
+                }
+
                 clock.restart();
             }
 
@@ -75,10 +85,15 @@ void Client::start()
                     }
                 }
 
-                // Updating target position
-                sf::Vector2f target_pos;
-                packet >> target_pos.x >> target_pos.y;
-                world.get_target().set_pos(target_pos);
+                // Getting target positions from the packet
+                int HowManyTargets;
+                packet >> HowManyTargets;
+                for (int i = 0; i < HowManyTargets; i++)
+                {
+                    sf::Vector2f targ_pos;
+                    packet >> targ_pos.x >> targ_pos.y;
+                    world.get_targets()[i].set_pos(targ_pos);
+                }
 
                 // Getting elapsed server time from packet
                 float ts;
@@ -129,7 +144,7 @@ void Client::notify_mov()
     const auto& v = world.get_players()[id()].get_vel();
 
     // Creating a packet for sending velocity
-    packet << Message::Movement << clientId << v.x << v.y;
+    packet << Message::ClientMovement << clientId << v.x << v.y;
     // Sending packet
     if (socket.send(packet) != sf::Socket::Done)
     {

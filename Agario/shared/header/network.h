@@ -3,8 +3,9 @@
 enum Message
 {
 	ClientCreated,
-	UpdateWorld,
-	Movement,
+	ClientMovement,
 	ClientDisconnect,
-	RemovePlayer
+	UpdateWorld,
+	RemovePlayer,
+	UpdateTarget
 };

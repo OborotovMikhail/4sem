@@ -4,6 +4,7 @@
 class Target
 {
 	sf::Vector2f pos; // Target position
+	const int radius = 10;
 
 public:
 	Target();
@@ -14,9 +15,6 @@ public:
 	// Set new target position
 	void set_pos(sf::Vector2f new_pos);
 
-	// Get target's x coordinate
-	float get_x();
-
-	// Get target's y coordinate
-	float get_y(); 
+	// Get target radius function
+	int get_rad();
 };

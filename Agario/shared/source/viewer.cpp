@@ -51,12 +51,17 @@ void Viewer::draw(World& world, int my_client_id)
         sf::RenderWindow::draw(s); // Drawing player in a window
     }
 
-    // Creating target
-    sf::CircleShape target_display(10);
-    target_display.setOrigin(target_display.getRadius(), target_display.getRadius());
-    target_display.setFillColor(sf::Color::White);
-    target_display.setPosition(world.get_target().get_pos());
-    sf::RenderWindow::draw(target_display);
+    // Drawing targets
+    for (auto& it : world.get_targets())
+    {
+        // Creating circle (target)
+        sf::CircleShape s(it.second.get_rad()); // Creating a circle
+        s.setOrigin(s.getRadius(), s.getRadius()); // Moving the circle origin to it's center
+        s.setFillColor(sf::Color::White); // Setting target color
+
+        s.setPosition(it.second.get_pos()); // Setting target position
+        sf::RenderWindow::draw(s); // Drawing target in a window
+    }
 
     // Centering to player (only for players)
     if (my_client_id > -1)
