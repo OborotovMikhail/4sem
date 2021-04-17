@@ -4,6 +4,16 @@
 
 Viewer::Viewer(const std::string& name) : sf::RenderWindow(sf::VideoMode(800, 800), name)
 {
+    // Loading background sprite
+    this->mapTexture;
+    if (!this->mapTexture.loadFromFile("space_sprite.jpg"))
+    {
+        std::cout << "Could not load background texture" << std::endl;
+    }
+    mapTexture.setSmooth(true);
+    this->background.setTexture(mapTexture);
+
+    //Setting frame limit
     setFramerateLimit(60);
 }
 
@@ -19,11 +29,14 @@ void Viewer::handleEvents()
 
 void Viewer::draw(World& world)
 {
+    // Clearing window, setting black color
+    clear(sf::Color::Black);
+
+    // Drawing background
+    sf::RenderWindow::draw(this->background);
+
     // Colors
     static const sf::Color colors[] = { sf::Color::Red, sf::Color::Green, sf::Color::Blue };
-
-    // Setting black color as a background
-    clear(sf::Color::Black);
 
     // Drawing players
     for (auto& it : world.get_players())

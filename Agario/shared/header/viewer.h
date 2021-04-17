@@ -6,6 +6,9 @@
 
 class Viewer : public sf::RenderWindow
 {
+    sf::Texture mapTexture;
+    sf::Sprite background;
+
 public:
     // Viewer constructor
     Viewer(const std::string& name);
