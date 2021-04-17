@@ -204,88 +204,48 @@ void Server::update(float dt)
         it.second.update(dt);
     }
 
-    // Checking if anybody reached any target
-    for (auto& it : world.get_players())
-    {
-        for (auto& elem : world.get_targets())
-        {
-            // Inside world borders
-            if (sqrt(pow((elem.second.get_pos().x - it.second.get_pos().x), 2)
-                + pow((elem.second.get_pos().y - it.second.get_pos().y), 2)) < it.second.get_rad())
-            {
-                elem.second.set_pos(world.get_random_pos()); // Setting new target pos
-                it.second.increase_rad(); // Increasing player radius
-                
-                dirty = true; // Server dirty now
-            }
-        }
-    }
-
-    // Checking for eating targets and players through the borders
+    // Checking for players eating targets and other players
+    // (inside the world and through the world borders)
     for (int i = -1; i < 2; i++)
     {
         for (int j = -1; j < 2; j++)
         {
-            if ((i != 0) || (j != 0))
+            // Players eating targets
+            for (auto& it : world.get_players())
             {
-                // Eating targets through the borders
-                for (auto& it : world.get_players())
+                for (auto& elem : world.get_targets())
                 {
-                    for (auto& elem : world.get_targets())
-                    {
-                        if (sqrt(pow((elem.second.get_pos().x - it.second.get_pos().x 
-                            + float(i * world.get_size().x)), 2)
-                            + pow((elem.second.get_pos().y - it.second.get_pos().y 
+                    if (sqrt(pow((elem.second.get_pos().x - it.second.get_pos().x
+                        + float(i * world.get_size().x)), 2)
+                        + pow((elem.second.get_pos().y - it.second.get_pos().y
                             + float(j * world.get_size().y)), 2)) < it.second.get_rad())
+                    {
+                        elem.second.set_pos(world.get_random_pos()); // Setting new target pos
+                        it.second.increase_rad(); // Increasing player radius
+
+                        dirty = true; // Server dirty now
+                    }
+                }
+            }
+
+            // Players eating other players
+            for (auto& it : world.get_players())
+            {
+                for (auto& elem : world.get_players())
+                {
+                    if (it.first != elem.first)
+                    {
+                        if (sqrt(pow((it.second.get_pos().x - elem.second.get_pos().x
+                            + float(i * world.get_size().x)), 2)
+                            + pow((it.second.get_pos().y - elem.second.get_pos().y
+                                + float(j * world.get_size().y)), 2)) < it.second.get_rad())
                         {
-                            elem.second.set_pos(world.get_random_pos()); // Setting new target pos
-                            it.second.increase_rad(); // Increasing player radius
+                            elem.second.set_pos(world.get_random_pos()); // Set random pos for eaten player
+                            elem.second.set_initial_rad(); // Set his radius to default one
 
                             dirty = true; // Server dirty now
                         }
                     }
-                }
-
-                // Eating players through the borders
-                for (auto& it : world.get_players())
-                {
-                    for (auto& elem : world.get_players())
-                    {
-                        if (it.first != elem.first)
-                        {
-                            // Inside world borders
-                            if (sqrt(pow((it.second.get_pos().x - elem.second.get_pos().x 
-                                + float(i * world.get_size().x)), 2)
-                                + pow((it.second.get_pos().y - elem.second.get_pos().y 
-                                + float(j * world.get_size().y)), 2)) < it.second.get_rad())
-                            {
-                                elem.second.set_pos(world.get_random_pos()); // Set random pos for eaten player
-                                elem.second.set_initial_rad(); // Set his radius to default one
-
-                                dirty = true; // Server dirty now
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    // Checking if any player ate other player
-    for (auto& it : world.get_players())
-    {
-        for (auto& elem : world.get_players())
-        {
-            if (it.first != elem.first)
-            {
-                // Inside world borders
-                if (sqrt(pow((it.second.get_pos().x - elem.second.get_pos().x), 2)
-                    + pow((it.second.get_pos().y - elem.second.get_pos().y), 2)) < it.second.get_rad())
-                {
-                    elem.second.set_pos(world.get_random_pos()); // Set random pos for eaten player
-                    elem.second.set_initial_rad(); // Set his radius to default one
-                    
-                    dirty = true; // Server dirty now
                 }
             }
         }
