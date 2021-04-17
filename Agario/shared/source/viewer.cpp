@@ -47,7 +47,7 @@ void Viewer::draw(World& world, int my_client_id)
             // Drawing players
             for (auto& it : world.get_players())
             {
-                sf::CircleShape s(it.second.get_rad()); // Creating a circle
+                sf::CircleShape s(it.second.get_radius()); // Creating a circle
                 s.setOrigin(s.getRadius(), s.getRadius()); // Moving the circle origin to it's center
                 int color_number = it.first % 3;
                 s.setFillColor(colors[color_number]); // Setting player color

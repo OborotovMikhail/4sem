@@ -4,10 +4,13 @@
 
 class Player
 {
+    float MaxSpeed = 300.0f; // Pixels per second, used as a reference to calculate velocity
+
     sf::Vector2f pos; // Position
     sf::Vector2f v; // Velocity
-    int rad = 20; // Radius
-    float MaxSpeed = 300.0f; // Pixels per second, used as a reference to calculate velocity
+
+    const float StartingRadius = 20;
+    int score = 0; // Player score
 
 public:
     // Update player position
@@ -25,18 +28,21 @@ public:
     // Get player velocity
     sf::Vector2f get_vel();
 
-    // Get player radius
-    int get_rad();
+    // Get player score
+    int get_score();
 
-    // Set new player radius
-    void set_rad(int new_rad);
+    // Set player score
+    void set_score(int score);
 
     // Update player velocity to new value
     void set_vel(sf::Vector2f vel);
 
-    // Increase player rad
-    void increase_rad();
+    // Increase player score
+    void increase_score();
 
     // Set initial player radius
-    void set_initial_rad();
+    void set_initial_score();
+
+    // Get current player radius
+    float get_radius();
 };

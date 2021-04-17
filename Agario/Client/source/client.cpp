@@ -69,12 +69,12 @@ void Client::start()
                     {
                         int index; // Player id
                         sf::Vector2f pos, v; // Positon and velocity from server
-                        int rad;
+                        int score;
 
-                        packet >> index >> pos.x >> pos.y >> v.x >> v.y >> rad;
+                        packet >> index >> pos.x >> pos.y >> v.x >> v.y >> score;
 
                         world.get_players()[index].set_pos(pos); // Updating position for players
-                        world.get_players()[index].set_rad(rad); // Updating radius for players
+                        world.get_players()[index].set_score(score); // Updating radius for players
 
                         if (index != id())
                         {

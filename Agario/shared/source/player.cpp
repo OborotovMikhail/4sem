@@ -28,14 +28,14 @@ sf::Vector2f Player::get_vel()
 	return this->v;
 }
 
-int Player::get_rad()
+int Player::get_score()
 {
-	return this->rad;
+	return score;
 }
 
-void Player::set_rad(int new_rad)
+void Player::set_score(int score)
 {
-	this->rad = new_rad;
+	this->score = score;
 }
 
 void Player::set_vel(sf::Vector2f vel)
@@ -43,12 +43,17 @@ void Player::set_vel(sf::Vector2f vel)
 	this->v = vel;
 }
 
-void Player::increase_rad()
+void Player::increase_score()
 {
-	this->rad += 10;
+	this->score++;
 }
 
-void Player::set_initial_rad()
+void Player::set_initial_score()
 {
-	this->rad = 20;
+	this->score = 0;
+}
+
+float Player::get_radius()
+{
+	return (this->StartingRadius + float(5) * sqrt(float(this->score)));
 }

@@ -218,10 +218,11 @@ void Server::update(float dt)
                     if (sqrt(pow((elem.second.get_pos().x - it.second.get_pos().x
                         + float(i * world.get_size().x)), 2)
                         + pow((elem.second.get_pos().y - it.second.get_pos().y
-                            + float(j * world.get_size().y)), 2)) < it.second.get_rad())
+                            + float(j * world.get_size().y)), 2)) < it.second.get_radius())
                     {
                         elem.second.set_pos(world.get_random_pos()); // Setting new target pos
-                        it.second.increase_rad(); // Increasing player radius
+                        it.second.increase_score(); // Increasing player radius
+                        debug("Ate targ, new score/rad:", it.second.get_score(), it.second.get_radius());
 
                         dirty = true; // Server dirty now
                     }
@@ -238,10 +239,10 @@ void Server::update(float dt)
                         if (sqrt(pow((it.second.get_pos().x - elem.second.get_pos().x
                             + float(i * world.get_size().x)), 2)
                             + pow((it.second.get_pos().y - elem.second.get_pos().y
-                                + float(j * world.get_size().y)), 2)) < it.second.get_rad())
+                                + float(j * world.get_size().y)), 2)) < it.second.get_radius())
                         {
                             elem.second.set_pos(world.get_random_pos()); // Set random pos for eaten player
-                            elem.second.set_initial_rad(); // Set his radius to default one
+                            elem.second.set_initial_score(); // Set his radius to default one
 
                             dirty = true; // Server dirty now
                         }
@@ -316,7 +317,7 @@ void Server::synchronize()
     {
         // Players position and velocity to packet
         toSend << elem.first << elem.second.get_pos().x << elem.second.get_pos().y <<
-            elem.second.get_vel().x << elem.second.get_vel().y << elem.second.get_rad();
+            elem.second.get_vel().x << elem.second.get_vel().y << elem.second.get_score();
     }
 
     // Sending targets to new player
