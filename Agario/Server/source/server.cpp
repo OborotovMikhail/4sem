@@ -238,6 +238,54 @@ void Server::update(float dt)
             }
         }
     }
+
+    // Checking if any player is crossing the world border
+    for (auto& it : world.get_players())
+    {
+        // Checking left border
+        if (it.second.get_pos().x < 0)
+        {
+            sf::Vector2f new_pos;
+            new_pos.x = it.second.get_pos().x + world.get_size().x;
+            new_pos.y = it.second.get_pos().y;
+            it.second.set_pos(new_pos);
+
+            dirty = true; // Server dirty now
+        }
+
+        // Checking right border
+        if (it.second.get_pos().x > world.get_size().x)
+        {
+            sf::Vector2f new_pos;
+            new_pos.x = it.second.get_pos().x - world.get_size().x;
+            new_pos.y = it.second.get_pos().y;
+            it.second.set_pos(new_pos);
+
+            dirty = true; // Server dirty now
+        }
+
+        // Checking top border
+        if (it.second.get_pos().y < 0)
+        {
+            sf::Vector2f new_pos;
+            new_pos.x = it.second.get_pos().x;
+            new_pos.y = it.second.get_pos().y + world.get_size().y;
+            it.second.set_pos(new_pos);
+
+            dirty = true; // Server dirty now
+        }
+
+        // Checking bottom border
+        if (it.second.get_pos().y > world.get_size().y)
+        {
+            sf::Vector2f new_pos;
+            new_pos.x = it.second.get_pos().x;
+            new_pos.y = it.second.get_pos().y - world.get_size().y;
+            it.second.set_pos(new_pos);
+
+            dirty = true; // Server dirty now
+        }
+    }
 }
 
 void Server::synchronize()
