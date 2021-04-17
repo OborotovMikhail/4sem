@@ -22,20 +22,8 @@ public:
     // Set new player position
     void set_pos(sf::Vector2f new_pos);
 
-    // Get player's x coordinate
-    float get_x();
-
-    // Get player's y coordinate
-    float get_y();
-
     // Get player velocity
     sf::Vector2f get_vel();
-
-    // Get player's x velocity
-    float get_x_vel();
-
-    // Get player's y velocity
-    float get_y_vel();
 
     // Get player radius
     int get_rad();

@@ -25,7 +25,7 @@ int main()
         tick += dt;
 
         // Synchronizing server if needed
-        if (tick.asMilliseconds() > 1000 || server.dirty)
+        if (tick.asMilliseconds() > 1000 || server.isDirty())
         {
             server.synchronize();
             tick = sf::Time();

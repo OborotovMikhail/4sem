@@ -23,29 +23,9 @@ void Player::set_pos(sf::Vector2f new_pos)
 	this->pos.y = new_pos.y;
 }
 
-float Player::get_x()
-{
-	return pos.x;
-}
-
-float Player::get_y()
-{
-	return pos.y;
-}
-
 sf::Vector2f Player::get_vel()
 {
 	return this->v;
-}
-
-float Player::get_x_vel()
-{
-	return this->v.x;
-}
-
-float Player::get_y_vel()
-{
-	return this->v.y;
 }
 
 int Player::get_rad()

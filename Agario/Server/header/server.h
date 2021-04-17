@@ -9,31 +9,30 @@
 
 class Server
 {
-    int currentPlayerId;
-    const unsigned short TargetsNum = 20; // Number of targets in the world
+    const int port; // Server port
 
-public:
+    int currentPlayerId;
+
+    const unsigned short MaxPlayers = 3; // Max allowed players
+    const unsigned short TargetsNum = 10; // Number of targets in the world
+
     World& world; // World pointer
 
+    std::atomic<bool> dirty = false; // Is server dirty, default = false
     std::atomic<bool> running = false; // Is server running
+
+    std::unordered_map<PlayerId, std::unique_ptr<sf::TcpSocket>> sockets; // Sockets map
+
+    SafeQueue<sf::Packet> receivedPackets; // Recieved packets (from clients)
 
     sf::TcpListener listener; // Listener
     sf::SocketSelector selector; // Socket selector
-
-    const int port; // Server port
-    const unsigned short MaxPlayers = 3; // Max allowed players
-    
-    // int playersConnected = 0; // Number of connected players
-
-    std::unordered_map<PlayerId, std::unique_ptr<sf::TcpSocket>> sockets; // Sockets map
-    
-    SafeQueue<sf::Packet> receivedPackets; // Recieved packets (from clients)
 
     std::thread syncThread; // Thread
     std::mutex newPlayerMutex; // Player mutex
     sf::Clock clock; // Clock
 
-    std::atomic<bool> dirty = false; // Is server dirty, default = false
+public:
 
     // Server constructor
     Server(int port, World& world);
@@ -43,6 +42,9 @@ public:
 
     // Is server running function
     bool isRunning() const;
+
+    // Is server dirty
+    bool isDirty();
 
     // Receiving packets from players
     void receive();
