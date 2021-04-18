@@ -222,7 +222,8 @@ void Server::update(float dt)
                     {
                         elem.second.set_pos(world.get_random_pos()); // Setting new target pos
                         it.second.increase_score(); // Increasing player radius
-                        debug("Ate targ, new score/rad:", it.second.get_score(), it.second.get_radius());
+                        debug("Ate targ, new score/rad:", it.second.get_score(), it.second.get_radius(),
+                            it.second.get_maxspeed());
 
                         dirty = true; // Server dirty now
                     }

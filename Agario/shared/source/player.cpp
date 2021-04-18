@@ -9,7 +9,18 @@ void Player::update(float dt)
 
 float Player::get_maxspeed()
 {
-	return this->MaxSpeed;
+	// Computing velocity
+	float result = this->StartingVelocity * (1 - 0.05 * log((float(1)/float(10) * this->score + 1)));
+
+	if (result < this->StartingVelocity * 0.7)
+	{
+		// Limiting possible velocity
+		return this->StartingVelocity * 0.7;
+	}
+	else
+	{
+		return result;
+	}
 }
 
 sf::Vector2f Player::get_pos()

@@ -6,12 +6,12 @@
 
 class Player
 {
-    float MaxSpeed = 300.0f; // Pixels per second, used as a reference to calculate velocity
+    const float StartingVelocity = 350.0f; // Pixels per second, used as a reference to calculate velocity
+    const float StartingRadius = 50;
 
     sf::Vector2f pos; // Position
     sf::Vector2f v; // Velocity
 
-    const float StartingRadius = 50;
     int score = 0; // Player score
 
 public:
