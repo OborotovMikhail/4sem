@@ -222,8 +222,6 @@ void Server::update(float dt)
                     {
                         elem.second.set_pos(world.get_random_pos()); // Setting new target pos
                         it.second.increase_score(); // Increasing player radius
-                        debug("Ate targ, new score/rad:", it.second.get_score(), it.second.get_radius(),
-                            it.second.get_maxspeed());
 
                         dirty = true; // Server dirty now
                     }
@@ -242,10 +240,46 @@ void Server::update(float dt)
                             + pow((it.second.get_pos().y - elem.second.get_pos().y
                                 + float(j * world.get_size().y)), 2)) < it.second.get_radius())
                         {
-                            elem.second.set_pos(world.get_random_pos()); // Set random pos for eaten player
-                            elem.second.set_initial_score(); // Set his radius to default one
+                            // If players' scores are not equal
+                            if (it.second.get_score() > elem.second.get_score())
+                            {
+                                // Adding 50% of the eaten player's score to the
+                                // one who ate him
+                                it.second.set_score(it.second.get_score() + elem.second.get_score() / 2);
 
-                            dirty = true; // Server dirty now
+                                elem.second.set_pos(world.get_random_pos()); // Set random pos for eaten player
+                                elem.second.set_initial_score(); // Set his radius to default one
+
+                                dirty = true; // Server dirty now
+                            }
+
+                            // If players' scores are equal make it random
+                            if (it.second.get_score() == elem.second.get_score())
+                            {
+                                unsigned seed = std::chrono::steady_clock::now().time_since_epoch().count(); // Random seed
+                                std::default_random_engine generator(seed); // Generator
+                                std::uniform_real_distribution<float> distribution(float(-1), float(1)); // Creating x distribution
+                                float random_player = distribution(generator);
+
+                                if (random_player > 0)
+                                {
+                                    it.second.set_score(it.second.get_score() + elem.second.get_score() / 2); // Adding score
+
+                                    elem.second.set_pos(world.get_random_pos()); // Set random pos for eaten player
+                                    elem.second.set_initial_score(); // Set his radius to default one
+
+                                    dirty = true; // Server dirty now
+                                }
+                                else
+                                {
+                                    elem.second.set_score(elem.second.get_score() + it.second.get_score() / 2); // Adding score
+
+                                    it.second.set_pos(world.get_random_pos()); // Set random pos for eaten player
+                                    it.second.set_initial_score(); // Set his radius to default one
+
+                                    dirty = true; // Server dirty now
+                                }
+                            }
                         }
                     }
                 }
