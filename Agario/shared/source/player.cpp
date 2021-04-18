@@ -55,5 +55,16 @@ void Player::set_initial_score()
 
 float Player::get_radius()
 {
-	return (this->StartingRadius + float(5) * sqrt(float(this->score)));
+	// Computing radius
+	float result = this->StartingRadius + log((float(1) / float(15)) * float(this->score) + float(1)) / log(1.2) * 8;
+
+	if (result > this->StartingRadius * 6)
+	{
+		// Limiting possible radius
+		return this->StartingRadius * 6;
+	}
+	else
+	{
+		return result;
+	}
 }

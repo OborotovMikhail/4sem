@@ -2,6 +2,8 @@
 #include "SFML\System.hpp"
 #include "debug.h"
 
+#include "target.h"
+
 class Player
 {
     float MaxSpeed = 300.0f; // Pixels per second, used as a reference to calculate velocity
@@ -9,7 +11,7 @@ class Player
     sf::Vector2f pos; // Position
     sf::Vector2f v; // Velocity
 
-    const float StartingRadius = 20;
+    const float StartingRadius = 50;
     int score = 0; // Player score
 
 public:

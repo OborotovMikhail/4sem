@@ -6,7 +6,6 @@
 #include <random>
 
 #include "player.h"
-#include "target.h"
 
 // Player id type
 using PlayerId = int;

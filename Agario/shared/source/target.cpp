@@ -23,5 +23,5 @@ void Target::set_pos(sf::Vector2f new_pos)
 
 int Target::get_rad()
 {
-	return this->radius;
+	return radius;
 }

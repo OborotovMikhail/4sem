@@ -77,7 +77,7 @@ void Viewer::draw(World& world, int my_client_id)
         }
     }
 
-    // Centering to player (only for players)
+    // Centering view to the player (client code)
     if (my_client_id > -1)
     {
         sf::View gameView;
