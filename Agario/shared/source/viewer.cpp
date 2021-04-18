@@ -2,11 +2,12 @@
 
 #include "viewer.h"
 
-Viewer::Viewer(const std::string& name) : sf::RenderWindow(sf::VideoMode(800, 800), name)
+Viewer::Viewer(const std::string& name) : sf::RenderWindow(sf::VideoMode(VIEWER_WIDTH, VIEWER_HEIGHT),
+    name, sf::Style::Fullscreen)
 {
     // Loading background sprite
     this->mapTexture;
-    if (!this->mapTexture.loadFromFile("kit.jpg"))
+    if (!this->mapTexture.loadFromFile("test.jpg"))
     {
         std::cout << "Could not load background texture" << std::endl;
     }
@@ -29,6 +30,21 @@ void Viewer::handleEvents()
 
 void Viewer::draw(World& world, int my_client_id)
 {
+    // Centering view to the player (client code)
+    if (my_client_id > -1)
+    {
+        sf::View gameView(sf::FloatRect(0.0f, 0.0f, VIEWER_WIDTH, VIEWER_HEIGHT));
+        gameView.setCenter(world.get_players()[my_client_id].get_pos());
+        this->setView(gameView);
+    }
+
+    if (my_client_id == -1)
+    {
+        sf::View gameView(sf::FloatRect(0.0f, 0.0f, VIEWER_WIDTH, VIEWER_HEIGHT));
+        gameView.zoom(2.0f);
+        this->setView(gameView);
+    }
+
     // Clearing window, setting black color
     clear(sf::Color::Black);
 
@@ -75,14 +91,6 @@ void Viewer::draw(World& world, int my_client_id)
                 sf::RenderWindow::draw(s); // Drawing fake target in a window
             }
         }
-    }
-
-    // Centering view to the player (client code)
-    if (my_client_id > -1)
-    {
-        sf::View gameView;
-        gameView.setCenter(world.get_players()[my_client_id].get_pos());
-        this->setView(gameView);
     }
 
     // Displaying the window

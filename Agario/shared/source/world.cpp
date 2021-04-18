@@ -2,8 +2,6 @@
 
 #include "world.h"
 
-// sf::Vector2i Size = { 800, 800 };
-
 void World::update(float dt)
 {
     std::lock_guard<std::mutex> guard(mutex);
@@ -23,11 +21,6 @@ std::unordered_map<PlayerId, Player>& World::get_players()
 std::unordered_map<TargetId, Target>& World::get_targets()
 {
     return this->targets;
-}
-
-Target& World::get_target()
-{
-    return this->target;
 }
 
 sf::Vector2f World::get_random_pos()

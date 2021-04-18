@@ -14,11 +14,13 @@ using TargetId = int;
 // Game world structure
 class World
 {
+    const int VIEWER_HEIGHT = 3840;
+    const int VIEWER_LENGHT = 2160;
+
     std::unordered_map<PlayerId, Player> players; // Players map
     std::unordered_map<TargetId, Target> targets; // Targets map
 
-    Target target; // Target class object
-    sf::Vector2i Size = { 800, 800 };; // World size
+    sf::Vector2i Size = { VIEWER_HEIGHT, VIEWER_LENGHT };; // World size
 
 public:
     std::mutex mutex; // Mutex
@@ -32,9 +34,6 @@ public:
 
     // Get targets map
     std::unordered_map<TargetId, Target>& get_targets();
-
-    // Get target function
-    Target& get_target();
     
     // Get random position on map
     sf::Vector2f get_random_pos();

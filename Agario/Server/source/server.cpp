@@ -20,10 +20,6 @@ Server::Server(int port, World& world) :
         return;
     }
 
-    sf::Vector2f new_pos = world.get_random_pos();
-
-    world.get_target().set_pos(new_pos); // Creating first target
-
     // Creating targets
     for (int i = 0; i < TargetsNum; i++)
     {
@@ -202,6 +198,7 @@ void Server::update(float dt)
     for (auto& it : world.get_players())
     {
         it.second.update(dt);
+        debug(it.second.get_pos().x, it.second.get_pos().y);
     }
 
     // Checking for players eating targets and other players
