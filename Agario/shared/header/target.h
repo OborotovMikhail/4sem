@@ -4,7 +4,7 @@
 class Target
 {
 	sf::Vector2f pos; // Target position
-	const int radius = 10;
+	const int radius = 20;
 
 public:
 	Target();

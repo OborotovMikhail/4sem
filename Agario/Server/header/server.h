@@ -14,7 +14,7 @@ class Server
     int currentPlayerId;
 
     const unsigned short MaxPlayers = 3; // Max allowed players
-    const unsigned short TargetsNum = 10; // Number of targets in the world
+    const unsigned short TargetsNum = 30; // Number of targets in the world
 
     World& world; // World pointer
 

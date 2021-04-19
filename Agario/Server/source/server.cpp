@@ -198,7 +198,6 @@ void Server::update(float dt)
     for (auto& it : world.get_players())
     {
         it.second.update(dt);
-        debug(it.second.get_pos().x, it.second.get_pos().y);
     }
 
     // Checking for players eating targets and other players

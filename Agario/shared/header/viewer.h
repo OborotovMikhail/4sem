@@ -9,9 +9,6 @@ class Viewer : public sf::RenderWindow
     const int VIEWER_WIDTH = 1920;
     const int VIEWER_HEIGHT = 1080;
 
-    sf::Texture mapTexture;
-    sf::Sprite background;
-
 public:
     // Viewer constructor
     Viewer(const std::string& name);

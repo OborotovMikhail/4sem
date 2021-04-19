@@ -5,15 +5,6 @@
 Viewer::Viewer(const std::string& name) : sf::RenderWindow(sf::VideoMode(VIEWER_WIDTH, VIEWER_HEIGHT),
     name, sf::Style::Fullscreen)
 {
-    // Loading background sprite
-    this->mapTexture;
-    if (!this->mapTexture.loadFromFile("test.jpg"))
-    {
-        std::cout << "Could not load background texture" << std::endl;
-    }
-    mapTexture.setSmooth(true);
-    this->background.setTexture(mapTexture);
-
     //Setting frame limit
     setFramerateLimit(60);
 }
@@ -33,23 +24,29 @@ void Viewer::draw(World& world, int my_client_id)
     // Centering view to the player (client code)
     if (my_client_id > -1)
     {
-        sf::View gameView(sf::FloatRect(0.0f, 0.0f, VIEWER_WIDTH, VIEWER_HEIGHT));
-        gameView.setCenter(world.get_players()[my_client_id].get_pos());
+        sf::View gameView(sf::FloatRect(0.0f, 0.0f, VIEWER_WIDTH, VIEWER_HEIGHT)); // Creating a rectangle
+        gameView.setCenter(world.get_players()[my_client_id].get_pos()); // Centering to player
+
         this->setView(gameView);
     }
 
+    // Whole world fixed view (server code)
     if (my_client_id == -1)
     {
-        sf::View gameView(sf::FloatRect(0.0f, 0.0f, VIEWER_WIDTH, VIEWER_HEIGHT));
-        gameView.zoom(2.0f);
+        sf::View gameView(sf::FloatRect(0.0f, 0.0f, VIEWER_WIDTH, VIEWER_HEIGHT)); // Creating a rectangle
+        gameView.zoom(float(World::get_size().x) / float(this->VIEWER_WIDTH)); // Scaling to see the whole world
+
+        // Centering after the zoom
+        sf::Vector2f center;
+        center.x = float(World::get_size().x) / 2.0f;
+        center.y = float(World::get_size().y) / 2.0f;
+        gameView.setCenter(center);
+
         this->setView(gameView);
     }
 
     // Clearing window, setting black color
     clear(sf::Color::Black);
-
-    // Drawing background
-    sf::RenderWindow::draw(this->background);
 
     // Colors
     static const sf::Color colors[] = { sf::Color::Red, sf::Color::Green, sf::Color::Blue };

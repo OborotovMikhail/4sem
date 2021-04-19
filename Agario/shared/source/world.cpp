@@ -58,7 +58,10 @@ sf::Vector2f World::get_random_pos()
 
 sf::Vector2i World::get_size()
 {
-    return this->Size;
+    sf::Vector2i result;
+    result.x = World::WORLD_WIDTH;
+    result.y = World::WORLD_HEIGHT;
+    return result;
 }
 
 void World::remove_player(PlayerId clientId)

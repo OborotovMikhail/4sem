@@ -14,13 +14,13 @@ using TargetId = int;
 // Game world structure
 class World
 {
-    const int VIEWER_HEIGHT = 3840;
-    const int VIEWER_LENGHT = 2160;
+    // World dimentions
+    // Some standart values: 1920 1080, 3840 2160, 5760 3240, 7680 4320
+    static const int WORLD_WIDTH = 5760; // World x span
+    static const int WORLD_HEIGHT = 3240; // World y span
 
     std::unordered_map<PlayerId, Player> players; // Players map
     std::unordered_map<TargetId, Target> targets; // Targets map
-
-    sf::Vector2i Size = { VIEWER_HEIGHT, VIEWER_LENGHT };; // World size
 
 public:
     std::mutex mutex; // Mutex
@@ -39,7 +39,7 @@ public:
     sf::Vector2f get_random_pos();
 
     // Get world size
-    sf::Vector2i get_size();
+    static sf::Vector2i get_size();
 
     // Remove player from the world
     void remove_player(PlayerId clientId);
