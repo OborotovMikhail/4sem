@@ -74,8 +74,8 @@ void Server::receive()
 
                         // Creating a spawn packet for the new client
                         sf::Packet outPacket;
-                        outPacket << Message::ClientCreated << this->currentPlayerId << world.get_players()[this->currentPlayerId].get_x()
-                            << world.get_players()[this->currentPlayerId].get_y() << clock.getElapsedTime().asSeconds();
+                        outPacket << Message::ClientCreated << this->currentPlayerId << world.get_players()[this->currentPlayerId].get_pos().x
+                            << world.get_players()[this->currentPlayerId].get_pos().y << clock.getElapsedTime().asSeconds();
 
                         // Sending online player id's to the new player
                         outPacket << this->world.get_players().size();
@@ -92,8 +92,8 @@ void Server::receive()
                         else
                         {
                             std::cout << "Player " << this->currentPlayerId << " connected (spawn position: "
-                            << world.get_players()[this->currentPlayerId].get_x() << " " <<
-                                world.get_players()[this->currentPlayerId].get_y() << ")\n";
+                            << world.get_players()[this->currentPlayerId].get_pos().x << " " <<
+                                world.get_players()[this->currentPlayerId].get_pos().y << ")\n";
                         }
 
                         sockets[this->currentPlayerId] = std::move(tempSocket);
@@ -189,32 +189,13 @@ void Server::update(float dt)
     // Checking if anybody reached the target
     for (auto& it : world.get_players())
     {
-        if (sqrt(pow((world.get_target().get_x() - it.second.get_x()), 2) 
-            + pow((world.get_target().get_y() - it.second.get_y()), 2)) < it.second.get_rad())
+        if (sqrt(pow((world.get_target().get_x() - it.second.get_pos().x), 2) 
+            + pow((world.get_target().get_y() - it.second.get_pos().y), 2)) < it.second.get_rad())
         {
             world.get_target().set_pos(world.get_random_pos()); // Setting new target pos
-            it.second.increase_rad(); // Increasing player radius
+            it.second.increase_score(); // Increasing player score
 
             dirty = true; // Server dirty now
-        }
-    }
-
-    // Checking if any player ate other player
-    for (auto& it : world.get_players())
-    {
-        for (auto& elem : world.get_players())
-        {
-            if (it.first != elem.first)
-            {
-                if (sqrt(pow((it.second.get_x() - elem.second.get_x()), 2)
-                    + pow((it.second.get_y() - elem.second.get_y()), 2)) < it.second.get_rad())
-                {
-                    elem.second.set_pos(world.get_random_pos()); // Set random pos for eaten player
-                    elem.second.set_initial_rad(); // Set his radius to default one
-
-                    dirty = true; // Server dirty now
-                }
-            }
         }
     }
 }
@@ -234,8 +215,8 @@ void Server::synchronize()
     for (auto& elem : world.get_players())
     {
         // Players position and velocity to packet
-        toSend << elem.first << elem.second.get_x() << elem.second.get_y() <<
-            elem.second.get_x_vel() << elem.second.get_y_vel() << elem.second.get_rad();
+        toSend << elem.first << elem.second.get_pos().x << elem.second.get_pos().y <<
+            elem.second.get_vel().x << elem.second.get_vel().y;
     }
 
     // Pushing target position to packet

@@ -47,7 +47,7 @@ sf::Vector2f World::get_random_pos()
         // Checking if new position is inside any player
         for (auto& it : this->players)
         {
-            if (sqrt(pow((it.second.get_x() - pos.x), 2) + pow((it.second.get_y()
+            if (sqrt(pow((it.second.get_pos().x - pos.x), 2) + pow((it.second.get_pos().y
                 - pos.y), 2)) < it.second.get_rad())
             {
                 is_inside++;

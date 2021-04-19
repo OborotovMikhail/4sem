@@ -23,29 +23,9 @@ void Player::set_pos(sf::Vector2f new_pos)
 	this->pos.y = new_pos.y;
 }
 
-float Player::get_x()
-{
-	return pos.x;
-}
-
-float Player::get_y()
-{
-	return pos.y;
-}
-
 sf::Vector2f Player::get_vel()
 {
 	return this->v;
-}
-
-float Player::get_x_vel()
-{
-	return this->v.x;
-}
-
-float Player::get_y_vel()
-{
-	return this->v.y;
 }
 
 int Player::get_rad()
@@ -53,22 +33,17 @@ int Player::get_rad()
 	return this->rad;
 }
 
-void Player::set_rad(int new_rad)
-{
-	this->rad = new_rad;
-}
-
 void Player::set_vel(sf::Vector2f vel)
 {
 	this->v = vel;
 }
 
-void Player::increase_rad()
+void Player::increase_score()
 {
-	this->rad += 10;
+	this->score++;
 }
 
-void Player::set_initial_rad()
+int Player::get_score()
 {
-	this->rad = 20;
+	return this->score;
 }
