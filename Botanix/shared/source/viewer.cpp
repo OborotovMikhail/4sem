@@ -39,7 +39,7 @@ void Viewer::draw(World& world)
     }
 
     // Creating target
-    sf::CircleShape target_display(10);
+    sf::CircleShape target_display(world.get_target().get_rad());
     target_display.setOrigin(target_display.getRadius(), target_display.getRadius());
     target_display.setFillColor(sf::Color::White);
     target_display.setPosition(world.get_target().get_pos());

@@ -189,8 +189,8 @@ void Server::update(float dt)
     // Checking if anybody reached the target
     for (auto& it : world.get_players())
     {
-        if (sqrt(pow((world.get_target().get_x() - it.second.get_pos().x), 2) 
-            + pow((world.get_target().get_y() - it.second.get_pos().y), 2)) < it.second.get_rad())
+        if (sqrt(pow((world.get_target().get_pos().x - it.second.get_pos().x), 2) 
+            + pow((world.get_target().get_pos().y - it.second.get_pos().y), 2)) < it.second.get_rad())
         {
             world.get_target().set_pos(world.get_random_pos()); // Setting new target pos
             it.second.increase_score(); // Increasing player score
@@ -220,8 +220,8 @@ void Server::synchronize()
     }
 
     // Pushing target position to packet
-    toSend << world.get_target().get_x();
-    toSend << world.get_target().get_y();
+    toSend << world.get_target().get_pos().x;
+    toSend << world.get_target().get_pos().y;
 
     // Pushing server elapsed time to packet
     toSend << clock.getElapsedTime().asSeconds();

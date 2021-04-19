@@ -28,9 +28,9 @@ sf::Vector2f Player::get_vel()
 	return this->v;
 }
 
-int Player::get_rad()
+float Player::get_rad()
 {
-	return this->rad;
+	return this->RADIUS;
 }
 
 void Player::set_vel(sf::Vector2f vel)
@@ -41,9 +41,13 @@ void Player::set_vel(sf::Vector2f vel)
 void Player::increase_score()
 {
 	this->score++;
+	if (this->score == FINAL_SCORE)
+	{
+		gameover = true;
+	}
 }
 
-int Player::get_score()
+bool Player::IfGameOver()
 {
-	return this->score;
+	return this->gameover;
 }
