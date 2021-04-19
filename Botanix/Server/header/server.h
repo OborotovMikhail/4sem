@@ -9,8 +9,6 @@
 
 class Server
 {
-    int currentPlayerId;
-public:
     World& world; // World pointer
 
     std::atomic<bool> running = false; // Is server running
@@ -23,7 +21,7 @@ public:
     // int playersConnected = 0; // Number of connected players
 
     std::unordered_map<PlayerId, std::unique_ptr<sf::TcpSocket>> sockets; // Sockets map
-    
+
     SafeQueue<sf::Packet> receivedPackets; // Recieved packets (from clients)
 
     std::thread syncThread; // Thread
@@ -32,6 +30,8 @@ public:
 
     std::atomic<bool> dirty = false; // Is server dirty, default = false
 
+    int currentPlayerId;
+public:
     // Server constructor
     Server(int port, World& world);
 
@@ -50,4 +50,6 @@ public:
     // Synchronizing with all clients
     // (sending up-to-date data from server)
     void synchronize();
+
+    bool IsDirty();
 };

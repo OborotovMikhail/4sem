@@ -9,7 +9,7 @@ void Player::update(float dt)
 
 float Player::get_maxspeed()
 {
-	return this->MaxSpeed;
+	return this->SPEED;
 }
 
 sf::Vector2f Player::get_pos()

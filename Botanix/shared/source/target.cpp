@@ -4,12 +4,6 @@
 #include <random>
 #include "target.h"
 
-Target::Target()
-{
-	this->pos.x = 0;
-	this->pos.y = 0;
-}
-
 sf::Vector2f Target::get_pos()
 {
 	return this->pos;

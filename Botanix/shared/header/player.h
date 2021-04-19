@@ -5,14 +5,13 @@ class Player
 {
     const float RADIUS = 20.0f; // Player radius
     const int FINAL_SCORE = 10; // Score needed to win the game
+    const float SPEED = 300.0f; // Pixels per second, used as a reference to calculate velocity
 
     int score = 0; // Player score, starting score is 0
     bool gameover = false; // Did the player reach endgame score
 
     sf::Vector2f pos; // Position
     sf::Vector2f v; // Velocity
-
-    float MaxSpeed = 300.0f; // Pixels per second, used as a reference to calculate velocity
 
 public:
     // Update player position

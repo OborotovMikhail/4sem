@@ -236,3 +236,8 @@ void Server::synchronize()
     }
 }
 
+bool Server::IsDirty()
+{
+    return this->dirty;
+}
+

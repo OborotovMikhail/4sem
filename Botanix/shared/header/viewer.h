@@ -6,6 +6,9 @@
 
 class Viewer : public sf::RenderWindow
 {
+    const int VIEWER_WIDTH = 800;
+    const int VIEWER_HEIGHT = 800;
+
 public:
     // Viewer constructor
     Viewer(const std::string& name);

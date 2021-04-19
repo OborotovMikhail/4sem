@@ -3,13 +3,11 @@
 
 class Target
 {
-	const float RADIUS = 5.0f; // Target radius
+	const float RADIUS = 10.0f; // Target radius
 
-	sf::Vector2f pos; // Target position
+	sf::Vector2f pos = { 0.0f, 0.0f }; // Target position
 
 public:
-	Target();
-
 	// Get target position
 	sf::Vector2f get_pos();
 
