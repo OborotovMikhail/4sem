@@ -63,13 +63,7 @@ void Client::start()
                         packet >> index >> pos.x >> pos.y >> v.x >> v.y;
 
                         world.get_players()[index].set_pos(pos); // Updating position for players
-
-                        if (index != id())
-                        {
-                            // Updating velocity for other players
-                            // Not for this client!
-                            world.get_players()[index].set_vel(v);
-                        }
+                        world.get_players()[index].set_vel(v);
                     }
                 }
 
@@ -123,11 +117,12 @@ void Client::notify_mov()
     // Creating a packet
     sf::Packet packet;
 
-    // This client's player velocity
-    const auto& v = world.get_players()[id()].get_vel();
+    // This client's player controls vector
+    const auto& controls = world.get_players()[id()].get_controls();
 
-    // Creating a packet for sending velocity
-    packet << Message::Movement << clientId << v.x << v.y;
+    // Creating a packet for sending controls
+    packet << Message::Movement << clientId << controls.x << controls.y;
+
     // Sending packet
     if (socket.send(packet) != sf::Socket::Done)
     {

@@ -1,5 +1,6 @@
 #pragma once
 #include "SFML\System.hpp"
+#include "debug.h"
 
 class Player
 {
@@ -12,6 +13,8 @@ class Player
 
     sf::Vector2f pos; // Position
     sf::Vector2f v; // Velocity
+
+    sf::Vector2f controls; // Current player controls status
 
 public:
     // Update player position
@@ -40,4 +43,10 @@ public:
 
     // Did the player reach the score needed to win
     bool IfGameOver();
+
+    // Get player controls
+    sf::Vector2f get_controls();
+
+    // Set player controls
+    void set_controls(sf::Vector2f controls);
 };

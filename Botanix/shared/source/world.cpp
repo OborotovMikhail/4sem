@@ -85,3 +85,7 @@ void World::show_players()
     
     std::cout << std::endl;
 }
+
+void World::check_controls()
+{
+}

@@ -2,6 +2,8 @@
 
 #include <SFML\Graphics.hpp>
 
-sf::Vector2f controls_arrows(float maxspeed);
+// 2D controls using arrows
+sf::Vector2f controls_arrows();
 
-sf::Vector2f controls_wasd(float maxspeed);
+// 2D controls using WASD
+sf::Vector2f controls_wasd();

@@ -42,4 +42,6 @@ public:
     void remove_player(PlayerId clientId);
 
     void show_players();
+
+    void check_controls();
 };

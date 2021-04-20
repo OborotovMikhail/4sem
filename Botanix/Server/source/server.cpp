@@ -143,9 +143,15 @@ void Server::update(float dt)
         // Processing movement packets
         if (messageType == Message::Movement)
         {
-            sf::Vector2f v; // Velocity vector
-            packet >> clientId >> v.x >> v.y; // Data from packet
-            world.get_players()[clientId].set_vel(v); // Updating player velocity
+            sf::Vector2f controls; // Recieved controls vector
+            packet >> clientId >> controls.x >> controls.y; // Data from packet
+            world.get_players()[clientId].set_controls(controls); // Updating player velocity
+
+            sf::Vector2f velocity; // New player velocity
+            velocity.x = controls.x * world.get_players()[clientId].get_maxspeed();
+            velocity.y = controls.y * world.get_players()[clientId].get_maxspeed();
+            world.get_players()[clientId].set_vel(velocity); // Setting player velocity
+
             dirty = true; // Server dirty
         }
 

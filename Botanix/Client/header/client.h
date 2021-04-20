@@ -35,7 +35,7 @@ public:
     // Client destructor
     ~Client();
 
-    // Notify server about velocity function
+    // Notify server about controls function
     void notify_mov();
 
     // Get client id function

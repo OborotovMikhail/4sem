@@ -51,3 +51,13 @@ bool Player::IfGameOver()
 {
 	return this->gameover;
 }
+
+sf::Vector2f Player::get_controls()
+{
+	return this->controls;
+}
+
+void Player::set_controls(sf::Vector2f controls)
+{
+	this->controls = controls;
+}

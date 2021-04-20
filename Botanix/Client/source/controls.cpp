@@ -2,7 +2,7 @@
 
 #include "controls.h"
 
-sf::Vector2f controls_arrows(float maxspeed)
+sf::Vector2f controls_arrows()
 {
 	sf::Vector2f v;
 
@@ -10,70 +10,70 @@ sf::Vector2f controls_arrows(float maxspeed)
     if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Right) == sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
         && (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) == sf::Keyboard::isKeyPressed(sf::Keyboard::Down)))
     {
-        v.x = 0;
-        v.y = 0;
+        v.x = 0.0f;
+        v.y = 0.0f;
     }
     // left movement
     if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && sf::Keyboard::isKeyPressed(sf::Keyboard::Left)
         && (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) == sf::Keyboard::isKeyPressed(sf::Keyboard::Down)))
     {
-        v.x = -maxspeed;
-        v.y = 0;
+        v.x = - 1.0f;
+        v.y = 0.0f;
     }
     // right movement
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Left)
         && (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) == sf::Keyboard::isKeyPressed(sf::Keyboard::Down)))
     {
-        v.x = maxspeed;
-        v.y = 0;
+        v.x = 1.0f;
+        v.y = 0.0f;
     }
     // down movement
     if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Right) == sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
         && !sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
     {
-        v.x = 0;
-        v.y = maxspeed;
+        v.x = 0.0f;
+        v.y = 1.0f;
     }
     // up movement
     if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Right) == sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
         && sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
     {
         v.x = 0;
-        v.y = -maxspeed;
+        v.y = - 1.0f;
     }
     // left-down movement
     if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && sf::Keyboard::isKeyPressed(sf::Keyboard::Left)
         && !sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
     {
-        v.x = -maxspeed;
-        v.y = maxspeed;
+        v.x = - 1.0f;
+        v.y = 1.0f;
     }
     // left-up movement
     if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && sf::Keyboard::isKeyPressed(sf::Keyboard::Left)
         && sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
     {
-        v.x = -maxspeed;
-        v.y = -maxspeed;
+        v.x = - 1.0f;
+        v.y = - 1.0f;
     }
     // right-down movement
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Left)
         && !sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
     {
-        v.x = maxspeed;
-        v.y = maxspeed;
+        v.x = 1.0f;
+        v.y = 1.0f;
     }
     // right-up movement
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Left)
         && sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
     {
-        v.x = maxspeed;
-        v.y = -maxspeed;
+        v.x = 1.0f;
+        v.y = - 1.0f;
     }
-
+    
     return v;
 }
 
-sf::Vector2f controls_wasd(float maxspeed)
+sf::Vector2f controls_wasd()
 {
     sf::Vector2f v;
 
@@ -81,64 +81,64 @@ sf::Vector2f controls_wasd(float maxspeed)
     if ((sf::Keyboard::isKeyPressed(sf::Keyboard::D) == sf::Keyboard::isKeyPressed(sf::Keyboard::A))
         && (sf::Keyboard::isKeyPressed(sf::Keyboard::W) == sf::Keyboard::isKeyPressed(sf::Keyboard::S)))
     {
-        v.x = 0;
-        v.y = 0;
+        v.x = 0.0f;
+        v.y = 0.0f;
     }
     // left movement
     if (!sf::Keyboard::isKeyPressed(sf::Keyboard::D) && sf::Keyboard::isKeyPressed(sf::Keyboard::A)
         && (sf::Keyboard::isKeyPressed(sf::Keyboard::W) == sf::Keyboard::isKeyPressed(sf::Keyboard::S)))
     {
-        v.x = -maxspeed;
-        v.y = 0;
+        v.x = - 1.0f;
+        v.y = 0.0f;
     }
     // right movement
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && !sf::Keyboard::isKeyPressed(sf::Keyboard::A)
         && (sf::Keyboard::isKeyPressed(sf::Keyboard::W) == sf::Keyboard::isKeyPressed(sf::Keyboard::S)))
     {
-        v.x = maxspeed;
-        v.y = 0;
+        v.x = 1.0f;
+        v.y = 0.0f;
     }
     // down movement
     if ((sf::Keyboard::isKeyPressed(sf::Keyboard::D) == sf::Keyboard::isKeyPressed(sf::Keyboard::A))
         && !sf::Keyboard::isKeyPressed(sf::Keyboard::W) && sf::Keyboard::isKeyPressed(sf::Keyboard::S))
     {
-        v.x = 0;
-        v.y = maxspeed;
+        v.x = 0.0f;
+        v.y = 1.0f;
     }
     // up movement
     if ((sf::Keyboard::isKeyPressed(sf::Keyboard::D) == sf::Keyboard::isKeyPressed(sf::Keyboard::A))
         && sf::Keyboard::isKeyPressed(sf::Keyboard::W) && !sf::Keyboard::isKeyPressed(sf::Keyboard::S))
     {
-        v.x = 0;
-        v.y = -maxspeed;
+        v.x = 0.0f;
+        v.y = - 1.0f;
     }
     // left-down movement
     if (!sf::Keyboard::isKeyPressed(sf::Keyboard::D) && sf::Keyboard::isKeyPressed(sf::Keyboard::A)
         && !sf::Keyboard::isKeyPressed(sf::Keyboard::W) && sf::Keyboard::isKeyPressed(sf::Keyboard::S))
     {
-        v.x = -maxspeed;
-        v.y = maxspeed;
+        v.x = - 1.0f;
+        v.y = 1.0f;
     }
     // left-up movement
     if (!sf::Keyboard::isKeyPressed(sf::Keyboard::D) && sf::Keyboard::isKeyPressed(sf::Keyboard::A)
         && sf::Keyboard::isKeyPressed(sf::Keyboard::W) && !sf::Keyboard::isKeyPressed(sf::Keyboard::S))
     {
-        v.x = -maxspeed;
-        v.y = -maxspeed;
+        v.x = - 1.0f;
+        v.y = - 1.0f;
     }
     // right-down movement
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && !sf::Keyboard::isKeyPressed(sf::Keyboard::A)
         && !sf::Keyboard::isKeyPressed(sf::Keyboard::W) && sf::Keyboard::isKeyPressed(sf::Keyboard::S))
     {
-        v.x = maxspeed;
-        v.y = maxspeed;
+        v.x = 1.0f;
+        v.y = 1.0f;
     }
     // right-up movement
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && !sf::Keyboard::isKeyPressed(sf::Keyboard::A)
         && sf::Keyboard::isKeyPressed(sf::Keyboard::W) && !sf::Keyboard::isKeyPressed(sf::Keyboard::S))
     {
-        v.x = maxspeed;
-        v.y = -maxspeed;
+        v.x = 1.0f;
+        v.y = - 1.0f;
     }
 
     return v;
