@@ -63,7 +63,7 @@ void Client::start()
                         packet >> index >> pos.x >> pos.y >> v.x >> v.y;
 
                         world.get_players()[index].set_pos(pos); // Updating position for players
-                        world.get_players()[index].set_vel(v);
+                        world.get_players()[index].set_vel(v); // Updating velocity for players
                     }
                 }
 

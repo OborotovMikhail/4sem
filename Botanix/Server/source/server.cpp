@@ -147,11 +147,6 @@ void Server::update(float dt)
             packet >> clientId >> controls.x >> controls.y; // Data from packet
             world.get_players()[clientId].set_controls(controls); // Updating player velocity
 
-            sf::Vector2f velocity; // New player velocity
-            velocity.x = controls.x * world.get_players()[clientId].get_maxspeed();
-            velocity.y = controls.y * world.get_players()[clientId].get_maxspeed();
-            world.get_players()[clientId].set_vel(velocity); // Setting player velocity
-
             dirty = true; // Server dirty
         }
 
@@ -183,6 +178,113 @@ void Server::update(float dt)
             this->world.show_players();
 
             dirty = true; // Server dirty
+        }
+    }
+
+    // Updating player's speed based on player controls
+    for (auto& it : world.get_players())
+    {
+        sf::Vector2f velocity; // New velocity vector
+
+        // X axis velocity
+        // Inside the world
+        if ((0 < it.second.get_pos().x) && (it.second.get_pos().x < world.get_size().x))
+        {
+            velocity.x = it.second.get_controls().x * it.second.get_maxspeed();
+        }
+        // On the left border
+        if (it.second.get_pos().x == 0)
+        {
+            if (it.second.get_controls().x > 0.0f)
+            {
+                velocity.x = it.second.get_controls().x * it.second.get_maxspeed();
+            }
+            else
+            {
+                velocity.x = 0;
+            }
+        }
+        // Outside the left border
+        if (it.second.get_pos().x < 0.0f)
+        {
+            sf::Vector2f new_pos;
+            new_pos.x = 0.0f;
+            new_pos.y = it.second.get_pos().y;
+            it.second.set_pos(new_pos);
+        }
+        // On the right border
+        if (it.second.get_pos().x == world.get_size().x)
+        {
+            if (it.second.get_controls().x < 0.0f)
+            {
+                velocity.x = it.second.get_controls().x * it.second.get_maxspeed();
+            }
+            else
+            {
+                velocity.x = 0;
+            }
+        }
+        // Outside the right border
+        if (it.second.get_pos().x > world.get_size().x)
+        {
+            sf::Vector2f new_pos;
+            new_pos.x = world.get_size().x;
+            new_pos.y = it.second.get_pos().y;
+            it.second.set_pos(new_pos);
+        }
+
+        // Y axis velocity
+        // Inside the world
+        if ((0 < it.second.get_pos().y) && (it.second.get_pos().y < world.get_size().y))
+        {
+            velocity.y = it.second.get_controls().y * it.second.get_maxspeed();
+        }
+        // On the top border
+        if (it.second.get_pos().y == 0)
+        {
+            if (it.second.get_controls().y > 0.0f)
+            {
+                velocity.y = it.second.get_controls().y * it.second.get_maxspeed();
+            }
+            else
+            {
+                velocity.y = 0;
+            }
+        }
+        // Outside the top border
+        if (it.second.get_pos().y < 0.0f)
+        {
+            sf::Vector2f new_pos;
+            new_pos.x = it.second.get_pos().x;
+            new_pos.y = 0.0f;
+            it.second.set_pos(new_pos);
+        }
+        // On the bottom border
+        if (it.second.get_pos().y == world.get_size().y)
+        {
+            if (it.second.get_controls().y < 0.0f)
+            {
+                velocity.y = it.second.get_controls().y * it.second.get_maxspeed();
+            }
+            else
+            {
+                velocity.y = 0;
+            }
+        }
+        // Outside the bottom border
+        if (it.second.get_pos().y > world.get_size().y)
+        {
+            sf::Vector2f new_pos;
+            new_pos.x = it.second.get_pos().x;
+            new_pos.y = world.get_size().y;
+            it.second.set_pos(new_pos);
+        }
+
+        // Checking if the velocity has changed
+        if (it.second.get_vel() != velocity)
+        {
+            it.second.set_vel(velocity);
+            this->dirty = true; // Server is dirty if not the same velocity as used to be
         }
     }
 
