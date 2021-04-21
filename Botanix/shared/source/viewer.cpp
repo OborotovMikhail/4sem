@@ -1,9 +1,12 @@
 #pragma once
 
 #include "viewer.h"
-
+    
 Viewer::Viewer(const std::string& name) : sf::RenderWindow(sf::VideoMode(800, 800), name)
 {
+    this->player_texture.loadFromFile("zubko.png");
+    this->target_texture.loadFromFile("otl10_white.png");
+
     setFramerateLimit(60);
 }
 
@@ -28,22 +31,18 @@ void Viewer::draw(World& world)
     // Drawing players
     for (auto& it : world.get_players())
     {
-        // Creating circle (player)
-        sf::CircleShape s(it.second.get_rad()); // Creating a circle
-        s.setOrigin(s.getRadius(), s.getRadius()); // Moving the circle origin to it's center
-        int color_number = it.first % 3;
-        s.setFillColor(colors[color_number]); // Setting player color
-
-        s.setPosition(it.second.get_pos()); // Setting player position
-        sf::RenderWindow::draw(s); // Drawing player in a window
+        sf::Sprite player_model(this->player_texture);
+        auto player_rect = player_model.getGlobalBounds();
+        player_model.setOrigin(player_rect.width / 2.0f, player_rect.height / 2.0f);
+        player_model.setPosition(it.second.get_pos());
+        sf::RenderWindow::draw(player_model);
     }
 
-    // Creating target
-    sf::CircleShape target_display(world.get_target().get_rad());
-    target_display.setOrigin(target_display.getRadius(), target_display.getRadius());
-    target_display.setFillColor(sf::Color::White);
-    target_display.setPosition(world.get_target().get_pos());
-    sf::RenderWindow::draw(target_display);
+    sf::Sprite target_model(this->target_texture);
+    auto target_rect = target_model.getGlobalBounds();
+    target_model.setOrigin(target_rect.width / 2.0f, target_rect.height / 2.0f);
+    target_model.setPosition(world.get_target().get_pos());
+    sf::RenderWindow::draw(target_model);
 
     // Displaying
     display();
