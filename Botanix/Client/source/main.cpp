@@ -21,37 +21,44 @@ int main()
     // Main cycle
     while (client.isRunning() && viewer.isOpen())
     {
-        viewer.handleEvents(); // Handling events
-
-        sf::Vector2f currControls; // Current player controls vector
-
-        if (client.id() == 0)
+        if (world.IfGameOver())
         {
-            // WASD for player 0
-            currControls = controls_wasd();
+            viewer.draw_gameover();
         }
         else
         {
-            // Arrow controls for others
-            currControls = controls_arrows();
+            viewer.handleEvents(); // Handling events
+
+            sf::Vector2f currControls; // Current player controls vector
+
+            if (client.id() == 0)
+            {
+                // WASD for player 0
+                currControls = controls_wasd();
+            }
+            else
+            {
+                // Arrow controls for others
+                currControls = controls_arrows();
+            }
+
+            // Changing player's velocity to new velocity
+            world.get_players()[client.id()].set_controls(currControls);
+
+            // Restarting clock and updating world
+            const auto dt = gameClock.restart();
+            world.update(dt.asSeconds());
+
+            // On any change (speed direction or magnitude) notify server
+            if (currControls != prevControls)
+            {
+                client.notify_mov();
+                prevControls = currControls;
+            }
+
+            // Drawing world
+            viewer.draw_gameplay(world);
         }
-
-        // Changing player's velocity to new velocity
-        world.get_players()[client.id()].set_controls(currControls);
-        
-        // Restarting clock and updating world
-        const auto dt = gameClock.restart();
-        world.update(dt.asSeconds());
-
-        // On any change (speed direction or magnitude) notify server
-        if (currControls != prevControls)
-        {
-            client.notify_mov();
-            prevControls = currControls;
-        }
-
-        // Drawing world
-        viewer.draw(world);
     }
 
     return 0;

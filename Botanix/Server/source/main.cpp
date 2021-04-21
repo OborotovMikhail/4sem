@@ -17,22 +17,29 @@ int main()
     // Main cycle
     while (server.isRunning() && viewer.isOpen())
     {
-        viewer.handleEvents(); // Handling events
-
-        auto dt = gameClock.restart(); // Calculating dt
-        server.update(dt.asSeconds()); // Updating
-
-        tick += dt;
-
-        // Synchronizing server if needed
-        if (tick.asMilliseconds() > 1000 || server.IsDirty())
+        if (world.IfGameOver())
         {
-            server.synchronize();
-            tick = sf::Time();
+            viewer.draw_gameover();
         }
+        else
+        {
+            viewer.handleEvents(); // Handling events
 
-        // Drawing world (server side)
-        viewer.draw(world);
+            auto dt = gameClock.restart(); // Calculating dt
+            server.update(dt.asSeconds()); // Updating
+
+            tick += dt;
+
+            // Synchronizing server if needed
+            if (tick.asMilliseconds() > 1000 || server.IsDirty())
+            {
+                server.synchronize();
+                tick = sf::Time();
+            }
+
+            // Drawing world (server side)
+            viewer.draw_gameplay(world);
+        }
     }
 
     return 0;

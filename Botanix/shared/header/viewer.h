@@ -11,6 +11,7 @@ class Viewer : public sf::RenderWindow
 
     sf::Texture player_texture;
     sf::Texture target_texture;
+    sf::Texture gameover_texture;
 
 public:
     // Viewer constructor
@@ -19,6 +20,9 @@ public:
     // Handling viewer events function
     void handleEvents();
 
-    // Draw (display) world function
-    void draw(World& world);
+    // Draw world during the game
+    void draw_gameplay(World& world);
+
+    // Draw endgame screen
+    void draw_gameover();
 };

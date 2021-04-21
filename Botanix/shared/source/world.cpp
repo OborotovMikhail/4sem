@@ -10,6 +10,11 @@ void World::update(float dt)
     for (auto& it : players)
     {
         it.second.update(dt);
+        if (it.second.IfGameOver())
+        {
+            this->gameover = true;
+            return;
+        }
     }
 }
 
@@ -86,6 +91,7 @@ void World::show_players()
     std::cout << std::endl;
 }
 
-void World::check_controls()
+bool World::IfGameOver()
 {
+    return this->gameover;
 }
