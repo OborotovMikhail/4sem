@@ -10,6 +10,7 @@ class Player
 
     int score = 0; // Player score, starting score is 0
     bool winner = false; // Did the player reach endgame score
+    bool ready = false; // If player is ready to play (in game lobby)
 
     sf::Vector2f pos; // Position
     sf::Vector2f v; // Velocity
@@ -47,9 +48,15 @@ public:
     // Did the player reach the score needed to win
     bool IfWinner();
 
+    // If player is ready to play (in game lobby)
+    bool IfReady();
+
     // Get player controls
     sf::Vector2f get_controls();
 
     // Set player controls
     void set_controls(sf::Vector2f controls);
+
+    void player_ready(); // Player is ready
+    void player_not_ready(); // Player is not ready
 };

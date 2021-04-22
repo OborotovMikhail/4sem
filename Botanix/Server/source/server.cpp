@@ -179,6 +179,40 @@ void Server::update(float dt)
 
             dirty = true; // Server dirty
         }
+
+        // Processing "ready to play" packets
+        if (messageType == Message::ClientReady)
+        {
+            packet >> clientId; // Data from packet
+            world.get_players()[clientId].player_ready();
+
+            // Counting ready players
+            int number_of_ready_players = 0;
+            for (auto& it : world.get_players())
+            {
+                if (it.second.IfReady())
+                {
+                    number_of_ready_players++;
+                }
+            }
+
+            // If everybody is ready start the game
+            if (number_of_ready_players == world.get_players().size())
+            {
+                // Creating a packet
+                sf::Packet toSend;
+                toSend << Message::SceneGameplay;
+
+                // Sending to all players
+                for (const auto& elem : sockets)
+                {
+                    if (elem.second->send(toSend) != sf::Socket::Done)
+                    {
+                        std::cout << "Can't send start game packet to player " << elem.first << " \n";
+                    }
+                }
+            }
+        }
     }
 
     // Updating player's speed based on player controls
@@ -312,7 +346,7 @@ void Server::update(float dt)
     {
         if (it.second.IfWinner())
         {
-            world.WonTheGame(it.first);
+            world.ChangeSceneToGameover(it.first);
 
             sf::Packet toSend; // Forming packet
             toSend << Message::SceneGameover << it.first; // Sending id of the winner

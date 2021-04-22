@@ -2,6 +2,7 @@
 #include <SFML\Graphics.hpp>
 
 #include "client.h"
+#include "viewer.h"
 #include "controls.h"
 
 // Client main function
@@ -21,6 +22,13 @@ int main()
     // Main cycle
     while (client.isRunning() && viewer.isOpen())
     {
+        if (world.IfLobby())
+        {
+            viewer.handleEvents(); // Handling events
+            client.events_lobby();
+            viewer.draw_lobby(world);
+        }
+
         if (world.IfGameplay())
         {
             viewer.handleEvents(); // Handling events

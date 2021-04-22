@@ -2,6 +2,7 @@
 #include <SFML\Graphics.hpp>
 
 #include "server.h"
+#include "viewer.h"
 
 // Server main function
 int main()
@@ -17,6 +18,14 @@ int main()
     // Main cycle
     while (server.isRunning() && viewer.isOpen())
     {
+        if (world.IfLobby())
+        {
+            viewer.handleEvents(); // Handling events
+
+            // Drawing world (server side)
+            viewer.draw_gameplay(world);
+        }
+
         if (world.IfGameplay())
         {
             viewer.handleEvents(); // Handling events

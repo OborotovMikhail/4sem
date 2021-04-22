@@ -32,6 +32,9 @@ class Server
 
     int currentPlayerId;
 
+    // Receiving packets from players
+    void receive();
+
 public:
     // Server constructor
     Server(int port, World& world);
@@ -41,9 +44,6 @@ public:
 
     // Is server running function
     bool isRunning() const;
-
-    // Receiving packets from players
-    void receive();
 
     // Updating players with data from packets
     void update(float dt);

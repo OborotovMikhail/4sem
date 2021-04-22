@@ -86,12 +86,25 @@ void World::show_players()
     std::cout << std::endl;
 }
 
+void World::ChangeSceneToGameplay()
+{
+    this->scene_lobby = false;
+    this->scene_gameplay = true;
+
+    this->winner_id = -1;
+}
+
+bool World::IfLobby()
+{
+    return this->scene_lobby;
+}
+
 bool World::IfGameover()
 {
     return this->scene_gameover;
 }
 
-void World::WonTheGame(int id)
+void World::ChangeSceneToGameover(int id)
 {
     this->scene_gameplay = false;
     this->scene_gameover = true;

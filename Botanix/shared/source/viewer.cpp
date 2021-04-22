@@ -8,6 +8,11 @@ Viewer::Viewer(const std::string& name) : sf::RenderWindow(sf::VideoMode(800, 80
     this->target_texture.loadFromFile("otl10_white.png"); // Loading target texture
     this->gameover_texture.loadFromFile("botanix_white.png"); // Loading target texture
 
+    if (!font.loadFromFile("PressStart2P.ttf"))
+    {
+        std::cout << "Could not load font" << std::endl;
+    }
+
     setFramerateLimit(60);
 }
 
@@ -19,6 +24,21 @@ void Viewer::handleEvents()
         if (event.type == sf::Event::Closed)
             close();
     }
+}
+
+void Viewer::draw_lobby(World& world)
+{
+    // Setting black color as a background
+    clear(sf::Color::Black);
+
+    ready.setFont(font);
+    ready.setColor(sf::Color::White);
+    ready.setString("ready");
+    ready.setPosition({ float(VIEWER_WIDTH) / 2.0f, float(VIEWER_HEIGHT) / 2.0f });
+    sf::RenderWindow::draw(ready);
+
+    // Displaying
+    display();
 }
 
 void Viewer::draw_gameplay(World& world)

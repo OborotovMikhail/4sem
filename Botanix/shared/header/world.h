@@ -20,7 +20,8 @@ class World
     std::unordered_map<PlayerId, Player> players; // Players map
     Target target; // Target class object
 
-    bool scene_gameplay = true;
+    bool scene_lobby = true;
+    bool scene_gameplay = false;
     bool scene_gameover = false; // Did any player reach endgame score
 
     PlayerId winner_id = -1; // Winner id
@@ -48,11 +49,15 @@ public:
 
     void show_players();
 
+    void ChangeSceneToGameplay();
+
+    bool IfLobby();
+
     // Check if any player won the game
     bool IfGameover();
 
     // Set gameover status
-    void WonTheGame(int id);
+    void ChangeSceneToGameover(int id);
 
     // Checking if gameplay scene
     bool IfGameplay();

@@ -13,12 +13,19 @@ class Viewer : public sf::RenderWindow
     sf::Texture target_texture;
     sf::Texture gameover_texture;
 
+    sf::Font font;
+
+    sf::Text ready;
+
 public:
     // Viewer constructor
     Viewer(const std::string& name);
 
     // Handling viewer events function
     void handleEvents();
+
+    // Draw lobby function
+    void draw_lobby(World& world);
 
     // Draw world during the game
     void draw_gameplay(World& world);

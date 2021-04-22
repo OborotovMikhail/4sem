@@ -26,7 +26,7 @@ class Client
     std::thread syncThread;
 
     // Client start function
-    void start();
+    void recieve();
 
 public:
     // Client constructor
@@ -45,4 +45,7 @@ public:
     bool isRunning() const;
 
     void disconnect();
+
+    // Handle events in the lobby
+    void events_lobby();
 };

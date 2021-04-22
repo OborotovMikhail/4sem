@@ -2,7 +2,7 @@
 
 #include "client.h"
 
-void Client::start()
+void Client::recieve()
 {
     // Connecting socket to server
     auto status = socket.connect(ip, port);
@@ -93,13 +93,21 @@ void Client::start()
                 this->world.show_players(); // Printing currently online players
             }
 
+            // Start game packet processing
+            if (type == Message::SceneGameplay)
+            {
+                world.ChangeSceneToGameplay();
+
+                std::cout << "Started the game" << std::endl;
+            }
+
             // Gameover scene packet processing
             if (type == Message::SceneGameover)
             {
                 int id;
                 packet >> id;
 
-                world.WonTheGame(id);
+                world.ChangeSceneToGameover(id);
 
                 std::cout << "Player " << id << " won the game\n";
             }
@@ -113,7 +121,7 @@ Client::Client(const std::string& ip, int port, World& world) :
     world(world)
 {
     running = true; // Client now running
-    syncThread = std::thread(&Client::start, this); // Creating thread
+    syncThread = std::thread(&Client::recieve, this); // Creating thread
     syncThread.detach(); // Detaching thread
 }
 
@@ -164,5 +172,25 @@ void Client::disconnect()
     if (socket.send(packet) != sf::Socket::Done)
     {
         std::cout << "Can't send disconnect packet to server\n";
+    }
+}
+
+void Client::events_lobby()
+{
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y))
+    {
+        world.get_players()[this->clientId].player_ready();
+    }
+
+    // Creating a packet
+    sf::Packet packet;
+
+    // Creating a packet for sending velocity
+    packet << Message::ClientReady << this->id();
+
+    // Sending packet
+    if (socket.send(packet) != sf::Socket::Done)
+    {
+        std::cout << "Can't send ready packet to server\n";
     }
 }

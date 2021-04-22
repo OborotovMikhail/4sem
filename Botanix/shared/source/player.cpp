@@ -62,6 +62,11 @@ bool Player::IfWinner()
 	return this->winner;
 }
 
+bool Player::IfReady()
+{
+	return this->ready;
+}
+
 sf::Vector2f Player::get_controls()
 {
 	return this->controls;
@@ -70,4 +75,14 @@ sf::Vector2f Player::get_controls()
 void Player::set_controls(sf::Vector2f controls)
 {
 	this->controls = controls;
+}
+
+void Player::player_ready()
+{
+	this->ready = true;
+}
+
+void Player::player_not_ready()
+{
+	this->ready = false;
 }
