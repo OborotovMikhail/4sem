@@ -91,10 +91,12 @@ bool World::IfGameover()
     return this->scene_gameover;
 }
 
-void World::GameOver()
+void World::WonTheGame(int id)
 {
     this->scene_gameplay = false;
     this->scene_gameover = true;
+
+    this->winner_id = id;
 }
 
 bool World::IfGameplay()

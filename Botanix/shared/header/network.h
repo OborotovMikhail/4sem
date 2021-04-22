@@ -5,6 +5,7 @@ enum Message
 	ClientCreated,
 	UpdateWorld,
 	Movement,
+	SceneGameover,
 	ClientDisconnect,
 	RemovePlayer
 };

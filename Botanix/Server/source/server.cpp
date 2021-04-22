@@ -312,7 +312,20 @@ void Server::update(float dt)
     {
         if (it.second.IfWinner())
         {
-            world.GameOver();
+            world.WonTheGame(it.first);
+
+            sf::Packet toSend; // Forming packet
+            toSend << Message::SceneGameover << it.first; // Sending id of the winner
+
+            for (const auto& elem : this->sockets)
+            {
+                if (elem.second->send(toSend) != sf::Socket::Done)
+                {
+                    std::cout << "Can't send gameover scene packet to player " << elem.first << " \n";
+                }
+            }
+
+            break;
         }
     }
 }

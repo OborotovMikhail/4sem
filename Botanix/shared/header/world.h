@@ -23,6 +23,8 @@ class World
     bool scene_gameplay = true;
     bool scene_gameover = false; // Did any player reach endgame score
 
+    PlayerId winner_id = -1; // Winner id
+
 public:
     std::mutex mutex; // Mutex
 
@@ -50,7 +52,7 @@ public:
     bool IfGameover();
 
     // Set gameover status
-    void GameOver();
+    void WonTheGame(int id);
 
     // Checking if gameplay scene
     bool IfGameplay();

@@ -92,6 +92,17 @@ void Client::start()
 
                 this->world.show_players(); // Printing currently online players
             }
+
+            // Gameover scene packet processing
+            if (type == Message::SceneGameover)
+            {
+                int id;
+                packet >> id;
+
+                world.WonTheGame(id);
+
+                std::cout << "Player " << id << " won the game\n";
+            }
         }
     }
 }
@@ -113,7 +124,7 @@ Client::~Client()
     syncThread.join(); // Joining thread
 }
 
-void Client::notify_mov()
+void Client::notify_server()
 {
     // Creating a packet
     sf::Packet packet;

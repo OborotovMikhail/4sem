@@ -36,7 +36,7 @@ public:
     ~Client();
 
     // Notify server about controls function
-    void notify_mov();
+    void notify_server();
 
     // Get client id function
     int id() const;

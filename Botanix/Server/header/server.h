@@ -31,6 +31,7 @@ class Server
     std::atomic<bool> dirty = false; // Is server dirty, default = false
 
     int currentPlayerId;
+
 public:
     // Server constructor
     Server(int port, World& world);

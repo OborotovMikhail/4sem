@@ -45,10 +45,10 @@ int main()
             const auto dt = gameClock.restart();
             world.update(dt.asSeconds());
 
-            // On any change (speed direction or magnitude) notify server
+            // On any change notify server
             if (currControls != prevControls)
             {
-                client.notify_mov();
+                client.notify_server();
                 prevControls = currControls;
             }
 
