@@ -17,11 +17,7 @@ int main()
     // Main cycle
     while (server.isRunning() && viewer.isOpen())
     {
-        if (world.IfGameOver())
-        {
-            viewer.draw_gameover();
-        }
-        else
+        if (world.IfGameplay())
         {
             viewer.handleEvents(); // Handling events
 
@@ -39,6 +35,13 @@ int main()
 
             // Drawing world (server side)
             viewer.draw_gameplay(world);
+        }
+
+        if (world.IfGameover())
+        {
+            viewer.handleEvents(); // Handling events
+
+            viewer.draw_gameover();
         }
     }
 

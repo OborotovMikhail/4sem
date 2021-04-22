@@ -306,6 +306,15 @@ void Server::update(float dt)
             dirty = true; // Server dirty now
         }
     }
+
+    // Checking if anybody won the game
+    for (auto& it : world.get_players())
+    {
+        if (it.second.IfWinner())
+        {
+            world.GameOver();
+        }
+    }
 }
 
 void Server::synchronize()
@@ -324,7 +333,7 @@ void Server::synchronize()
     {
         // Players position and velocity to packet
         toSend << elem.first << elem.second.get_pos().x << elem.second.get_pos().y <<
-            elem.second.get_vel().x << elem.second.get_vel().y;
+            elem.second.get_vel().x << elem.second.get_vel().y << elem.second.get_score();
     }
 
     // Pushing target position to packet

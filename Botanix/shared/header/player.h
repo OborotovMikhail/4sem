@@ -9,7 +9,7 @@ class Player
     const float SPEED = 300.0f; // Pixels per second, used as a reference to calculate velocity
 
     int score = 0; // Player score, starting score is 0
-    bool gameover = false; // Did the player reach endgame score
+    bool winner = false; // Did the player reach endgame score
 
     sf::Vector2f pos; // Position
     sf::Vector2f v; // Velocity
@@ -41,8 +41,11 @@ public:
     // Increase player score
     void increase_score();
 
+    int get_score(); // Get player score
+    void set_score(int score); // Set player score
+
     // Did the player reach the score needed to win
-    bool IfGameOver();
+    bool IfWinner();
 
     // Get player controls
     sf::Vector2f get_controls();

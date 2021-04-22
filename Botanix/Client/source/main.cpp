@@ -21,11 +21,7 @@ int main()
     // Main cycle
     while (client.isRunning() && viewer.isOpen())
     {
-        if (world.IfGameOver())
-        {
-            viewer.draw_gameover();
-        }
-        else
+        if (world.IfGameplay())
         {
             viewer.handleEvents(); // Handling events
 
@@ -58,6 +54,12 @@ int main()
 
             // Drawing world
             viewer.draw_gameplay(world);
+        }
+
+        if (world.IfGameover())
+        {
+            viewer.handleEvents();
+            viewer.draw_gameover();
         }
     }
 

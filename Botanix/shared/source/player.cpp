@@ -43,13 +43,23 @@ void Player::increase_score()
 	this->score++;
 	if (this->score == FINAL_SCORE)
 	{
-		gameover = true;
+		this->winner = true;
 	}
 }
 
-bool Player::IfGameOver()
+int Player::get_score()
 {
-	return this->gameover;
+	return this->score;
+}
+
+void Player::set_score(int score)
+{
+	this->score = score;
+}
+
+bool Player::IfWinner()
+{
+	return this->winner;
 }
 
 sf::Vector2f Player::get_controls()

@@ -20,7 +20,8 @@ class World
     std::unordered_map<PlayerId, Player> players; // Players map
     Target target; // Target class object
 
-    bool gameover = false; // Did any player reach endgame score
+    bool scene_gameplay = true;
+    bool scene_gameover = false; // Did any player reach endgame score
 
 public:
     std::mutex mutex; // Mutex
@@ -46,5 +47,11 @@ public:
     void show_players();
 
     // Check if any player won the game
-    bool IfGameOver();
+    bool IfGameover();
+
+    // Set gameover status
+    void GameOver();
+
+    // Checking if gameplay scene
+    bool IfGameplay();
 };
