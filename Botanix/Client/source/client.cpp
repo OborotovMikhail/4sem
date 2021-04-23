@@ -175,9 +175,21 @@ void Client::disconnect()
     }
 }
 
-void Client::events_lobby()
+void Client::events_lobby(Viewer& viewer)
 {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+    // Changing buttons in lobby
+    if ((viewer.get_lobby_selected_button() < (viewer.get_lobby_buttons().size() - 1)) &&
+        sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+    {
+        viewer.set_lobby_selected_button(viewer.get_lobby_selected_button() + 1);
+    }
+    if ((viewer.get_lobby_selected_button() > 0) &&
+        sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+    {
+        viewer.set_lobby_selected_button(viewer.get_lobby_selected_button() - 1);
+    }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && (viewer.get_lobby_selected_button() == 0))
     {
         if (!world.get_players()[clientId].IfReady())
         {

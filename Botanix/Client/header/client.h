@@ -47,7 +47,5 @@ public:
     void disconnect();
 
     // Handle events in the lobby
-    void events_lobby();
-
-    void test();
+    void events_lobby(Viewer& viewer);
 };

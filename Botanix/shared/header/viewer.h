@@ -17,6 +17,9 @@ class Viewer : public sf::RenderWindow
 
     sf::Text ready;
 
+    std::map<int, sf::Text> lobby_buttons;
+    int lobby_selected_button = 0;
+
 public:
     // Viewer constructor
     Viewer(const std::string& name);
@@ -32,4 +35,13 @@ public:
 
     // Draw endgame screen
     void draw_gameover();
+    
+    // Get selected lobby button
+    int get_lobby_selected_button();
+
+    // Set selected lobby button
+    void set_lobby_selected_button(int button);
+
+    // Get lobby buttons map
+    std::map<int, sf::Text>& get_lobby_buttons();
 };

@@ -25,7 +25,7 @@ int main()
         if (world.IfLobby())
         {
             viewer.handleEvents(); // Handling events
-            client.events_lobby();
+            client.events_lobby(viewer);
             viewer.draw_lobby(world);
         }
 
