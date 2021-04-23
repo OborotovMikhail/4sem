@@ -5,8 +5,6 @@
 Viewer::Viewer(const std::string& name) : sf::RenderWindow(sf::VideoMode(800, 800), name)
 {
     this->player_texture.loadFromFile("hero1.png"); // Loading player texture
-    this->target_texture.loadFromFile("otl10_white.png"); // Loading target texture
-    this->gameover_texture.loadFromFile("botanix_white.png"); // Loading target texture
 
     // Loading font
     if (!font.loadFromFile("PressStart2P.ttf"))
@@ -90,12 +88,13 @@ void Viewer::draw_gameplay(World& world)
         sf::RenderWindow::draw(player_model); // Draw
     }
 
-    sf::Sprite target_model(this->target_texture); // Set texture
-    auto target_rect = target_model.getGlobalBounds();
-    target_model.setOrigin(target_rect.width / 2.0f, target_rect.height / 2.0f); // Set sprite origin
-    target_model.setPosition(world.get_target().get_pos()); // Set position
-    target_model.setScale({ 0.7f, 0.7f });
-    sf::RenderWindow::draw(target_model); // Draw
+    sf::Text target_text;
+    target_text.setFont(font);
+    target_text.setColor(sf::Color::White);
+    target_text.setString("OTL10");
+    target_text.setOrigin(target_text.getGlobalBounds().width / 2.0f, target_text.getGlobalBounds().height / 2.0f);
+    target_text.setPosition(world.get_target().get_pos());
+    sf::RenderWindow::draw(target_text); // Draw
 
     // Displaying
     display();
@@ -106,12 +105,13 @@ void Viewer::draw_gameover()
     // Setting black color as a background
     clear(sf::Color::Black);
 
-    sf::Sprite gameover_sprite(this->gameover_texture); // Set texture
-    auto gameover_rect = gameover_sprite.getGlobalBounds();
-    gameover_sprite.setOrigin(gameover_rect.width / 2.0f, gameover_rect.height / 2.0f); // Set sprite origin
-    gameover_sprite.setPosition({float(this->VIEWER_WIDTH ) / 2.0f, float(this->VIEWER_HEIGHT) / 2.0f }); // Set position
-    gameover_sprite.setScale({ 1.0f, 1.0f }); // Set scale
-    sf::RenderWindow::draw(gameover_sprite); // Draw
+    sf::Text gameover_text;
+    gameover_text.setFont(font);
+    gameover_text.setColor(sf::Color::White);
+    gameover_text.setString("BOTANIX");
+    gameover_text.setOrigin(gameover_text.getGlobalBounds().width / 2.0f, gameover_text.getGlobalBounds().height / 2.0f);
+    gameover_text.setPosition({ float(VIEWER_WIDTH) / 2.0f, float(VIEWER_HEIGHT) / 2.0f });
+    sf::RenderWindow::draw(gameover_text); // Draw
 
     // Displaying
     display();

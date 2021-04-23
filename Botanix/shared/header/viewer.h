@@ -10,8 +10,6 @@ class Viewer : public sf::RenderWindow
     const int VIEWER_HEIGHT = 800;
 
     sf::Texture player_texture;
-    sf::Texture target_texture;
-    sf::Texture gameover_texture;
 
     sf::Font font;
 
