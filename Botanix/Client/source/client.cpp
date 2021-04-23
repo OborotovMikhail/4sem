@@ -178,17 +178,22 @@ void Client::disconnect()
 void Client::events_lobby(Viewer& viewer)
 {
     // Changing buttons in lobby
+    // Going down
     if ((viewer.get_lobby_selected_button() < (viewer.get_lobby_buttons().size() - 1)) &&
         sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
     {
         viewer.set_lobby_selected_button(viewer.get_lobby_selected_button() + 1);
+        while (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {}
     }
+    // Going up
     if ((viewer.get_lobby_selected_button() > 0) &&
         sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
     {
         viewer.set_lobby_selected_button(viewer.get_lobby_selected_button() - 1);
+        while (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {}
     }
 
+    // Pressing ready button
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && (viewer.get_lobby_selected_button() == 0))
     {
         if (!world.get_players()[clientId].IfReady())
@@ -208,5 +213,12 @@ void Client::events_lobby(Viewer& viewer)
                 std::cout << "Can't send ready packet to server\n";
             }
         }
+    }
+
+    // Pressing disconnect button
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && (viewer.get_lobby_selected_button() == 2))
+    {
+        this->disconnect();
+        this->running = false;
     }
 }

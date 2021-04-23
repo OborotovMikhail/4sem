@@ -15,8 +15,7 @@ class Viewer : public sf::RenderWindow
 
     sf::Font font;
 
-    sf::Text ready;
-
+    const int NUMBER_OF_LOBBY_BUTTONS = 3;
     std::map<int, sf::Text> lobby_buttons;
     int lobby_selected_button = 0;
 

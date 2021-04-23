@@ -17,18 +17,28 @@ Viewer::Viewer(const std::string& name) : sf::RenderWindow(sf::VideoMode(800, 80
     setFramerateLimit(60);
 
     // Setting up lobby buttons
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < NUMBER_OF_LOBBY_BUTTONS; i++)
     {
         lobby_buttons[i].setFont(font);
-        lobby_buttons[i].setOrigin(ready.getGlobalBounds().width / 2.0f, ready.getGlobalBounds().height / 2.0f);
-        sf::Vector2f pos;
-        pos.x = float(VIEWER_WIDTH) / 2.0f;
-        pos.y = float(VIEWER_HEIGHT) / 2.0f + float(i) * float(VIEWER_HEIGHT) * 0.1f;
-        lobby_buttons[i].setPosition(pos);
     }
     lobby_buttons[0].setString("ready");
     lobby_buttons[1].setString("pick hero");
     lobby_buttons[2].setString("disconnect");
+    for (int i = 0; i < NUMBER_OF_LOBBY_BUTTONS; i++)
+    {
+        float total_menu_height = (NUMBER_OF_LOBBY_BUTTONS - 1) * VIEWER_HEIGHT * 0.1f;
+        for (int i = 0; i < NUMBER_OF_LOBBY_BUTTONS; i++)
+        {
+            total_menu_height += lobby_buttons[i].getGlobalBounds().height;
+        }
+
+        lobby_buttons[i].setOrigin(lobby_buttons[i].getGlobalBounds().width / 2.0f, lobby_buttons[i].getGlobalBounds().height / 2.0f);
+        sf::Vector2f pos;
+        pos.x = float(VIEWER_WIDTH) / 2.0f;
+        pos.y = float(VIEWER_HEIGHT) / 2.0f + float(i) * float(VIEWER_HEIGHT) * 0.1f
+            - total_menu_height / 2.0f;
+        lobby_buttons[i].setPosition(pos);
+    }
 }
 
 void Viewer::handleEvents()
