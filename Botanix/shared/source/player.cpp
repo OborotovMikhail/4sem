@@ -62,6 +62,11 @@ bool Player::IfWinner()
 	return this->winner;
 }
 
+void Player::no_longer_winner()
+{
+	this->winner = false;
+}
+
 bool Player::IfReady()
 {
 	return this->ready;

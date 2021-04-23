@@ -215,6 +215,8 @@ void Server::update(float dt)
                         std::cout << "Can't send start game packet to player " << elem.first << " \n";
                     }
                 }
+
+                world.ChangeSceneToGameplay();
             }
         }
     }
@@ -362,6 +364,8 @@ void Server::update(float dt)
                     std::cout << "Can't send gameover scene packet to player " << elem.first << " \n";
                 }
             }
+
+            it.second.no_longer_winner();
 
             break;
         }

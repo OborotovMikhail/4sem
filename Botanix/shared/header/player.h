@@ -51,6 +51,8 @@ public:
     // Did the player reach the score needed to win
     bool IfWinner();
 
+    void no_longer_winner();
+
     // If player is ready to play (in game lobby)
     bool IfReady();
 
