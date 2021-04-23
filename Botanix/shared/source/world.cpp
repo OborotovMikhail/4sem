@@ -116,3 +116,8 @@ bool World::IfGameplay()
 {
     return this->scene_gameplay;
 }
+
+bool World::IfHeroSelection()
+{
+    return this->scene_hero_selection;
+}

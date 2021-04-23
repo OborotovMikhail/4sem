@@ -12,6 +12,9 @@ class Player
     bool winner = false; // Did the player reach endgame score
     bool ready = false; // If player is ready to play (in game lobby)
 
+    int selected_hero_num = 1;
+    bool hero_selected = false;
+
     sf::Vector2f pos; // Position
     sf::Vector2f v; // Velocity
 
@@ -59,4 +62,6 @@ public:
 
     void player_ready(); // Player is ready
     void player_not_ready(); // Player is not ready
+
+    int get_selected_hero(); // Get a hero number selected by this player
 };

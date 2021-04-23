@@ -222,3 +222,8 @@ void Client::events_lobby(Viewer& viewer)
         this->running = false;
     }
 }
+
+void Client::events_hero_selection(Viewer& viewer)
+{
+
+}

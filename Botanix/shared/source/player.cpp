@@ -86,3 +86,8 @@ void Player::player_not_ready()
 {
 	this->ready = false;
 }
+
+int Player::get_selected_hero()
+{
+	return this->selected_hero_num;
+}

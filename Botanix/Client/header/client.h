@@ -48,4 +48,7 @@ public:
 
     // Handle events in the lobby
     void events_lobby(Viewer& viewer);
+
+    // Handle events in the hero selection screen
+    void events_hero_selection(Viewer& viewer);
 };

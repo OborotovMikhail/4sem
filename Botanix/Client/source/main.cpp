@@ -29,6 +29,12 @@ int main()
             viewer.draw_lobby(world);
         }
 
+        if (world.IfHeroSelection())
+        {
+            viewer.handleEvents();
+
+        }
+
         if (world.IfGameplay())
         {
             viewer.handleEvents(); // Handling events

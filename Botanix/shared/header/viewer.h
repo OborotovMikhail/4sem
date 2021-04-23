@@ -9,7 +9,8 @@ class Viewer : public sf::RenderWindow
     const int VIEWER_WIDTH = 800;
     const int VIEWER_HEIGHT = 800;
 
-    sf::Texture player_texture;
+    const int NUMBER_OF_HEROES = 3;
+    std::map<int, sf::Texture> player_textures;
 
     sf::Font font;
 
@@ -26,6 +27,9 @@ public:
 
     // Draw lobby function
     void draw_lobby(World& world);
+
+    // Draw hero selection screen
+    void draw_hero_selection(World& world);
 
     // Draw world during the game
     void draw_gameplay(World& world);

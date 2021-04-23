@@ -21,6 +21,7 @@ class World
     Target target; // Target class object
 
     bool scene_lobby = true;
+    bool scene_hero_selection = false;
     bool scene_gameplay = false;
     bool scene_gameover = false; // Did any player reach endgame score
 
@@ -61,4 +62,6 @@ public:
 
     // Checking if gameplay scene
     bool IfGameplay();
+
+    bool IfHeroSelection();
 };

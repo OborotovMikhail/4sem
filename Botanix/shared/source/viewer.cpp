@@ -4,7 +4,10 @@
     
 Viewer::Viewer(const std::string& name) : sf::RenderWindow(sf::VideoMode(800, 800), name)
 {
-    this->player_texture.loadFromFile("hero1.png"); // Loading player texture
+    // Loading player textures
+    this->player_textures[0].loadFromFile("hero0.png");
+    this->player_textures[1].loadFromFile("hero1.png");
+    this->player_textures[2].loadFromFile("hero2.png");
 
     // Loading font
     if (!font.loadFromFile("PressStart2P.ttf"))
@@ -72,6 +75,11 @@ void Viewer::draw_lobby(World& world)
     display();
 }
 
+void Viewer::draw_hero_selection(World& world)
+{
+
+}
+
 void Viewer::draw_gameplay(World& world)
 {
     // Setting black color as a background
@@ -80,7 +88,7 @@ void Viewer::draw_gameplay(World& world)
     // Drawing players
     for (auto& it : world.get_players())
     {
-        sf::Sprite player_model(this->player_texture); // Set texture
+        sf::Sprite player_model(this->player_textures[it.second.get_selected_hero()]); // Set texture
         auto player_rect = player_model.getGlobalBounds();
         player_model.setOrigin(player_rect.width / 2.0f, player_rect.height / 2.0f); // Set sprite origin
         player_model.setPosition(it.second.get_pos()); // Set position
