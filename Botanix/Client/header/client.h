@@ -48,4 +48,6 @@ public:
 
     // Handle events in the lobby
     void events_lobby();
+
+    void test();
 };

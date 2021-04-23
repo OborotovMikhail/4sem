@@ -177,20 +177,24 @@ void Client::disconnect()
 
 void Client::events_lobby()
 {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
     {
-        world.get_players()[this->clientId].player_ready();
-    }
+        if (!world.get_players()[clientId].IfReady())
+        {
+            debug("Ready");
+            world.get_players()[this->clientId].player_ready();
 
-    // Creating a packet
-    sf::Packet packet;
+            // Creating a packet
+            sf::Packet packet;
 
-    // Creating a packet for sending velocity
-    packet << Message::ClientReady << this->id();
+            // Creating a packet for sending velocity
+            packet << Message::ClientReady << this->id();
 
-    // Sending packet
-    if (socket.send(packet) != sf::Socket::Done)
-    {
-        std::cout << "Can't send ready packet to server\n";
+            // Sending packet
+            if (socket.send(packet) != sf::Socket::Done)
+            {
+                std::cout << "Can't send ready packet to server\n";
+            }
+        }
     }
 }

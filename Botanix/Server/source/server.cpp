@@ -183,8 +183,11 @@ void Server::update(float dt)
         // Processing "ready to play" packets
         if (messageType == Message::ClientReady)
         {
+            debug("ready packet");
             packet >> clientId; // Data from packet
             world.get_players()[clientId].player_ready();
+
+            debug("Client", clientId, "ready");
 
             // Counting ready players
             int number_of_ready_players = 0;
@@ -199,6 +202,7 @@ void Server::update(float dt)
             // If everybody is ready start the game
             if (number_of_ready_players == world.get_players().size())
             {
+                debug("All ready");
                 // Creating a packet
                 sf::Packet toSend;
                 toSend << Message::SceneGameplay;

@@ -22,7 +22,18 @@ int main()
         {
             viewer.handleEvents(); // Handling events
 
-            // Drawing world (server side)
+            auto dt = gameClock.restart(); // Calculating dt
+            server.update(dt.asSeconds()); // Updating
+
+            tick += dt;
+
+            // Synchronizing server if needed
+            if (tick.asMilliseconds() > 1000 || server.IsDirty())
+            {
+                server.synchronize();
+                tick = sf::Time();
+            }
+
             viewer.draw_gameplay(world);
         }
 
@@ -49,7 +60,6 @@ int main()
         if (world.IfGameover())
         {
             viewer.handleEvents(); // Handling events
-
             viewer.draw_gameover();
         }
     }
