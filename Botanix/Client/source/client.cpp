@@ -96,7 +96,7 @@ void Client::recieve()
             // Start game packet processing
             if (type == Message::SceneGameplay)
             {
-                world.ChangeSceneToGameplay();
+                world.SceneChange_Gameplay();
 
                 std::cout << "Started the game" << std::endl;
             }
@@ -107,7 +107,7 @@ void Client::recieve()
                 int id;
                 packet >> id;
 
-                world.ChangeSceneToGameover(id);
+                world.SceneChange_Gameover(id);
 
                 std::cout << "Player " << id << " won the game\n";
             }
@@ -215,6 +215,12 @@ void Client::events_lobby(Viewer& viewer)
         }
     }
 
+    // Pressing hero selection button
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && (viewer.get_lobby_selected_button() == 1))
+    {
+        world.SceneChange_HeroSelection();
+    }
+
     // Pressing disconnect button
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && (viewer.get_lobby_selected_button() == 2))
     {
@@ -225,5 +231,10 @@ void Client::events_lobby(Viewer& viewer)
 
 void Client::events_hero_selection(Viewer& viewer)
 {
-
+    // ESC to get back to lobby
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+    {
+        world.SceneChange_Lobby();
+        while (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {}
+    }
 }

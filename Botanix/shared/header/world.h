@@ -50,7 +50,9 @@ public:
 
     void show_players();
 
-    void ChangeSceneToGameplay();
+    void SceneChange_Lobby();
+    void SceneChange_HeroSelection();
+    void SceneChange_Gameplay();
 
     bool IfLobby();
 
@@ -58,7 +60,7 @@ public:
     bool IfGameover();
 
     // Set gameover status
-    void ChangeSceneToGameover(int id);
+    void SceneChange_Gameover(int id);
 
     // Checking if gameplay scene
     bool IfGameplay();

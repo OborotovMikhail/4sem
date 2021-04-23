@@ -77,7 +77,13 @@ void Viewer::draw_lobby(World& world)
 
 void Viewer::draw_hero_selection(World& world)
 {
+    // Setting black color as a background
+    clear(sf::Color::Black);
 
+
+
+    // Displaying
+    display();
 }
 
 void Viewer::draw_gameplay(World& world)

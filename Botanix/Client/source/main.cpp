@@ -24,7 +24,7 @@ int main()
     {
         if (world.IfLobby())
         {
-            viewer.handleEvents(); // Handling events
+            viewer.handleEvents();
             client.events_lobby(viewer);
             viewer.draw_lobby(world);
         }
@@ -32,7 +32,8 @@ int main()
         if (world.IfHeroSelection())
         {
             viewer.handleEvents();
-
+            client.events_hero_selection(viewer);
+            viewer.draw_hero_selection(world);
         }
 
         if (world.IfGameplay())

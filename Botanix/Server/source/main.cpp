@@ -18,26 +18,7 @@ int main()
     // Main cycle
     while (server.isRunning() && viewer.isOpen())
     {
-        if (world.IfLobby())
-        {
-            viewer.handleEvents(); // Handling events
-
-            auto dt = gameClock.restart(); // Calculating dt
-            server.update(dt.asSeconds()); // Updating
-
-            tick += dt;
-
-            // Synchronizing server if needed
-            if (tick.asMilliseconds() > 1000 || server.IsDirty())
-            {
-                server.synchronize();
-                tick = sf::Time();
-            }
-
-            viewer.draw_gameplay(world);
-        }
-
-        if (world.IfGameplay())
+        if (!world.IfGameplay())
         {
             viewer.handleEvents(); // Handling events
 
