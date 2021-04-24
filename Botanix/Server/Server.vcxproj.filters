@@ -62,5 +62,8 @@
     <ClInclude Include="header\server.h">
       <Filter>this project\header</Filter>
     </ClInclude>
+    <ClInclude Include="..\shared\header\scene.h">
+      <Filter>shared\header</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

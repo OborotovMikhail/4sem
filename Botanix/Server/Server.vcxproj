@@ -29,6 +29,7 @@
   <ItemGroup>
     <ClInclude Include="..\shared\header\network.h" />
     <ClInclude Include="..\shared\header\player.h" />
+    <ClInclude Include="..\shared\header\scene.h" />
     <ClInclude Include="..\shared\header\target.h" />
     <ClInclude Include="..\shared\header\viewer.h" />
     <ClInclude Include="..\shared\header\world.h" />

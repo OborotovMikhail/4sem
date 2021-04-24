@@ -86,58 +86,12 @@ void World::show_players()
     std::cout << std::endl;
 }
 
-void World::SceneChange_Lobby()
+Scene World::GetScene()
 {
-    this->scene_lobby = true;
-    this->scene_hero_selection = false;
-    this->scene_gameplay = false;
-    this->scene_gameover = false;
+    return this->GameScene;
 }
 
-void World::SceneChange_HeroSelection()
+void World::SetScene(Scene scene)
 {
-    this->scene_lobby = false;
-    this->scene_hero_selection = true;
-    this->scene_gameplay = false;
-    this->scene_gameover = false;
-}
-
-void World::SceneChange_Gameplay()
-{
-    this->scene_lobby = false;
-    this->scene_hero_selection = false;
-    this->scene_gameplay = true;
-    this->scene_gameover = false;
-    
-    this->winner_id = -1;
-}
-
-bool World::IfLobby()
-{
-    return this->scene_lobby;
-}
-
-bool World::IfGameover()
-{
-    return this->scene_gameover;
-}
-
-void World::SceneChange_Gameover(int id)
-{
-    this->scene_lobby = false;
-    this->scene_hero_selection = false;
-    this->scene_gameplay = false;
-    this->scene_gameover = true;
-
-    this->winner_id = id;
-}
-
-bool World::IfGameplay()
-{
-    return this->scene_gameplay;
-}
-
-bool World::IfHeroSelection()
-{
-    return this->scene_hero_selection;
+    this->GameScene = scene;
 }

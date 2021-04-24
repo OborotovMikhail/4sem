@@ -18,7 +18,7 @@ int main()
     // Main cycle
     while (server.isRunning() && viewer.isOpen())
     {
-        if (!world.IfGameplay())
+        if (world.GetScene() != Scene::Gameover)
         {
             viewer.handleEvents(); // Handling events
 
@@ -38,7 +38,7 @@ int main()
             viewer.draw_gameplay(world);
         }
 
-        if (world.IfGameover())
+        if (world.GetScene() == Scene::Gameover)
         {
             viewer.handleEvents(); // Handling events
             viewer.draw_gameover();

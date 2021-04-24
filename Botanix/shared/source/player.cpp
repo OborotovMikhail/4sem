@@ -62,6 +62,11 @@ bool Player::IfWinner()
 	return this->winner;
 }
 
+void Player::won_the_game()
+{
+	this->winner = true;
+}
+
 void Player::no_longer_winner()
 {
 	this->winner = false;

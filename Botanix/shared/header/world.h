@@ -7,6 +7,7 @@
 
 #include "player.h"
 #include "target.h"
+#include "scene.h"
 
 // Player id type
 using PlayerId = int;
@@ -20,10 +21,7 @@ class World
     std::unordered_map<PlayerId, Player> players; // Players map
     Target target; // Target class object
 
-    bool scene_lobby = true;
-    bool scene_hero_selection = false;
-    bool scene_gameplay = false;
-    bool scene_gameover = false; // Did any player reach endgame score
+    Scene GameScene = Scene::Lobby;
 
     PlayerId winner_id = -1; // Winner id
 
@@ -50,20 +48,7 @@ public:
 
     void show_players();
 
-    void SceneChange_Lobby();
-    void SceneChange_HeroSelection();
-    void SceneChange_Gameplay();
-
-    bool IfLobby();
-
-    // Check if any player won the game
-    bool IfGameover();
-
-    // Set gameover status
-    void SceneChange_Gameover(int id);
-
-    // Checking if gameplay scene
-    bool IfGameplay();
-
-    bool IfHeroSelection();
+    Scene GetScene(); // Get current game scene
+    void SetScene(Scene scene); // Set game scene
+    
 };

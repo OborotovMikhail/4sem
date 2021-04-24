@@ -216,7 +216,7 @@ void Server::update(float dt)
                     }
                 }
 
-                world.SceneChange_Gameplay();
+                world.SetScene(Scene::Gameplay);
             }
         }
     }
@@ -352,7 +352,8 @@ void Server::update(float dt)
     {
         if (it.second.IfWinner())
         {
-            world.SceneChange_Gameover(it.first);
+            world.SetScene(Scene::Gameover);
+            it.second.won_the_game();
 
             sf::Packet toSend; // Forming packet
             toSend << Message::SceneGameover << it.first; // Sending id of the winner

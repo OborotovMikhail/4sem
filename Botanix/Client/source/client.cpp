@@ -96,7 +96,7 @@ void Client::recieve()
             // Start game packet processing
             if (type == Message::SceneGameplay)
             {
-                world.SceneChange_Gameplay();
+                world.SetScene(Scene::Gameplay);
 
                 std::cout << "Started the game" << std::endl;
             }
@@ -107,7 +107,8 @@ void Client::recieve()
                 int id;
                 packet >> id;
 
-                world.SceneChange_Gameover(id);
+                world.SetScene(Scene::Gameover);
+                world.get_players()[id].won_the_game();
 
                 std::cout << "Player " << id << " won the game\n";
             }
@@ -142,7 +143,7 @@ void Client::notify_server()
 
     // Creating a packet for sending controls
     packet << Message::Movement << clientId << controls.x << controls.y;
-
+    
     // Sending packet
     if (socket.send(packet) != sf::Socket::Done)
     {
@@ -218,7 +219,7 @@ void Client::events_lobby(Viewer& viewer)
     // Pressing hero selection button
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && (viewer.get_lobby_selected_button() == 1))
     {
-        world.SceneChange_HeroSelection();
+        world.SetScene(Scene::HeroSelection);
     }
 
     // Pressing disconnect button
@@ -234,7 +235,7 @@ void Client::events_hero_selection(Viewer& viewer)
     // ESC to get back to lobby
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
     {
-        world.SceneChange_Lobby();
+        world.SetScene(Scene::Lobby);
         while (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {}
     }
 }

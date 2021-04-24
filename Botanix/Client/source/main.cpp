@@ -22,21 +22,21 @@ int main()
     // Main cycle
     while (client.isRunning() && viewer.isOpen())
     {
-        if (world.IfLobby())
+        if (world.GetScene() == Scene::Lobby)
         {
             viewer.handleEvents();
             client.events_lobby(viewer);
             viewer.draw_lobby(world);
         }
 
-        if (world.IfHeroSelection())
+        if (world.GetScene() == Scene::HeroSelection)
         {
             viewer.handleEvents();
             client.events_hero_selection(viewer);
             viewer.draw_hero_selection(world);
         }
 
-        if (world.IfGameplay())
+        if (world.GetScene() == Scene::Gameplay)
         {
             viewer.handleEvents(); // Handling events
 
@@ -52,7 +52,7 @@ int main()
                 // Arrow controls for others
                 currControls = controls_arrows();
             }
-
+            
             // Changing player's velocity to new velocity
             world.get_players()[client.id()].set_controls(currControls);
 
@@ -71,7 +71,7 @@ int main()
             viewer.draw_gameplay(world);
         }
 
-        if (world.IfGameover())
+        if (world.GetScene() == Scene::Gameover)
         {
             viewer.handleEvents();
             viewer.draw_gameover();
