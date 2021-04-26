@@ -27,28 +27,21 @@ class World
 
 public:
     std::mutex mutex; // Mutex
-
-    // Update world function
-    // (Updates all players positions)
-    void update(float dt);
-
-    // Get players map
-    std::unordered_map<PlayerId, Player>& get_players();
-
-    // Get target function
-    Target& get_target();
     
-    // Get random position on map
-    sf::Vector2f get_random_pos();
+    void update(float dt); // Update world function (Updates all players positions)
+    
+    std::unordered_map<PlayerId, Player>& get_players(); // Get players map
+    
+    Target& get_target(); // Get target
+    
+    sf::Vector2f get_random_pos(); // Get random position on map
+    
+    static sf::Vector2i get_size(); // Get world size
 
-    // Get world size
-    static sf::Vector2i get_size();
+    void remove_player(PlayerId clientId); // Remove player from the world
 
-    void remove_player(PlayerId clientId);
-
-    void show_players();
+    void show_players(); // Print out all player currently in the world
 
     Scene GetScene(); // Get current game scene
     void SetScene(Scene scene); // Set game scene
-    
 };

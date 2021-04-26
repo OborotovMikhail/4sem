@@ -18,7 +18,6 @@ class Server
 
     const int port; // Server port
     const unsigned short MaxPlayers = 3; // Max allowed players
-    // int playersConnected = 0; // Number of connected players
 
     std::unordered_map<PlayerId, std::unique_ptr<sf::TcpSocket>> sockets; // Sockets map
 
@@ -31,26 +30,18 @@ class Server
     std::atomic<bool> dirty = false; // Is server dirty, default = false
 
     int currentPlayerId;
-
-    // Receiving packets from players
-    void receive();
+    
+    void receive(); // Receiving packets from players
 
 public:
-    // Server constructor
-    Server(int port, World& world);
+    Server(int port, World& world); // Server constructor
+    ~Server(); // Server destructor
+    
+    bool isRunning() const; // Is server running function
+    
+    void update(float dt); // Updating players with data from packets
 
-    // Server destructor
-    ~Server();
+    void synchronize(); // Synchronizing with all clients (sending up-to-date data from server)
 
-    // Is server running function
-    bool isRunning() const;
-
-    // Updating players with data from packets
-    void update(float dt);
-
-    // Synchronizing with all clients
-    // (sending up-to-date data from server)
-    void synchronize();
-
-    bool IsDirty();
+    bool IsDirty(); // Is server dirty
 };

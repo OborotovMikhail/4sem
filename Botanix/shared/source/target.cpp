@@ -2,6 +2,7 @@
 
 #include <mutex>
 #include <random>
+
 #include "target.h"
 
 sf::Vector2f Target::get_pos()

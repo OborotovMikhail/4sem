@@ -1,4 +1,5 @@
 #pragma once
+
 #include <SFML\System.hpp>
 
 class Target
@@ -8,12 +9,8 @@ class Target
 	sf::Vector2f pos = { 0.0f, 0.0f }; // Target position
 
 public:
-	// Get target position
-	sf::Vector2f get_pos();
+	sf::Vector2f get_pos(); // Get target position
+	void set_pos(sf::Vector2f new_pos); // Set new target position
 
-	// Set new target position
-	void set_pos(sf::Vector2f new_pos);
-
-	// Get target radius
-	float get_rad();
+	float get_rad(); // Get target radius
 };

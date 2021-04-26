@@ -22,6 +22,7 @@ int main()
     // Main cycle
     while (client.isRunning() && viewer.isOpen())
     {
+        // Lobby scene
         if (world.GetScene() == Scene::Lobby)
         {
             viewer.handleEvents();
@@ -29,6 +30,7 @@ int main()
             viewer.draw_lobby(world);
         }
 
+        // Hero selection scene
         if (world.GetScene() == Scene::HeroSelection)
         {
             viewer.handleEvents();
@@ -36,6 +38,7 @@ int main()
             viewer.draw_hero_selection(world);
         }
 
+        // Gameplay scene
         if (world.GetScene() == Scene::Gameplay)
         {
             viewer.handleEvents(); // Handling events
@@ -71,6 +74,7 @@ int main()
             viewer.draw_gameplay(world);
         }
 
+        // Gameover scene
         if (world.GetScene() == Scene::Gameover)
         {
             viewer.handleEvents();

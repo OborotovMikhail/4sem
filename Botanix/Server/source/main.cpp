@@ -18,6 +18,7 @@ int main()
     // Main cycle
     while (server.isRunning() && viewer.isOpen())
     {
+        // Drawing game world for all scenes except the gameover
         if (world.GetScene() != Scene::Gameover)
         {
             viewer.handleEvents(); // Handling events
@@ -27,20 +28,20 @@ int main()
 
             tick += dt;
 
-            // Synchronizing server if needed
+            // Synchronizing clients if needed
             if (tick.asMilliseconds() > 1000 || server.IsDirty())
             {
                 server.synchronize();
                 tick = sf::Time();
             }
-
-            // Drawing world (server side)
-            viewer.draw_gameplay(world);
+            
+            viewer.draw_gameplay(world); // Drawing world
         }
 
+        // Drawing gameover scene
         if (world.GetScene() == Scene::Gameover)
         {
-            viewer.handleEvents(); // Handling events
+            viewer.handleEvents();
             viewer.draw_gameover();
         }
     }

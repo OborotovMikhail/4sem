@@ -25,30 +25,20 @@ class Client
 
     std::thread syncThread;
 
-    // Client start function
-    void recieve();
+    void recieve(); // Client start function
 
 public:
-    // Client constructor
-    Client(const std::string& ip, int port, World& world);
+    Client(const std::string& ip, int port, World& world); // Client constructor
+    ~Client(); // Client destructor
+    
+    void notify_server(); // Notify server about new player controls
 
-    // Client destructor
-    ~Client();
+    int id() const; // Get client id
+    
+    bool isRunning() const; // Is client running
 
-    // Notify server about controls function
-    void notify_server();
+    void disconnect(); // Disconnect from the server
 
-    // Get client id function
-    int id() const;
-
-    // Is client running function
-    bool isRunning() const;
-
-    void disconnect();
-
-    // Handle events in the lobby
-    void events_lobby(Viewer& viewer);
-
-    // Handle events in the hero selection screen
-    void events_hero_selection(Viewer& viewer);
+    void events_lobby(Viewer& viewer); // Handle events in the lobby
+    void events_hero_selection(Viewer& viewer); // Handle events in the hero selection screen
 };
