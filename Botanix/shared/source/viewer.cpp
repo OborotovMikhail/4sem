@@ -81,6 +81,31 @@ void Viewer::draw_hero_selection(World& world)
     clear(sf::Color::Black);
 
 
+    float total_heroes_width = (NUMBER_OF_HEROES - 1) * VIEWER_WIDTH * 0.1f;
+    for (int i = 0; i < (NUMBER_OF_HEROES - 1); i++)
+    {
+        sf::Sprite sample_hero_sprite(this->player_textures[0]);
+        sample_hero_sprite.setScale({ 0.7f, 0.7f }); // Scaling
+
+        total_heroes_width += sample_hero_sprite.getGlobalBounds().width;
+    }
+
+    // Setting up hero sprites
+    for (auto& it : player_textures)
+    {
+        sf::Sprite hero_sprite(this->player_textures[it.first]); // Set texture
+        hero_sprite.setScale({ 0.7f, 0.7f }); // Scaling
+        auto hero_rect = hero_sprite.getGlobalBounds();
+        hero_sprite.setOrigin(hero_rect.width / 2.0f, hero_rect.height / 2.0f); // Set sprite origin
+
+        sf::Vector2f pos; // Creating hero sprite position
+        pos.x = float(VIEWER_WIDTH) / 2.0f + float(it.first) * float(VIEWER_WIDTH) * 0.1f
+            + float(it.first) * hero_rect.width - total_heroes_width / 2.0f;
+        pos.y = float(VIEWER_HEIGHT) / 2.0f;
+        hero_sprite.setPosition(pos);
+
+        sf::RenderWindow::draw(hero_sprite); // Draw
+    }
 
     // Displaying
     display();
