@@ -75,7 +75,7 @@ void Viewer::draw_lobby(World& world)
     display();
 }
 
-void Viewer::draw_hero_selection(World& world)
+void Viewer::draw_hero_selection(World& world, int clientId)
 {
     // Setting black color as a background
     clear(sf::Color::Black);
@@ -103,6 +103,17 @@ void Viewer::draw_hero_selection(World& world)
             + float(it.first) * hero_rect.width - total_heroes_width / 2.0f;
         pos.y = float(VIEWER_HEIGHT) / 2.0f;
         hero_sprite.setPosition(pos);
+
+        if (it.first == world.get_players()[clientId].get_selected_hero())
+        {
+            sf::RectangleShape selected_rect_out;
+            selected_rect_out.setSize({ hero_rect.width, hero_rect.height });
+            selected_rect_out.setOrigin({ hero_rect.width / 2.0f, hero_rect.height / 2.0f });
+            selected_rect_out.setFillColor(sf::Color::White);
+            selected_rect_out.setPosition(pos);
+
+            sf::RenderWindow::draw(selected_rect_out);
+        }
 
         sf::RenderWindow::draw(hero_sprite); // Draw
     }

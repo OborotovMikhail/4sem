@@ -24,7 +24,7 @@ public:
     void handleEvents(); // Handling viewer events function
     
     void draw_lobby(World& world); // Draw lobby function
-    void draw_hero_selection(World& world); // Draw hero selection screen
+    void draw_hero_selection(World& world, int clientId); // Draw hero selection screen
     void draw_gameplay(World& world); // Draw world during the game
     void draw_gameover(); // Draw endgame screen
     

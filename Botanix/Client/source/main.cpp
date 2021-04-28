@@ -35,7 +35,7 @@ int main()
         {
             viewer.handleEvents();
             client.events_hero_selection(viewer);
-            viewer.draw_hero_selection(world);
+            viewer.draw_hero_selection(world, client.id());
         }
 
         // Gameplay scene
