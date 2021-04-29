@@ -101,3 +101,8 @@ int Player::get_selected_hero()
 {
 	return this->selected_hero_num;
 }
+
+void Player::set_selected_hero(int hero)
+{
+	this->selected_hero_num = hero;
+}

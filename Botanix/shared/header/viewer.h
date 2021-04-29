@@ -32,4 +32,6 @@ public:
     void set_lobby_selected_button(int button); // Set selected lobby button
     
     std::map<int, sf::Text>& get_lobby_buttons(); // Get lobby buttons map
+
+    int get_number_of_heroes();
 };

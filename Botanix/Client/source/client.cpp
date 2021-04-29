@@ -238,4 +238,24 @@ void Client::events_hero_selection(Viewer& viewer)
         world.SetScene(Scene::Lobby);
         while (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {}
     }
+
+    // Going left in hero selection
+    if ((world.get_players()[this->clientId].get_selected_hero() > 0) &&
+        sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+    {
+        int current_hero = world.get_players()[this->clientId].get_selected_hero();
+        current_hero -= 1;
+        world.get_players()[this->clientId].set_selected_hero(current_hero);
+        while (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {}
+    }
+        
+    // Going right in hero selection
+    if ((world.get_players()[this->clientId].get_selected_hero() > 0) &&
+        sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+    {
+        int current_hero = world.get_players()[this->clientId].get_selected_hero();
+        current_hero -= 1;
+        world.get_players()[this->clientId].set_selected_hero(current_hero);
+        while (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {}
+    }
 }

@@ -85,7 +85,7 @@ void Viewer::draw_hero_selection(World& world, int clientId)
     for (int i = 0; i < (NUMBER_OF_HEROES - 1); i++)
     {
         sf::Sprite sample_hero_sprite(this->player_textures[0]);
-        sample_hero_sprite.setScale({ 0.7f, 0.7f }); // Scaling
+        // sample_hero_sprite.setScale({ 0.7f, 0.7f }); // Scaling
 
         total_heroes_width += sample_hero_sprite.getGlobalBounds().width;
     }
@@ -94,7 +94,7 @@ void Viewer::draw_hero_selection(World& world, int clientId)
     for (auto& it : player_textures)
     {
         sf::Sprite hero_sprite(this->player_textures[it.first]); // Set texture
-        hero_sprite.setScale({ 0.7f, 0.7f }); // Scaling
+        // hero_sprite.setScale({ 0.7f, 0.7f }); // Scaling
         auto hero_rect = hero_sprite.getGlobalBounds();
         hero_sprite.setOrigin(hero_rect.width / 2.0f, hero_rect.height / 2.0f); // Set sprite origin
 
@@ -180,4 +180,9 @@ void Viewer::set_lobby_selected_button(int button)
 std::map<int, sf::Text>& Viewer::get_lobby_buttons()
 {
     return this->lobby_buttons;
+}
+
+int Viewer::get_number_of_heroes()
+{
+    return this->NUMBER_OF_HEROES;
 }
