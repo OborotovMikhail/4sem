@@ -246,15 +246,15 @@ void Client::events_hero_selection(Viewer& viewer)
         int current_hero = world.get_players()[this->clientId].get_selected_hero();
         current_hero -= 1;
         world.get_players()[this->clientId].set_selected_hero(current_hero);
-        while (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {}
+        while (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {}
     }
         
     // Going right in hero selection
-    if ((world.get_players()[this->clientId].get_selected_hero() > 0) &&
+    if ((world.get_players()[this->clientId].get_selected_hero() < viewer.get_number_of_heroes()) &&
         sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
         int current_hero = world.get_players()[this->clientId].get_selected_hero();
-        current_hero -= 1;
+        current_hero += 1;
         world.get_players()[this->clientId].set_selected_hero(current_hero);
         while (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {}
     }
