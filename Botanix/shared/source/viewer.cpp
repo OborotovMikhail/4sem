@@ -80,7 +80,7 @@ void Viewer::draw_hero_selection(World& world, int clientId)
     // Setting black color as a background
     clear(sf::Color::Black);
 
-
+    // Calculatin total menu distance (for centering)
     float total_heroes_width = (NUMBER_OF_HEROES - 1) * VIEWER_WIDTH * 0.1f;
     for (int i = 0; i < (NUMBER_OF_HEROES - 1); i++)
     {
@@ -104,12 +104,23 @@ void Viewer::draw_hero_selection(World& world, int clientId)
         pos.y = float(VIEWER_HEIGHT) / 2.0f;
         hero_sprite.setPosition(pos);
 
+        // Drawing selected hero rectangle
         if (it.first == world.get_players()[clientId].get_selected_hero())
         {
             sf::RectangleShape selected_rect_out;
             selected_rect_out.setSize({ hero_rect.width, hero_rect.height });
             selected_rect_out.setOrigin({ hero_rect.width / 2.0f, hero_rect.height / 2.0f });
-            selected_rect_out.setFillColor(sf::Color::White);
+            if (!world.get_players()[clientId].isHeroSelected())
+            {
+                // If selection is not confirmed - white
+                selected_rect_out.setFillColor(sf::Color::White);
+            }
+            else
+            {
+                // If selection is confirmed - red
+                selected_rect_out.setFillColor(sf::Color::Red);
+            }
+            
             selected_rect_out.setPosition(pos);
 
             sf::RenderWindow::draw(selected_rect_out);

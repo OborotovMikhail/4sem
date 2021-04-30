@@ -220,6 +220,7 @@ void Client::events_lobby(Viewer& viewer)
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && (viewer.get_lobby_selected_button() == 1))
     {
         world.SetScene(Scene::HeroSelection);
+        while (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {}
     }
 
     // Pressing disconnect button
@@ -227,6 +228,7 @@ void Client::events_lobby(Viewer& viewer)
     {
         this->disconnect();
         this->running = false;
+        while (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {}
     }
 }
 
@@ -243,19 +245,35 @@ void Client::events_hero_selection(Viewer& viewer)
     if ((world.get_players()[this->clientId].get_selected_hero() > 0) &&
         sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {
-        int current_hero = world.get_players()[this->clientId].get_selected_hero();
-        current_hero -= 1;
-        world.get_players()[this->clientId].set_selected_hero(current_hero);
-        while (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {}
+        if (!world.get_players()[this->clientId].isHeroSelected())
+        {
+            int current_hero = world.get_players()[this->clientId].get_selected_hero();
+            current_hero -= 1;
+            world.get_players()[this->clientId].set_selected_hero(current_hero);
+            while (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {}
+        }
     }
         
     // Going right in hero selection
-    if ((world.get_players()[this->clientId].get_selected_hero() < viewer.get_number_of_heroes()) &&
+    if ((world.get_players()[this->clientId].get_selected_hero() < (viewer.get_number_of_heroes() - 1)) &&
         sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
-        int current_hero = world.get_players()[this->clientId].get_selected_hero();
-        current_hero += 1;
-        world.get_players()[this->clientId].set_selected_hero(current_hero);
-        while (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {}
+        if (!world.get_players()[this->clientId].isHeroSelected())
+        {
+            int current_hero = world.get_players()[this->clientId].get_selected_hero();
+            current_hero += 1;
+            world.get_players()[this->clientId].set_selected_hero(current_hero);
+            while (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {}
+        }
+    }
+
+    // Confirming hero selection
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+    {
+        if (!world.get_players()[this->clientId].isHeroSelected())
+        {
+            world.get_players()[this->clientId].setHeroSelectionConfirm(true);
+            while (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {}
+        }
     }
 }

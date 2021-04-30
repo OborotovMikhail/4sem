@@ -13,7 +13,7 @@ class Player
     bool winner = false; // Did the player reach endgame score
     bool ready = false; // If player is ready to play (in game lobby)
 
-    int selected_hero_num = 2; // Id number of a selected hero
+    int selected_hero_num = 0; // Id number of a selected hero
     bool is_hero_selected = false; // Did the player select a hero to play
 
     sf::Vector2f pos; // Position
@@ -53,4 +53,7 @@ public:
 
     int get_selected_hero(); // Get a hero number selected by this player
     void set_selected_hero(int hero); // Set selected hero number
+
+    bool isHeroSelected();
+    void setHeroSelectionConfirm(bool x);
 };

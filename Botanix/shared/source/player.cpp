@@ -106,3 +106,13 @@ void Player::set_selected_hero(int hero)
 {
 	this->selected_hero_num = hero;
 }
+
+bool Player::isHeroSelected()
+{
+	return this->is_hero_selected;
+}
+
+void Player::setHeroSelectionConfirm(bool x)
+{
+	this->is_hero_selected = x;
+}
