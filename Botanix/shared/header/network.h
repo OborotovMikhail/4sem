@@ -10,5 +10,6 @@ enum Message
 	Movement,
 	SceneGameplay,
 	SceneGameover,
-	RemovePlayer
+	RemovePlayer,
+	PlayerHeroSelected
 };

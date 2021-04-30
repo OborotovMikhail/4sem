@@ -272,7 +272,18 @@ void Client::events_hero_selection(Viewer& viewer)
     {
         if (!world.get_players()[this->clientId].isHeroSelected())
         {
-            world.get_players()[this->clientId].setHeroSelectionConfirm(true);
+            // Creating a packet
+            sf::Packet packet;
+
+            // Forming a packet for sending selected hero id
+            packet << Message::ClientHeroSelected << this->id() << world.get_players()[this->clientId].get_selected_hero();
+
+            // Sending packet
+            if (socket.send(packet) != sf::Socket::Done)
+            {
+                std::cout << "Can't send hero selection packet to server\n";
+            }
+
             while (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {}
         }
     }
