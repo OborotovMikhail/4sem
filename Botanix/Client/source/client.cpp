@@ -44,6 +44,30 @@ void Client::recieve()
                 }
                 std::cout << std::endl;
 
+                // Recieving all world data
+                int n;
+                packet >> n; // Getting number of players from packet
+                std::lock_guard<std::mutex> m(world.mutex);
+                for (int i = 0; i < n; i++)
+                {
+                    int index, score, hero_id;
+                    bool hero_selected;
+                    sf::Vector2f pos, v; // Positon and velocity from server
+
+                    packet >> index >> pos.x >> pos.y >> v.x >> v.y >> score >> hero_id >> hero_selected;
+
+                    world.get_players()[index].set_pos(pos); // Updating position for players
+                    world.get_players()[index].set_vel(v); // Updating velocity for players
+                    world.get_players()[index].set_score(score); // Set player score
+                    world.get_players()[index].set_selected_hero(hero_id); // Setting selected hero
+                    world.get_players()[index].setHeroSelectionConfirm(hero_selected); // Setting hero confirmation
+                }
+
+                // Updating target position
+                sf::Vector2f target_pos;
+                packet >> target_pos.x >> target_pos.y;
+                world.get_target().set_pos(target_pos);
+
                 clock.restart();
             }
 
@@ -111,6 +135,16 @@ void Client::recieve()
                 world.get_players()[id].won_the_game();
 
                 std::cout << "Player " << id << " won the game\n";
+            }
+
+            // Gameover scene packet processing
+            if (type == Message::PlayerHeroSelected)
+            {
+                int id, selected_hero;
+                packet >> id >> selected_hero;
+
+                world.get_players()[id].set_selected_hero(selected_hero);
+                world.get_players()[id].setHeroSelectionConfirm(true);
             }
         }
     }

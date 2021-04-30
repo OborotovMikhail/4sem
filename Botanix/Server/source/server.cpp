@@ -84,6 +84,21 @@ void Server::receive()
                             outPacket << it.first;
                         }
 
+                        // Sending all world data to new player
+                        // (data about players that are already connected)
+                        outPacket << world.get_players().size();
+                        for (auto& elem : world.get_players())
+                        {
+                            // Players position and velocity to packet
+                            outPacket << elem.first << elem.second.get_pos().x << elem.second.get_pos().y <<
+                                elem.second.get_vel().x << elem.second.get_vel().y << elem.second.get_score()
+                                << elem.second.get_selected_hero() << elem.second.isHeroSelected();
+                        }
+
+                        // Pushing target position to packet
+                        outPacket << world.get_target().get_pos().x;
+                        outPacket << world.get_target().get_pos().y;
+
                         dirty = true; // Server dirty
 
                         // Sending a packet to a new client
@@ -221,8 +236,6 @@ void Server::update(float dt)
         {
             int selected_hero;
             packet >> clientId >> selected_hero;
-
-            debug(clientId, selected_hero);
 
             world.get_players()[clientId].set_selected_hero(selected_hero);
             world.get_players()[clientId].setHeroSelectionConfirm(true);
