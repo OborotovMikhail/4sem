@@ -76,14 +76,7 @@ void Server::receive()
                         sf::Packet outPacket;
                         outPacket << Message::ClientCreated << this->currentPlayerId << world.get_players()[this->currentPlayerId].get_pos().x
                             << world.get_players()[this->currentPlayerId].get_pos().y << clock.getElapsedTime().asSeconds();
-
-                        // Sending online player id's to the new player
-                        outPacket << this->world.get_players().size();
-                        for (auto& it : this->world.get_players())
-                        {
-                            outPacket << it.first;
-                        }
-
+                        
                         // Sending all world data to new player
                         // (data about players that are already connected)
                         outPacket << world.get_players().size();

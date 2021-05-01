@@ -31,18 +31,6 @@ void Client::recieve()
 
                 world.get_players()[clientId].set_pos(pos);
                 std::cout << "Client created, id: " << clientId << std::endl;
-                
-                // Printing currently online players
-                std::cout << "Online players by their id\'s: ";
-                int online_players_num;
-                packet >> online_players_num;
-                for (int i = 0; i < online_players_num; i++)
-                {
-                    int id;
-                    packet >> id;
-                    std::cout << id << " ";
-                }
-                std::cout << std::endl;
 
                 // Recieving all world data
                 int n;
@@ -67,6 +55,14 @@ void Client::recieve()
                 sf::Vector2f target_pos;
                 packet >> target_pos.x >> target_pos.y;
                 world.get_target().set_pos(target_pos);
+
+                // Printing currently online players
+                std::cout << "Online players by their id\'s: ";
+                for (auto& it : world.get_players())
+                {
+                    std::cout << it.first << " ";
+                }
+                std::cout << std::endl;
 
                 clock.restart();
             }

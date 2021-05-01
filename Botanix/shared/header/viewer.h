@@ -9,6 +9,8 @@ class Viewer : public sf::RenderWindow
     const int VIEWER_WIDTH = 800;
     const int VIEWER_HEIGHT = 800;
 
+    const float HERO_SCALE_FACTOR = 0.7f;
+
     const int NUMBER_OF_HEROES = 3;
     std::map<int, sf::Texture> player_textures; // Map of player textures
 

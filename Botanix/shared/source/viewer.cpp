@@ -85,7 +85,7 @@ void Viewer::draw_hero_selection(World& world, int clientId)
     for (int i = 0; i < (NUMBER_OF_HEROES - 1); i++)
     {
         sf::Sprite sample_hero_sprite(this->player_textures[0]);
-        // sample_hero_sprite.setScale({ 0.7f, 0.7f }); // Scaling
+        sample_hero_sprite.setScale(HERO_SCALE_FACTOR, HERO_SCALE_FACTOR ); // Scaling
 
         total_heroes_width += sample_hero_sprite.getGlobalBounds().width;
     }
@@ -94,14 +94,17 @@ void Viewer::draw_hero_selection(World& world, int clientId)
     for (auto& it : player_textures)
     {
         sf::Sprite hero_sprite(this->player_textures[it.first]); // Set texture
-        // hero_sprite.setScale({ 0.7f, 0.7f }); // Scaling
+        hero_sprite.scale(HERO_SCALE_FACTOR, HERO_SCALE_FACTOR); // Scaling
         auto hero_rect = hero_sprite.getGlobalBounds();
-        hero_sprite.setOrigin(hero_rect.width / 2.0f, hero_rect.height / 2.0f); // Set sprite origin
-
-        sf::Vector2f pos; // Creating hero sprite position
+        hero_sprite.setOrigin(hero_rect.width / HERO_SCALE_FACTOR / 2.0f, 
+            hero_rect.height / HERO_SCALE_FACTOR / 2.0f); // Set sprite origin
+        
+        // Calculating hero sprite position
+        sf::Vector2f pos;
         pos.x = float(VIEWER_WIDTH) / 2.0f + float(it.first) * float(VIEWER_WIDTH) * 0.1f
             + float(it.first) * hero_rect.width - total_heroes_width / 2.0f;
         pos.y = float(VIEWER_HEIGHT) / 2.0f;
+
         hero_sprite.setPosition(pos);
 
         // Drawing selected hero rectangle
@@ -109,7 +112,7 @@ void Viewer::draw_hero_selection(World& world, int clientId)
         {
             sf::RectangleShape selected_rect_out;
             selected_rect_out.setSize({ hero_rect.width, hero_rect.height });
-            selected_rect_out.setOrigin({ hero_rect.width / 2.0f, hero_rect.height / 2.0f });
+            selected_rect_out.setOrigin({ selected_rect_out.getSize().x / 2.0f, selected_rect_out.getSize().y / 2.0f });
             if (!world.get_players()[clientId].isHeroSelected())
             {
                 // If selection is not confirmed - white
@@ -127,6 +130,20 @@ void Viewer::draw_hero_selection(World& world, int clientId)
         }
 
         sf::RenderWindow::draw(hero_sprite); // Draw
+
+        // Debug circle
+        sf::CircleShape s(5); // Creating a circle
+        s.setOrigin(s.getRadius(), s.getRadius()); // Moving the circle origin to it's center
+        s.setFillColor(sf::Color::Red);
+        s.setPosition(pos);
+        sf::RenderWindow::draw(s);
+
+        // Debug circle
+        sf::CircleShape debug(5); // Creating a circle
+        debug.setOrigin(debug.getRadius(), debug.getRadius()); // Moving the circle origin to it's center
+        debug.setFillColor(sf::Color::Blue);
+        debug.setPosition(hero_sprite.getPosition().x, hero_sprite.getPosition().y);
+        sf::RenderWindow::draw(debug);
     }
 
     // Displaying
