@@ -110,8 +110,9 @@ void Viewer::draw_hero_selection(World& world, int clientId)
         // Drawing selected hero rectangle
         if (it.first == world.get_players()[clientId].get_selected_hero())
         {
+            // Creating outer rectangle
             sf::RectangleShape selected_rect_out;
-            selected_rect_out.setSize({ hero_rect.width, hero_rect.height });
+            selected_rect_out.setSize({ hero_rect.width * 1.1f, hero_rect.height * 1.1f });
             selected_rect_out.setOrigin({ selected_rect_out.getSize().x / 2.0f, selected_rect_out.getSize().y / 2.0f });
             if (!world.get_players()[clientId].isHeroSelected())
             {
@@ -122,28 +123,21 @@ void Viewer::draw_hero_selection(World& world, int clientId)
             {
                 // If selection is confirmed - red
                 selected_rect_out.setFillColor(sf::Color::Red);
-            }
-            
+            }   
             selected_rect_out.setPosition(pos);
 
-            sf::RenderWindow::draw(selected_rect_out);
+            // Creating inner rectangle
+            sf::RectangleShape selected_rect_in;
+            selected_rect_in.setSize({ hero_rect.width * 1.07f, hero_rect.height * 1.07f });
+            selected_rect_in.setOrigin({ selected_rect_in.getSize().x / 2.0f, selected_rect_in.getSize().y / 2.0f });
+            selected_rect_in.setFillColor(sf::Color::Black);
+            selected_rect_in.setPosition(pos);
+
+            sf::RenderWindow::draw(selected_rect_out); // Drawing outer rectangle
+            sf::RenderWindow::draw(selected_rect_in); // Drawing inner rectangle
         }
 
         sf::RenderWindow::draw(hero_sprite); // Draw
-
-        // Debug circle
-        sf::CircleShape s(5); // Creating a circle
-        s.setOrigin(s.getRadius(), s.getRadius()); // Moving the circle origin to it's center
-        s.setFillColor(sf::Color::Red);
-        s.setPosition(pos);
-        sf::RenderWindow::draw(s);
-
-        // Debug circle
-        sf::CircleShape debug(5); // Creating a circle
-        debug.setOrigin(debug.getRadius(), debug.getRadius()); // Moving the circle origin to it's center
-        debug.setFillColor(sf::Color::Blue);
-        debug.setPosition(hero_sprite.getPosition().x, hero_sprite.getPosition().y);
-        sf::RenderWindow::draw(debug);
     }
 
     // Displaying
