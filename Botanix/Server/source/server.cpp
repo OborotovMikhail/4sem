@@ -61,7 +61,8 @@ void Server::receive()
                 // If a new client is connected this code executes
                 if (listener.accept(*tempSocket) == sf::Socket::Done)
                 {
-                    if (this->world.get_players().size() < MaxPlayers) //if server is not full
+                    //if server is not full
+                    if (this->world.get_players().size() < MaxPlayers)
                     {
                         std::lock_guard<std::mutex> guard(newPlayerMutex);
 
@@ -96,7 +97,9 @@ void Server::receive()
 
                         // Sending a packet to a new client
                         if (tempSocket->send(outPacket) != sf::Socket::Done)
+                        {
                             std::cout << "Error sending player index" << std::endl;
+                        }
                         else
                         {
                             std::cout << "Player " << this->currentPlayerId << " connected (spawn position: "
@@ -111,7 +114,18 @@ void Server::receive()
                     }
                     else
                     {
-                        std::cout << "Could not connect new player, server is full\n";
+                        // Error message for new client
+                        std::lock_guard<std::mutex> guard(newPlayerMutex);
+
+                        sf::Packet outPacket;
+                        outPacket << Message::ErrorServerFull;
+
+                        std::cout << "Could not connect new player, server is full" << std::endl;
+
+                        if (tempSocket->send(outPacket) != sf::Socket::Done)
+                        {
+                            std::cout << "Error sending \'server is full error\' error packet" << std::endl;
+                        }
                     }
                 }
             }

@@ -2,7 +2,8 @@
 
 #include "viewer.h"
     
-Viewer::Viewer(const std::string& name) : sf::RenderWindow(sf::VideoMode(800, 800), name)
+Viewer::Viewer(const std::string& name) : sf::RenderWindow(sf::VideoMode(800, 800), 
+    name)
 {
     // Loading player textures
     this->player_textures[0].loadFromFile("hero0.png");
@@ -181,6 +182,23 @@ void Viewer::draw_gameover()
     gameover_text.setFont(font);
     gameover_text.setColor(sf::Color::White);
     gameover_text.setString("BOTANIX");
+    gameover_text.setOrigin(gameover_text.getGlobalBounds().width / 2.0f, gameover_text.getGlobalBounds().height / 2.0f);
+    gameover_text.setPosition({ float(VIEWER_WIDTH) / 2.0f, float(VIEWER_HEIGHT) / 2.0f });
+    sf::RenderWindow::draw(gameover_text); // Draw
+
+    // Displaying
+    display();
+}
+
+void Viewer::draw_server_full()
+{
+    // Setting black color as a background
+    clear(sf::Color::Black);
+
+    sf::Text gameover_text;
+    gameover_text.setFont(font);
+    gameover_text.setColor(sf::Color::White);
+    gameover_text.setString("server is full");
     gameover_text.setOrigin(gameover_text.getGlobalBounds().width / 2.0f, gameover_text.getGlobalBounds().height / 2.0f);
     gameover_text.setPosition({ float(VIEWER_WIDTH) / 2.0f, float(VIEWER_HEIGHT) / 2.0f });
     sf::RenderWindow::draw(gameover_text); // Draw

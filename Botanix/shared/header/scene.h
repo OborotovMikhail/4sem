@@ -5,5 +5,6 @@ enum class Scene
 	Lobby,
 	HeroSelection,
 	Gameplay,
-	Gameover
+	Gameover,
+	ServerFull
 };

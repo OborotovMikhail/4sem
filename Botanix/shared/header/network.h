@@ -11,5 +11,6 @@ enum Message
 	SceneGameplay,
 	SceneGameover,
 	RemovePlayer,
-	PlayerHeroSelected
+	PlayerHeroSelected,
+	ErrorServerFull
 };

@@ -6,6 +6,7 @@
 
 class Viewer : public sf::RenderWindow
 {
+    // Some standart values: 800 800, 1920 1080, 3840 2160, 5760 3240, 7680 4320
     const int VIEWER_WIDTH = 800;
     const int VIEWER_HEIGHT = 800;
 
@@ -29,6 +30,7 @@ public:
     void draw_hero_selection(World& world, int clientId); // Draw hero selection screen
     void draw_gameplay(World& world); // Draw world during the game
     void draw_gameover(); // Draw endgame screen
+    void draw_server_full(); // Draw server is full screen
     
     int get_lobby_selected_button(); // Get selected lobby button
     void set_lobby_selected_button(int button); // Set selected lobby button

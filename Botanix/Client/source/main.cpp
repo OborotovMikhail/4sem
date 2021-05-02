@@ -80,6 +80,13 @@ int main()
             viewer.handleEvents();
             viewer.draw_gameover();
         }
+
+        // Server is full error scene
+        if (world.GetScene() == Scene::ServerFull)
+        {
+            viewer.handleEvents();
+            viewer.draw_server_full();
+        }
     }
 
     return 0;

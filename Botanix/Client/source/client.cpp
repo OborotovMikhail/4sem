@@ -142,6 +142,12 @@ void Client::recieve()
                 world.get_players()[id].set_selected_hero(selected_hero);
                 world.get_players()[id].setHeroSelectionConfirm(true);
             }
+
+            // Server is full packet processing
+            if (type == Message::ErrorServerFull)
+            {
+                world.SetScene(Scene::ServerFull);
+            }
         }
     }
 }
