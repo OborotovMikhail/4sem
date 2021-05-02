@@ -6,5 +6,6 @@ enum class Scene
 	HeroSelection,
 	Gameplay,
 	Gameover,
-	ServerFull
+	ErrorServerFull,
+	ErrorOngoingGame
 };

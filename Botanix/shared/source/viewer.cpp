@@ -207,6 +207,23 @@ void Viewer::draw_server_full()
     display();
 }
 
+void Viewer::draw_ongoing_game()
+{
+    // Setting black color as a background
+    clear(sf::Color::Black);
+
+    sf::Text gameover_text;
+    gameover_text.setFont(font);
+    gameover_text.setColor(sf::Color::White);
+    gameover_text.setString("there is an ongoing game");
+    gameover_text.setOrigin(gameover_text.getGlobalBounds().width / 2.0f, gameover_text.getGlobalBounds().height / 2.0f);
+    gameover_text.setPosition({ float(VIEWER_WIDTH) / 2.0f, float(VIEWER_HEIGHT) / 2.0f });
+    sf::RenderWindow::draw(gameover_text); // Draw
+
+    // Displaying
+    display();
+}
+
 int Viewer::get_lobby_selected_button()
 {
     return this->lobby_selected_button;

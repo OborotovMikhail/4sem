@@ -64,53 +64,72 @@ void Server::receive()
                     //if server is not full
                     if (this->world.get_players().size() < MaxPlayers)
                     {
-                        std::lock_guard<std::mutex> guard(newPlayerMutex);
-
-                        // Setting random player spawn position
-                        sf::Vector2f new_pos = world.get_random_pos();
-                        world.get_players()[this->currentPlayerId].set_pos(new_pos);
-
-                        // Adding new client's socket
-                        selector.add(*tempSocket);
-
-                        // Creating a spawn packet for the new client
-                        sf::Packet outPacket;
-                        outPacket << Message::ClientCreated << this->currentPlayerId << world.get_players()[this->currentPlayerId].get_pos().x
-                            << world.get_players()[this->currentPlayerId].get_pos().y << clock.getElapsedTime().asSeconds();
-                        
-                        // Sending all world data to new player
-                        // (data about players that are already connected)
-                        outPacket << world.get_players().size();
-                        for (auto& elem : world.get_players())
+                        // If the game is not ongoing
+                        if (this->world.GetScene() != Scene::Gameplay)
                         {
-                            // Players position and velocity to packet
-                            outPacket << elem.first << elem.second.get_pos().x << elem.second.get_pos().y <<
-                                elem.second.get_vel().x << elem.second.get_vel().y << elem.second.get_score()
-                                << elem.second.get_selected_hero() << elem.second.isHeroSelected();
-                        }
+                            std::lock_guard<std::mutex> guard(newPlayerMutex);
 
-                        // Pushing target position to packet
-                        outPacket << world.get_target().get_pos().x;
-                        outPacket << world.get_target().get_pos().y;
+                            // Setting random player spawn position
+                            sf::Vector2f new_pos = world.get_random_pos();
+                            world.get_players()[this->currentPlayerId].set_pos(new_pos);
 
-                        dirty = true; // Server dirty
+                            // Adding new client's socket
+                            selector.add(*tempSocket);
 
-                        // Sending a packet to a new client
-                        if (tempSocket->send(outPacket) != sf::Socket::Done)
-                        {
-                            std::cout << "Error sending player index" << std::endl;
+                            // Creating a spawn packet for the new client
+                            sf::Packet outPacket;
+                            outPacket << Message::ClientCreated << this->currentPlayerId << world.get_players()[this->currentPlayerId].get_pos().x
+                                << world.get_players()[this->currentPlayerId].get_pos().y << clock.getElapsedTime().asSeconds();
+
+                            // Sending all world data to new player
+                            // (data about players that are already connected)
+                            outPacket << world.get_players().size();
+                            for (auto& elem : world.get_players())
+                            {
+                                // Players position and velocity to packet
+                                outPacket << elem.first << elem.second.get_pos().x << elem.second.get_pos().y <<
+                                    elem.second.get_vel().x << elem.second.get_vel().y << elem.second.get_score()
+                                    << elem.second.get_selected_hero() << elem.second.isHeroSelected();
+                            }
+
+                            // Pushing target position to packet
+                            outPacket << world.get_target().get_pos().x;
+                            outPacket << world.get_target().get_pos().y;
+
+                            dirty = true; // Server dirty
+
+                            // Sending a packet to a new client
+                            if (tempSocket->send(outPacket) != sf::Socket::Done)
+                            {
+                                std::cout << "Error sending player index" << std::endl;
+                            }
+                            else
+                            {
+                                std::cout << "Player " << this->currentPlayerId << " connected (spawn position: "
+                                    << world.get_players()[this->currentPlayerId].get_pos().x << " " <<
+                                    world.get_players()[this->currentPlayerId].get_pos().y << ")\n";
+                            }
+
+                            sockets[this->currentPlayerId] = std::move(tempSocket);
+                            this->currentPlayerId++;
+
+                            this->world.show_players();
                         }
                         else
                         {
-                            std::cout << "Player " << this->currentPlayerId << " connected (spawn position: "
-                            << world.get_players()[this->currentPlayerId].get_pos().x << " " <<
-                                world.get_players()[this->currentPlayerId].get_pos().y << ")\n";
+                            // Error message for new client
+                            std::lock_guard<std::mutex> guard(newPlayerMutex);
+
+                            sf::Packet outPacket;
+                            outPacket << Message::ErrorOngoingGame;
+
+                            std::cout << "Could not connect new player, the game is ongoing" << std::endl;
+
+                            if (tempSocket->send(outPacket) != sf::Socket::Done)
+                            {
+                                std::cout << "Error sending \'ongoing game error\' packet" << std::endl;
+                            }
                         }
-
-                        sockets[this->currentPlayerId] = std::move(tempSocket);
-                        this->currentPlayerId++;
-
-                        this->world.show_players();
                     }
                     else
                     {
@@ -124,7 +143,7 @@ void Server::receive()
 
                         if (tempSocket->send(outPacket) != sf::Socket::Done)
                         {
-                            std::cout << "Error sending \'server is full error\' error packet" << std::endl;
+                            std::cout << "Error sending \'server is full error\' packet" << std::endl;
                         }
                     }
                 }

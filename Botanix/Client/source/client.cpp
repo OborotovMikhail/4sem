@@ -146,7 +146,15 @@ void Client::recieve()
             // Server is full packet processing
             if (type == Message::ErrorServerFull)
             {
-                world.SetScene(Scene::ServerFull);
+                world.SetScene(Scene::ErrorServerFull);
+                std::cout << "Could not connect to server, server is full" << std::endl;
+            }
+
+            // Server is full packet processing
+            if (type == Message::ErrorOngoingGame)
+            {
+                world.SetScene(Scene::ErrorOngoingGame);
+                std::cout << "Could not connect to server, there is an ongoing game" << std::endl;
             }
         }
     }

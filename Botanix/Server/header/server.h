@@ -17,7 +17,7 @@ class Server
     sf::SocketSelector selector; // Socket selector
 
     const int port; // Server port
-    const unsigned short MaxPlayers = 1; // Max allowed players
+    const unsigned short MaxPlayers = 3; // Max allowed players
 
     std::unordered_map<PlayerId, std::unique_ptr<sf::TcpSocket>> sockets; // Sockets map
 

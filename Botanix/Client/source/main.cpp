@@ -82,10 +82,17 @@ int main()
         }
 
         // Server is full error scene
-        if (world.GetScene() == Scene::ServerFull)
+        if (world.GetScene() == Scene::ErrorServerFull)
         {
             viewer.handleEvents();
             viewer.draw_server_full();
+        }
+
+        // Ongoing game error scene
+        if (world.GetScene() == Scene::ErrorOngoingGame)
+        {
+            viewer.handleEvents();
+            viewer.draw_ongoing_game();
         }
     }
 
