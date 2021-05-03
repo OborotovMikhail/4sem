@@ -17,9 +17,13 @@ class Viewer : public sf::RenderWindow
 
     sf::Font font; // Text font
 
-    const int NUMBER_OF_LOBBY_BUTTONS = 3; // Number of buttons in lobby
-    std::map<int, sf::Text> lobby_buttons; // Map of buttons in lobby
-    int lobby_selected_button = 0; // Currently selected button in lobby
+    const int NUMBER_OF_LOBBY_BUTTONS = 3; // Number of buttons in lobby scene
+    std::map<int, sf::Text> lobby_buttons; // Map of buttons in lobby scene
+    int lobby_selected_button = 0; // Currently selected button in lobby scene
+
+    const int NUMBER_OF_GAMEOVER_BUTTONS = 2; // Number of buttons in gameover scene
+    std::map<int, sf::Text> gameover_buttons; // Map of buttons in gameover scene
+    int gameover_selected_button = 0; // Currently selected button in gameover scene
 
 public:
     Viewer(const std::string& name); // Viewer constructor

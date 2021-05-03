@@ -41,6 +41,29 @@ Viewer::Viewer(const std::string& name) : sf::RenderWindow(sf::VideoMode(800, 80
             - total_menu_height / 2.0f;
         lobby_buttons[i].setPosition(pos);
     }
+
+    // Setting up gameover scene buttons
+    for (int i = 0; i < NUMBER_OF_GAMEOVER_BUTTONS; i++)
+    {
+        gameover_buttons[i].setFont(font);
+    }
+    gameover_buttons[0].setString("lobby");
+    gameover_buttons[1].setString("disconnect");
+    for (int i = 0; i < NUMBER_OF_GAMEOVER_BUTTONS; i++)
+    {
+        float total_menu_width = (NUMBER_OF_GAMEOVER_BUTTONS - 1) * VIEWER_WIDTH * 0.1f;
+        for (int i = 0; i < NUMBER_OF_GAMEOVER_BUTTONS; i++)
+        {
+            total_menu_width += gameover_buttons[i].getGlobalBounds().height;
+        }
+
+        gameover_buttons[i].setOrigin(gameover_buttons[i].getGlobalBounds().width / 2.0f, gameover_buttons[i].getGlobalBounds().height / 2.0f);
+        sf::Vector2f pos;
+        pos.x = float(VIEWER_WIDTH) / 2.0f + float(i) * float(VIEWER_WIDTH) * 0.3f
+            - total_menu_width / 2.0f;
+        pos.y = float(VIEWER_HEIGHT) * 0.95f;
+        gameover_buttons[i].setPosition(pos);
+    }
 }
 
 void Viewer::handleEvents()
@@ -193,6 +216,21 @@ void Viewer::draw_gameover(World& world)
     gameover_text_2.setOrigin(gameover_text_2.getGlobalBounds().width / 2.0f, gameover_text_2.getGlobalBounds().height / 2.0f);
     gameover_text_2.setPosition({ float(VIEWER_WIDTH) / 2.0f, float(VIEWER_HEIGHT) / 2.0f * 1.05f });
     sf::RenderWindow::draw(gameover_text_2); // Draw
+
+    // Drawing gameover scene buttons
+    for (auto& it : gameover_buttons)
+    {
+        if (it.first == gameover_selected_button)
+        {
+            it.second.setColor(sf::Color::Red);
+        }
+        else
+        {
+            it.second.setColor(sf::Color::White);
+        }
+
+        sf::RenderWindow::draw(it.second);
+    }
 
     // Displaying
     display();
