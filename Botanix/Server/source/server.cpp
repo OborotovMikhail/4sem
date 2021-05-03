@@ -415,6 +415,8 @@ void Server::update(float dt)
             world.SetScene(Scene::Gameover);
             it.second.won_the_game();
 
+            world.setWinnerId(it.first); // Setting winner player id
+
             sf::Packet toSend; // Forming packet
             toSend << Message::SceneGameover << it.first; // Sending id of the winner
 

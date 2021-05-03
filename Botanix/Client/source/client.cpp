@@ -130,6 +130,8 @@ void Client::recieve()
                 world.SetScene(Scene::Gameover);
                 world.get_players()[id].won_the_game();
 
+                world.setWinnerId(id); // Setting winner player id
+
                 std::cout << "Player " << id << " won the game\n";
             }
 

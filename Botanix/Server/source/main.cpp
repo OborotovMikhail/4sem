@@ -42,7 +42,7 @@ int main()
         if (world.GetScene() == Scene::Gameover)
         {
             viewer.handleEvents();
-            viewer.draw_gameover();
+            viewer.draw_gameover(world);
         }
     }
 

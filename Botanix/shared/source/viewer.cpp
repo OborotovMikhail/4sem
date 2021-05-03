@@ -173,18 +173,26 @@ void Viewer::draw_gameplay(World& world)
     display();
 }
 
-void Viewer::draw_gameover()
+void Viewer::draw_gameover(World& world)
 {
     // Setting black color as a background
     clear(sf::Color::Black);
 
-    sf::Text gameover_text;
-    gameover_text.setFont(font);
-    gameover_text.setColor(sf::Color::White);
-    gameover_text.setString("BOTANIX");
-    gameover_text.setOrigin(gameover_text.getGlobalBounds().width / 2.0f, gameover_text.getGlobalBounds().height / 2.0f);
-    gameover_text.setPosition({ float(VIEWER_WIDTH) / 2.0f, float(VIEWER_HEIGHT) / 2.0f });
-    sf::RenderWindow::draw(gameover_text); // Draw
+    sf::Text gameover_text_1;
+    gameover_text_1.setFont(font);
+    gameover_text_1.setColor(sf::Color::White);
+    gameover_text_1.setString("PLAYER " + std::to_string(world.getWinnerId()));
+    gameover_text_1.setOrigin(gameover_text_1.getGlobalBounds().width / 2.0f, gameover_text_1.getGlobalBounds().height / 2.0f);
+    gameover_text_1.setPosition({ float(VIEWER_WIDTH) / 2.0f, float(VIEWER_HEIGHT) / 2.0f * 0.95f });
+    sf::RenderWindow::draw(gameover_text_1); // Draw
+
+    sf::Text gameover_text_2;
+    gameover_text_2.setFont(font);
+    gameover_text_2.setColor(sf::Color::White);
+    gameover_text_2.setString("BOTANIX");
+    gameover_text_2.setOrigin(gameover_text_2.getGlobalBounds().width / 2.0f, gameover_text_2.getGlobalBounds().height / 2.0f);
+    gameover_text_2.setPosition({ float(VIEWER_WIDTH) / 2.0f, float(VIEWER_HEIGHT) / 2.0f * 1.05f });
+    sf::RenderWindow::draw(gameover_text_2); // Draw
 
     // Displaying
     display();

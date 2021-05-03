@@ -45,4 +45,7 @@ public:
 
     Scene GetScene(); // Get current game scene
     void SetScene(Scene scene); // Set game scene
+
+    void setWinnerId(int val); // Set winner player id
+    int getWinnerId(); // Get winner player id
 };

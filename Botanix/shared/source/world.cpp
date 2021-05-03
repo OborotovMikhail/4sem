@@ -95,3 +95,13 @@ void World::SetScene(Scene scene)
 {
     this->GameScene = scene;
 }
+
+void World::setWinnerId(int val)
+{
+    this->winner_id = val;
+}
+
+int World::getWinnerId()
+{
+    return this->winner_id;
+}

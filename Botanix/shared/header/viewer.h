@@ -29,7 +29,7 @@ public:
     void draw_lobby(World& world); // Draw lobby function
     void draw_hero_selection(World& world, int clientId); // Draw hero selection screen
     void draw_gameplay(World& world); // Draw world during the game
-    void draw_gameover(); // Draw endgame screen
+    void draw_gameover(World& world); // Draw endgame screen
     void draw_server_full(); // Draw server is full error screen
     void draw_ongoing_game(); // Draw ongoing game error screen
     
