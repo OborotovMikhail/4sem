@@ -41,5 +41,5 @@ public:
 
     void events_lobby(Viewer& viewer); // Handle events in the lobby
     void events_hero_selection(Viewer& viewer); // Handle events in the hero selection screen
-    void events_gameover_selection(Viewer& viewer); // Handle events in the gameover screen
+    void events_gameover(Viewer& viewer); // Handle events in the gameover screen
 };

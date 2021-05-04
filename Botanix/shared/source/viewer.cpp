@@ -288,6 +288,21 @@ std::map<int, sf::Text>& Viewer::get_lobby_buttons()
     return this->lobby_buttons;
 }
 
+int Viewer::get_gameover_selected_button()
+{
+    return this->gameover_selected_button;
+}
+
+void Viewer::set_gameover_selected_button(int button)
+{
+    this->gameover_selected_button = button;
+}
+
+std::map<int, sf::Text>& Viewer::get_gameover_buttons()
+{
+    return this->gameover_buttons;
+}
+
 int Viewer::get_number_of_heroes()
 {
     return this->NUMBER_OF_HEROES;

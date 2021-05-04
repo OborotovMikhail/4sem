@@ -41,8 +41,11 @@ public:
     
     int get_lobby_selected_button(); // Get selected lobby button
     void set_lobby_selected_button(int button); // Set selected lobby button
-    
     std::map<int, sf::Text>& get_lobby_buttons(); // Get lobby buttons map
+
+    int get_gameover_selected_button(); // Get selected gameover button
+    void set_gameover_selected_button(int button); // Set selected gameover button
+    std::map<int, sf::Text>& get_gameover_buttons(); // Get gameover buttons map
 
     int get_number_of_heroes();
 };

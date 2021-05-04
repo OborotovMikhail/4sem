@@ -335,7 +335,36 @@ void Client::events_hero_selection(Viewer& viewer)
     }
 }
 
-void Client::events_gameover_selection(Viewer& viewer)
+void Client::events_gameover(Viewer& viewer)
 {
+    // Changing buttons in lobby
+    // Going right
+    if ((viewer.get_gameover_selected_button() < (viewer.get_gameover_buttons().size() - 1)) &&
+        sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+    {
+        viewer.set_gameover_selected_button(viewer.get_gameover_selected_button() + 1);
+        while (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {}
+    }
+    // Going left
+    if ((viewer.get_gameover_selected_button() > 0) &&
+        sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+    {
+        viewer.set_gameover_selected_button(viewer.get_gameover_selected_button() - 1);
+        while (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {}
+    }
 
+    // Pressing back to lobby button
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && (viewer.get_lobby_selected_button() == 0))
+    {
+        world.SetScene(Scene::Lobby);
+        while (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {}
+    }
+
+    // Pressing disconnect button
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && (viewer.get_lobby_selected_button() == 1))
+    {
+        this->disconnect();
+        this->running = false;
+        while (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {}
+    }
 }
