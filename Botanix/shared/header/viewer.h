@@ -18,10 +18,12 @@ class Viewer : public sf::RenderWindow
     sf::Font font; // Text font
 
     const int NUMBER_OF_LOBBY_BUTTONS = 3; // Number of buttons in lobby scene
+    const float SPACE_BETWEEN_LOBBY_BUTTONS = 0.1f; // Space between lobby buttons (relative to viewer size)
     std::map<int, sf::Text> lobby_buttons; // Map of buttons in lobby scene
     int lobby_selected_button = 0; // Currently selected button in lobby scene
 
     const int NUMBER_OF_GAMEOVER_BUTTONS = 2; // Number of buttons in gameover scene
+    const float SPACE_BETWEEN_GAMEOVER_BUTTONS = 0.4f; // Space between gameover buttons (relative to viewer size)
     std::map<int, sf::Text> gameover_buttons; // Map of buttons in gameover scene
     int gameover_selected_button = 0; // Currently selected button in gameover scene
 

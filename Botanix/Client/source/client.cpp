@@ -334,3 +334,8 @@ void Client::events_hero_selection(Viewer& viewer)
         }
     }
 }
+
+void Client::events_gameover_selection(Viewer& viewer)
+{
+
+}

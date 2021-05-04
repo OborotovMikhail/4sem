@@ -6,7 +6,7 @@
 class Player
 {
     const float RADIUS = 100.0f; // Player radius
-    const int FINAL_SCORE = 3; // Score needed to win the game
+    const int FINAL_SCORE = 1; // Score needed to win the game
     const float SPEED = 300.0f; // Pixels per second, used as a reference to calculate velocity
 
     int score = 0; // Player score, starting score is 0

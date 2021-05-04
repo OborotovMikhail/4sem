@@ -26,19 +26,20 @@ Viewer::Viewer(const std::string& name) : sf::RenderWindow(sf::VideoMode(800, 80
     lobby_buttons[0].setString("ready");
     lobby_buttons[1].setString("pick hero");
     lobby_buttons[2].setString("disconnect");
+
+    float total_lobby_height = (NUMBER_OF_LOBBY_BUTTONS - 1) * VIEWER_HEIGHT * 0.1f;
     for (int i = 0; i < NUMBER_OF_LOBBY_BUTTONS; i++)
     {
-        float total_menu_height = (NUMBER_OF_LOBBY_BUTTONS - 1) * VIEWER_HEIGHT * 0.1f;
-        for (int i = 0; i < NUMBER_OF_LOBBY_BUTTONS; i++)
-        {
-            total_menu_height += lobby_buttons[i].getGlobalBounds().height;
-        }
+        total_lobby_height += lobby_buttons[i].getGlobalBounds().height;
+    }
 
+    for (int i = 0; i < NUMBER_OF_LOBBY_BUTTONS; i++)
+    {
         lobby_buttons[i].setOrigin(lobby_buttons[i].getGlobalBounds().width / 2.0f, lobby_buttons[i].getGlobalBounds().height / 2.0f);
         sf::Vector2f pos;
         pos.x = float(VIEWER_WIDTH) / 2.0f;
-        pos.y = float(VIEWER_HEIGHT) / 2.0f + float(i) * float(VIEWER_HEIGHT) * 0.1f
-            - total_menu_height / 2.0f;
+        pos.y = float(VIEWER_HEIGHT) / 2.0f + float(i) * float(VIEWER_HEIGHT) * SPACE_BETWEEN_LOBBY_BUTTONS
+            - float(VIEWER_HEIGHT) * float(NUMBER_OF_LOBBY_BUTTONS - 1) * SPACE_BETWEEN_LOBBY_BUTTONS / 2.0f;
         lobby_buttons[i].setPosition(pos);
     }
 
@@ -49,18 +50,20 @@ Viewer::Viewer(const std::string& name) : sf::RenderWindow(sf::VideoMode(800, 80
     }
     gameover_buttons[0].setString("lobby");
     gameover_buttons[1].setString("disconnect");
+
+    float total_gameover_width = float(NUMBER_OF_GAMEOVER_BUTTONS - 1) * VIEWER_WIDTH * 0.1f;
     for (int i = 0; i < NUMBER_OF_GAMEOVER_BUTTONS; i++)
     {
-        float total_menu_width = (NUMBER_OF_GAMEOVER_BUTTONS - 1) * VIEWER_WIDTH * 0.1f;
-        for (int i = 0; i < NUMBER_OF_GAMEOVER_BUTTONS; i++)
-        {
-            total_menu_width += gameover_buttons[i].getGlobalBounds().height;
-        }
+        total_gameover_width += gameover_buttons[i].getGlobalBounds().width;
+    }
 
+    for (int i = 0; i < NUMBER_OF_GAMEOVER_BUTTONS; i++)
+    {
         gameover_buttons[i].setOrigin(gameover_buttons[i].getGlobalBounds().width / 2.0f, gameover_buttons[i].getGlobalBounds().height / 2.0f);
-        sf::Vector2f pos;
-        pos.x = float(VIEWER_WIDTH) / 2.0f + float(i) * float(VIEWER_WIDTH) * 0.3f
-            - total_menu_width / 2.0f;
+        
+        sf::Vector2f pos;   
+        pos.x = float(VIEWER_WIDTH) / 2.0f + float(i) * float(VIEWER_WIDTH) * SPACE_BETWEEN_GAMEOVER_BUTTONS
+            - SPACE_BETWEEN_GAMEOVER_BUTTONS / 2.0f * float(NUMBER_OF_GAMEOVER_BUTTONS - 1) * float(VIEWER_WIDTH);
         pos.y = float(VIEWER_HEIGHT) * 0.95f;
         gameover_buttons[i].setPosition(pos);
     }
