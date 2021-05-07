@@ -18,6 +18,23 @@ Viewer::Viewer(const std::string& name) : sf::RenderWindow(sf::VideoMode(800, 80
 
     setFramerateLimit(60);
 
+    // Setting up connect scene buttons
+    for (int i = 0; i < NUMBER_OF_CONNECT_BUTTONS; i++)
+    {
+        connect_buttons[i].setFont(font);
+    }
+    connect_buttons[0].setString("connect");
+
+    for (int i = 0; i < NUMBER_OF_CONNECT_BUTTONS; i++)
+    {
+        connect_buttons[i].setOrigin(connect_buttons[i].getGlobalBounds().width / 2.0f, connect_buttons[i].getGlobalBounds().height / 2.0f);
+        sf::Vector2f pos;
+        pos.x = float(VIEWER_WIDTH) / 2.0f;
+        pos.y = float(VIEWER_HEIGHT) / 2.0f + float(i) * float(VIEWER_HEIGHT) * SPACE_BETWEEN_CONNECT_BUTTONS
+            - float(VIEWER_HEIGHT) * float(NUMBER_OF_CONNECT_BUTTONS - 1) * SPACE_BETWEEN_CONNECT_BUTTONS / 2.0f;
+        connect_buttons[i].setPosition(pos);
+    }
+
     // Setting up lobby buttons
     for (int i = 0; i < NUMBER_OF_LOBBY_BUTTONS; i++)
     {
@@ -77,6 +94,29 @@ void Viewer::handleEvents()
         if (event.type == sf::Event::Closed)
             close();
     }
+}
+
+void Viewer::draw_connect(World& world)
+{
+    // Setting black color as a background
+    clear(sf::Color::Black);
+
+    for (auto& it : connect_buttons)
+    {
+        if (it.first == connect_selected_button)
+        {
+            it.second.setColor(sf::Color::Red);
+        }
+        else
+        {
+            it.second.setColor(sf::Color::White);
+        }
+
+        sf::RenderWindow::draw(it.second);
+    }
+
+    // Displaying
+    display();
 }
 
 void Viewer::draw_lobby(World& world)
@@ -271,6 +311,21 @@ void Viewer::draw_ongoing_game()
 
     // Displaying
     display();
+}
+
+int Viewer::get_connect_selected_button()
+{
+    return this->connect_selected_button;
+}
+
+void Viewer::set_connect_selected_button(int button)
+{
+    this->connect_selected_button = button;
+}
+
+std::map<int, sf::Text>& Viewer::get_connect_buttons()
+{
+    return this->connect_buttons;
 }
 
 int Viewer::get_lobby_selected_button()

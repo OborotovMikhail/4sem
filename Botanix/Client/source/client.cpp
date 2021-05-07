@@ -207,6 +207,13 @@ bool Client::isRunning() const
     return running;
 }
 
+void Client::connect()
+{
+    running = true; // Client now running
+    syncThread = std::thread(&Client::recieve, this); // Creating thread
+    syncThread.detach(); // Detaching thread
+}
+
 void Client::disconnect()
 {
     // Creating a packet
@@ -219,6 +226,32 @@ void Client::disconnect()
     if (socket.send(packet) != sf::Socket::Done)
     {
         std::cout << "Can't send disconnect packet to server\n";
+    }
+}
+
+void Client::events_connect(Viewer& viewer)
+{
+    // Changing buttons in connect scene
+    // Going down
+    if ((viewer.get_connect_selected_button() < (viewer.get_connect_buttons().size() - 1)) &&
+        sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+    {
+        viewer.set_connect_selected_button(viewer.get_connect_selected_button() + 1);
+        while (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {}
+    }
+    // Going up
+    if ((viewer.get_connect_selected_button() > 0) &&
+        sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+    {
+        viewer.set_connect_selected_button(viewer.get_connect_selected_button() - 1);
+        while (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {}
+    }
+
+    // Pressing connect button
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && (viewer.get_lobby_selected_button() == 0))
+    {
+        
+        while (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {}
     }
 }
 

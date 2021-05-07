@@ -17,6 +17,11 @@ class Viewer : public sf::RenderWindow
 
     sf::Font font; // Text font
 
+    const int NUMBER_OF_CONNECT_BUTTONS = 1; // Number of buttons in connect scene
+    const float SPACE_BETWEEN_CONNECT_BUTTONS = 0.1f; // Space between connect scene buttons (relative to viewer size)
+    std::map<int, sf::Text> connect_buttons; // Map of buttons in connect scene
+    int connect_selected_button = 0; // Currently selected button in connect scene
+
     const int NUMBER_OF_LOBBY_BUTTONS = 3; // Number of buttons in lobby scene
     const float SPACE_BETWEEN_LOBBY_BUTTONS = 0.1f; // Space between lobby buttons (relative to viewer size)
     std::map<int, sf::Text> lobby_buttons; // Map of buttons in lobby scene
@@ -32,12 +37,17 @@ public:
     
     void handleEvents(); // Handling viewer events function
     
-    void draw_lobby(World& world); // Draw lobby function
+    void draw_connect(World& world); // Draw connection screen scene
+    void draw_lobby(World& world); // Draw lobby scene
     void draw_hero_selection(World& world, int clientId); // Draw hero selection screen
     void draw_gameplay(World& world); // Draw world during the game
     void draw_gameover(World& world); // Draw endgame screen
     void draw_server_full(); // Draw server is full error screen
     void draw_ongoing_game(); // Draw ongoing game error screen
+
+    int get_connect_selected_button(); // Get selected connect scene button
+    void set_connect_selected_button(int button); // Set selected connect scene button
+    std::map<int, sf::Text>& get_connect_buttons(); // Get connect scene buttons map
     
     int get_lobby_selected_button(); // Get selected lobby button
     void set_lobby_selected_button(int button); // Set selected lobby button

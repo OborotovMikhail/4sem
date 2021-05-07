@@ -2,6 +2,7 @@
 
 enum class Scene
 {
+	Connect,
 	Lobby,
 	HeroSelection,
 	Gameplay,

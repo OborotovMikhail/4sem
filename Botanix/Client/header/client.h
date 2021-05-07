@@ -37,8 +37,10 @@ public:
     
     bool isRunning() const; // Is client running
 
+    void connect(); // Connect to server
     void disconnect(); // Disconnect from the server
 
+    void events_connect(Viewer& viewer); // Handle events in the connect screen
     void events_lobby(Viewer& viewer); // Handle events in the lobby
     void events_hero_selection(Viewer& viewer); // Handle events in the hero selection screen
     void events_gameover(Viewer& viewer); // Handle events in the gameover screen

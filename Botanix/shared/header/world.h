@@ -22,7 +22,7 @@ class World
     std::unordered_map<PlayerId, Player> players; // Players map
     Target target; // Target class object
 
-    Scene GameScene = Scene::Lobby;
+    Scene GameScene = Scene::Connect;
 
     PlayerId winner_id = -1; // Winner id
 
