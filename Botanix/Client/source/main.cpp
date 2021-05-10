@@ -25,7 +25,7 @@ int main()
         // Connect screen scene
         if (world.GetScene() == Scene::Connect)
         {
-            viewer.handleEvents();
+            //viewer.handleEvents();
             client.events_connect(viewer);
             viewer.draw_connect(world);
         }

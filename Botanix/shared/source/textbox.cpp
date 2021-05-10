@@ -2,6 +2,35 @@
 
 #include "textbox.h"
 
+Textbox::Textbox()
+{
+	textbox.setColor(sf::Color::White);
+	isSelected = true;
+	if (isSelected)
+	{
+		textbox.setString("_");
+	}
+	else
+	{
+		textbox.setString("");
+	}
+}
+
+Textbox::Textbox(int size, sf::Color color, bool sel)
+{
+	textbox.setCharacterSize(size);
+	textbox.setColor(color);
+	isSelected = sel;
+	if (sel)
+	{
+		textbox.setString("_");
+	}
+	else
+	{
+		textbox.setString("");
+	}
+}
+
 void Textbox::inputLogic(int charTyped)
 {
 	if (charTyped != DELETE_KEY && charTyped != ENTER_KEY && charTyped != ESCAPE_KEY)
@@ -22,7 +51,7 @@ void Textbox::deleteLastChar()
 {
 	std::string t = text.str();
 	std::string newT = "";
-	for (int i = 0; i < t.length(); i++)
+	for (int i = 0; i < t.length() - 1; i++)
 	{
 		newT += t[i];
 	}
@@ -32,22 +61,7 @@ void Textbox::deleteLastChar()
 	textbox.setString(text.str());
 }
 
-Textbox::Textbox(int size, sf::Color color, bool sel)
-{
-	textbox.setCharacterSize(size);
-	textbox.setColor(color);
-	isSelected = sel;
-	if (sel)
-	{
-		textbox.setString("_");
-	}
-	else
-	{
-		textbox.setString("");
-	}
-}
-
-void Textbox::setFont(sf::Font &font)
+void Textbox::setFont(sf::Font& font)
 {
 	textbox.setFont(font);
 }

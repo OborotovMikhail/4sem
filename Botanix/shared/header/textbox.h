@@ -4,6 +4,8 @@
 #include <SFML/Graphics.hpp>
 #include <sstream>
 
+#include "debug.h"
+
 #define DELETE_KEY 8
 #define ENTER_KEY 13 
 #define ESCAPE_KEY 27
@@ -20,9 +22,8 @@ class Textbox
 	void deleteLastChar(); // Deleting symbols from the typebox
 
 public:
-	Textbox() {}
-
-	Textbox(int size, sf::Color color, bool sel);
+	Textbox(); // Default constructor
+	Textbox(int size, sf::Color color, bool sel); // More precise constructor
 
 	void setFont(sf::Font &font); // Set typebox font
 

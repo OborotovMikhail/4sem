@@ -42,6 +42,9 @@
     <ClCompile Include="source\controls.cpp">
       <Filter>this project\source</Filter>
     </ClCompile>
+    <ClCompile Include="..\shared\source\textbox.cpp">
+      <Filter>shared\source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\shared\header\network.h">

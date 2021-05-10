@@ -16,11 +16,11 @@ Viewer::Viewer(const std::string& name) : sf::RenderWindow(sf::VideoMode(800, 80
         std::cout << "Could not load font" << std::endl;
     }
 
-    setFramerateLimit(60);
+    setFramerateLimit(60); // Setting frame limit
 
-    Textbox textbox(15, sf::Color::White, false);
+    // Setting up textbox
     textbox.setFont(font);
-    textbox.setPosition({ 100, 100 });
+    textbox.setPosition({ 100.0f, 100.0f });
     textbox.setLimit(true, 10);
 
     // Setting up connect scene buttons
