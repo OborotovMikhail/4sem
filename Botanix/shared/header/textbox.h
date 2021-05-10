@@ -1,0 +1,41 @@
+#pragma once
+
+#include <iostream>
+#include <SFML/Graphics.hpp>
+#include <sstream>
+
+#define DELETE_KEY 8
+#define ENTER_KEY 13 
+#define ESCAPE_KEY 27
+
+class Textbox
+{
+	sf::Text textbox;
+	std::ostringstream text;
+	bool isSelected = false; // Is the typebox currently selected
+	bool hasLimit = false; // If the typebox has limit
+	int limit = 0; // Typebox limit
+
+	void inputLogic(int charTyped); // Adding new symbols to the typebox
+	void deleteLastChar(); // Deleting symbols from the typebox
+
+public:
+	Textbox() {}
+
+	Textbox(int size, sf::Color color, bool sel);
+
+	void setFont(sf::Font &font); // Set typebox font
+
+	void setPosition(sf::Vector2f pos); // Set typebox position
+
+	void setLimit(bool ToF); // Set if the typebox has limit
+	void setLimit(bool ToF, int lim); // Set if the typebox has limit and the limit itself
+
+	void setSelected(bool sel); // Set if the typebox is selected
+
+	std::string getText(); // Get typebox string
+
+	void drawTo(sf::RenderWindow& window); // Draw typebox to the window
+
+	void typedOn(sf::Event input); // Input to typebox
+};
