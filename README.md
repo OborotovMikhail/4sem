@@ -3,11 +3,11 @@ This is a repository with all my programming tasks and homework from 4th semeste
 
 
 ## ~INFO ##  
-Contains all the materials, presentations, examples.
-
-## ~OTHER ##  
-Contains all other extra practice projects.
+This directory contains all the materials, presentations, examples.
 
 ## ~TEMPLATES ##  
-Contains all created project templates for VisualStudio
+This directory contains all created project templates for VisualStudio
 with different 3rd party dependencies.
+
+## Other directories ##
+All other directories are different projects.
