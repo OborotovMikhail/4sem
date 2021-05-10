@@ -18,6 +18,11 @@ Viewer::Viewer(const std::string& name) : sf::RenderWindow(sf::VideoMode(800, 80
 
     setFramerateLimit(60);
 
+    Textbox textbox(15, sf::Color::White, false);
+    textbox.setFont(font);
+    textbox.setPosition({ 100, 100 });
+    textbox.setLimit(true, 10);
+
     // Setting up connect scene buttons
     for (int i = 0; i < NUMBER_OF_CONNECT_BUTTONS; i++)
     {
@@ -114,6 +119,8 @@ void Viewer::draw_connect(World& world)
 
         sf::RenderWindow::draw(it.second);
     }
+
+    sf::RenderWindow::draw(textbox.getDrawable());
 
     // Displaying
     display();
@@ -361,4 +368,9 @@ std::map<int, sf::Text>& Viewer::get_gameover_buttons()
 int Viewer::get_number_of_heroes()
 {
     return this->NUMBER_OF_HEROES;
+}
+
+Textbox& Viewer::getTextbox()
+{
+    return this->textbox;
 }

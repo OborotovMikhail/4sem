@@ -228,6 +228,19 @@ void Client::disconnect()
 
 void Client::events_connect(Viewer& viewer)
 {
+    sf::Event my_event;
+
+    while (viewer.pollEvent(my_event))
+    {
+        switch (my_event.type)
+        {
+        case sf::Event::Closed:
+            viewer.close();
+        case sf::Event::TextEntered:
+            viewer.getTextbox().typedOn(my_event);
+        }
+    }
+
     // Changing buttons in connect scene
     // Going down
     if ((viewer.get_connect_selected_button() < (viewer.get_connect_buttons().size() - 1)) &&

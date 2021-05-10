@@ -3,6 +3,7 @@
 #include <SFML\Graphics.hpp>
 
 #include "world.h"
+#include "textbox.h"
 
 class Viewer : public sf::RenderWindow
 {
@@ -16,6 +17,8 @@ class Viewer : public sf::RenderWindow
     std::map<int, sf::Texture> player_textures; // Map of player textures
 
     sf::Font font; // Text font
+
+    Textbox textbox;
 
     const int NUMBER_OF_CONNECT_BUTTONS = 1; // Number of buttons in connect scene
     const float SPACE_BETWEEN_CONNECT_BUTTONS = 0.1f; // Space between connect scene buttons (relative to viewer size)
@@ -58,4 +61,6 @@ public:
     std::map<int, sf::Text>& get_gameover_buttons(); // Get gameover buttons map
 
     int get_number_of_heroes();
+
+    Textbox& getTextbox();
 };

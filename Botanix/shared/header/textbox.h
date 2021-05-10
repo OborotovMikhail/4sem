@@ -37,5 +37,7 @@ public:
 
 	void drawTo(sf::RenderWindow& window); // Draw typebox to the window
 
+	sf::Text getDrawable();
+
 	void typedOn(sf::Event input); // Input to typebox
 };

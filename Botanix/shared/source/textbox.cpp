@@ -94,6 +94,11 @@ void Textbox::drawTo(sf::RenderWindow& window)
 	window.draw(textbox);
 }
 
+sf::Text Textbox::getDrawable()
+{
+	return this->textbox;
+}
+
 void Textbox::typedOn(sf::Event input)
 {
 	if (isSelected)
