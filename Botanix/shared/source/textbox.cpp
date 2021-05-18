@@ -71,9 +71,19 @@ void Textbox::setColor(sf::Color color)
 	this->textbox.setColor(color);
 }
 
+void Textbox::setOrigin(sf::Vector2f pos)
+{
+	this->textbox.setOrigin(pos);
+}
+
 void Textbox::setPosition(sf::Vector2f pos)
 {
 	textbox.setPosition(pos);
+}
+
+sf::FloatRect Textbox::getGlobalBounds()
+{
+	return this->textbox.getGlobalBounds();
 }
 
 void Textbox::setLimit(bool ToF)

@@ -29,7 +29,11 @@ public:
 
 	void setColor(sf::Color color); // Set typebox color
 
+	void setOrigin(sf::Vector2f pos); // Set textbox origin
+
 	void setPosition(sf::Vector2f pos); // Set typebox position
+
+	sf::FloatRect getGlobalBounds(); // Get textbox global bounds
 
 	void setLimit(bool ToF); // Set if the typebox has limit
 	void setLimit(bool ToF, int lim); // Set if the typebox has limit and the limit itself

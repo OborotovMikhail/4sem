@@ -228,6 +228,17 @@ void Client::disconnect()
 
 void Client::events_connect(Viewer& viewer)
 {
+    sf::Event my_event; // Getting event
+
+    // Close window event
+    while (viewer.pollEvent(my_event))
+    {
+        if (my_event.type == sf::Event::Closed)
+        {
+            viewer.close();
+        }
+    }
+
     // Changing buttons in connect scene
     // Going down
     if ((viewer.get_connect_selected_button() < (viewer.get_connect_menu_size() - 1)) &&
@@ -255,15 +266,10 @@ void Client::events_connect(Viewer& viewer)
     // Inputing to textboxes
     if (viewer.get_connect_selected_button() < viewer.get_number_of_textboxes())
     {
-        sf::Event my_event;
-
         while (viewer.pollEvent(my_event))
         {
-            switch (my_event.type)
+            if (my_event.type == sf::Event::TextEntered)
             {
-            case sf::Event::Closed:
-                viewer.close();
-            case sf::Event::TextEntered:
                 viewer.getTextbox()[viewer.get_connect_selected_button()].typedOn(my_event);
             }
         }

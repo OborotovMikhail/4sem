@@ -23,7 +23,14 @@ Viewer::Viewer(const std::string& name) : sf::RenderWindow(sf::VideoMode(800, 80
     for (int i = 0; i < NUMBER_OF_CONNECT_TEXTBOXES; i++)
     {
         connect_textboxes[i].setFont(font);
-        connect_textboxes[i].setPosition({ 100.0f, (1.0f + float(i)) * 100.0f });
+        connect_textboxes[i].setOrigin({ 0.0f, connect_textboxes[i].getGlobalBounds().height / 2.0f });
+
+        sf::Vector2f pos;
+        pos.x = float(VIEWER_WIDTH) / 2.0f;
+        pos.y = float(VIEWER_HEIGHT) / 2.0f + float(i) * float(VIEWER_HEIGHT) * SPACE_BETWEEN_CONNECT_BUTTONS
+            - float(VIEWER_HEIGHT) * float(CONNECT_MENU_SIZE - 1) * SPACE_BETWEEN_CONNECT_BUTTONS / 2.0f;
+
+        connect_textboxes[i].setPosition(pos);
         connect_textboxes[i].setLimit(true, 10);
     }
 
@@ -35,7 +42,7 @@ Viewer::Viewer(const std::string& name) : sf::RenderWindow(sf::VideoMode(800, 80
         sf::Vector2f pos;
         pos.x = float(VIEWER_WIDTH) / 2.0f;
         pos.y = float(VIEWER_HEIGHT) / 2.0f + float(i) * float(VIEWER_HEIGHT) * SPACE_BETWEEN_CONNECT_BUTTONS
-            - float(VIEWER_HEIGHT) * float(NUMBER_OF_CONNECT_BUTTONS - 1) * SPACE_BETWEEN_CONNECT_BUTTONS / 2.0f;
+            - float(VIEWER_HEIGHT) * float(CONNECT_MENU_SIZE - 1) * SPACE_BETWEEN_CONNECT_BUTTONS / 2.0f;
         connect_buttons[i].setPosition(pos);
     }
     connect_buttons[0].setString("connect");
