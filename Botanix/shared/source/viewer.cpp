@@ -16,22 +16,21 @@ Viewer::Viewer(const std::string& name) : sf::RenderWindow(sf::VideoMode(800, 80
         std::cout << "Could not load font" << std::endl;
     }
 
-    setFramerateLimit(60); // Setting frame limit
+    // Setting frame limit
+    setFramerateLimit(60);
 
-    // Setting up textbox
-    textbox.setFont(font);
-    textbox.setPosition({ 100.0f, 100.0f });
-    textbox.setLimit(true, 10);
+    // Setting up connect scene textboxes
+    for (int i = 0; i < NUMBER_OF_CONNECT_TEXTBOXES; i++)
+    {
+        connect_textboxes[i].setFont(font);
+        connect_textboxes[i].setPosition({ 100.0f, (1.0f + float(i)) * 100.0f });
+        connect_textboxes[i].setLimit(true, 10);
+    }
 
     // Setting up connect scene buttons
     for (int i = 0; i < NUMBER_OF_CONNECT_BUTTONS; i++)
     {
         connect_buttons[i].setFont(font);
-    }
-    connect_buttons[0].setString("connect");
-
-    for (int i = 0; i < NUMBER_OF_CONNECT_BUTTONS; i++)
-    {
         connect_buttons[i].setOrigin(connect_buttons[i].getGlobalBounds().width / 2.0f, connect_buttons[i].getGlobalBounds().height / 2.0f);
         sf::Vector2f pos;
         pos.x = float(VIEWER_WIDTH) / 2.0f;
@@ -39,6 +38,7 @@ Viewer::Viewer(const std::string& name) : sf::RenderWindow(sf::VideoMode(800, 80
             - float(VIEWER_HEIGHT) * float(NUMBER_OF_CONNECT_BUTTONS - 1) * SPACE_BETWEEN_CONNECT_BUTTONS / 2.0f;
         connect_buttons[i].setPosition(pos);
     }
+    connect_buttons[0].setString("connect");
 
     // Setting up lobby buttons
     for (int i = 0; i < NUMBER_OF_LOBBY_BUTTONS; i++)
@@ -106,7 +106,8 @@ void Viewer::draw_connect(World& world)
     // Setting black color as a background
     clear(sf::Color::Black);
 
-    for (auto& it : connect_buttons)
+    // Drawing textboxes
+    for (auto& it : connect_textboxes)
     {
         if (it.first == connect_selected_button)
         {
@@ -117,10 +118,23 @@ void Viewer::draw_connect(World& world)
             it.second.setColor(sf::Color::White);
         }
 
-        sf::RenderWindow::draw(it.second);
+        sf::RenderWindow::draw(it.second.getDrawable());
     }
 
-    sf::RenderWindow::draw(textbox.getDrawable());
+    // Drawing buttons
+    for (auto& it : connect_buttons)
+    {
+        if (it.first == (connect_selected_button - NUMBER_OF_CONNECT_TEXTBOXES))
+        {
+            it.second.setColor(sf::Color::Red);
+        }
+        else
+        {
+            it.second.setColor(sf::Color::White);
+        }
+
+        sf::RenderWindow::draw(it.second);
+    }
 
     // Displaying
     display();
@@ -320,6 +334,16 @@ void Viewer::draw_ongoing_game()
     display();
 }
 
+int Viewer::get_connect_menu_size()
+{
+    return CONNECT_MENU_SIZE;
+}
+
+int Viewer::get_number_of_textboxes()
+{
+    return NUMBER_OF_CONNECT_TEXTBOXES;
+}
+
 int Viewer::get_connect_selected_button()
 {
     return this->connect_selected_button;
@@ -370,7 +394,7 @@ int Viewer::get_number_of_heroes()
     return this->NUMBER_OF_HEROES;
 }
 
-Textbox& Viewer::getTextbox()
+std::map<int, Textbox>& Viewer::getTextbox()
 {
-    return this->textbox;
+    return this->connect_textboxes;
 }

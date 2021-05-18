@@ -18,10 +18,11 @@ class Viewer : public sf::RenderWindow
 
     sf::Font font; // Text font
 
-    Textbox textbox;
-
+    const int CONNECT_MENU_SIZE = 3;
+    const int NUMBER_OF_CONNECT_TEXTBOXES = 2; // Number of textboxes in connect scene
     const int NUMBER_OF_CONNECT_BUTTONS = 1; // Number of buttons in connect scene
     const float SPACE_BETWEEN_CONNECT_BUTTONS = 0.1f; // Space between connect scene buttons (relative to viewer size)
+    std::map<int, Textbox> connect_textboxes; // Map of textboxes in connect scene
     std::map<int, sf::Text> connect_buttons; // Map of buttons in connect scene
     int connect_selected_button = 0; // Currently selected button in connect scene
 
@@ -48,6 +49,8 @@ public:
     void draw_server_full(); // Draw server is full error screen
     void draw_ongoing_game(); // Draw ongoing game error screen
 
+    int get_connect_menu_size(); // Get the number of total number of buttons (including textboxes)
+    int get_number_of_textboxes(); // Get the number of textboxes in the connection scene
     int get_connect_selected_button(); // Get selected connect scene button
     void set_connect_selected_button(int button); // Set selected connect scene button
     std::map<int, sf::Text>& get_connect_buttons(); // Get connect scene buttons map
@@ -62,5 +65,5 @@ public:
 
     int get_number_of_heroes();
 
-    Textbox& getTextbox();
+    std::map<int, Textbox>& getTextbox();
 };

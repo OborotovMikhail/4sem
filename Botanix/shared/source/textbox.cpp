@@ -66,6 +66,11 @@ void Textbox::setFont(sf::Font& font)
 	textbox.setFont(font);
 }
 
+void Textbox::setColor(sf::Color color)
+{
+	this->textbox.setColor(color);
+}
+
 void Textbox::setPosition(sf::Vector2f pos)
 {
 	textbox.setPosition(pos);

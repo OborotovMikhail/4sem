@@ -27,6 +27,8 @@ public:
 
 	void setFont(sf::Font &font); // Set typebox font
 
+	void setColor(sf::Color color); // Set typebox color
+
 	void setPosition(sf::Vector2f pos); // Set typebox position
 
 	void setLimit(bool ToF); // Set if the typebox has limit
