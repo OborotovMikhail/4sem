@@ -42,6 +42,8 @@ public:
 
 	std::string getText(); // Get typebox string
 
+	void setText(std::string str); // Set text to textbox (Only to visual part!)
+
 	void drawTo(sf::RenderWindow& window); // Draw typebox to the window
 
 	sf::Text getDrawable();

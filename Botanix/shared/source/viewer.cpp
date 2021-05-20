@@ -19,35 +19,64 @@ Viewer::Viewer(const std::string& name) : sf::RenderWindow(sf::VideoMode(800, 80
     // Setting frame limit
     setFramerateLimit(60);
 
+    // DEBUG
+    debugcirc.setFillColor(sf::Color::Blue);
+    debugcirc.setRadius(5.0f);
+    debugcirc.setOrigin(debugcirc.getRadius(), debugcirc.getRadius());
+    //debugcirc.setPosition(0.0f, 0.0f);
+
     // Setting up connect scene textboxes
     for (int i = 0; i < NUMBER_OF_CONNECT_TEXTBOXES; i++)
     {
         connect_textboxes[i].setFont(font);
+
+        connect_textboxes[i].setText("init");
+
         connect_textboxes[i].setOrigin({ 0.0f, connect_textboxes[i].getGlobalBounds().height / 2.0f });
 
         sf::Vector2f pos;
-        pos.x = float(VIEWER_WIDTH) / 2.0f;
+        pos.x = float(VIEWER_WIDTH) / 2.0f + float(VIEWER_WIDTH) * SPACE_BETWEEN_CONNECT_BUTTONS / 4.0f;
         pos.y = float(VIEWER_HEIGHT) / 2.0f + float(i) * float(VIEWER_HEIGHT) * SPACE_BETWEEN_CONNECT_BUTTONS
             - float(VIEWER_HEIGHT) * float(CONNECT_MENU_SIZE - 1) * SPACE_BETWEEN_CONNECT_BUTTONS / 2.0f;
 
         connect_textboxes[i].setPosition(pos);
         connect_textboxes[i].setLimit(true, 10);
+
+        connect_textboxes[i].setText("");
     }
 
-    // Setting up connect scene buttons
-    for (int i = 0; i < NUMBER_OF_CONNECT_BUTTONS; i++)
+    // Setting up connect scene buttons (buttons near the textboxes)
+    connect_buttons[0].setString("nickname:");
+    connect_buttons[1].setString("server ip:");
+    for (int i = 0; i < 2; i++)
     {
         connect_buttons[i].setFont(font);
+
+        connect_buttons[i].setOrigin(connect_buttons[i].getGlobalBounds().width, connect_buttons[i].getGlobalBounds().height / 2.0f);
+
+        sf::Vector2f pos;
+        pos.x = float(VIEWER_WIDTH) / 2.0f - float(VIEWER_WIDTH) * SPACE_BETWEEN_CONNECT_BUTTONS / 4.0f;
+        pos.y = float(VIEWER_HEIGHT) / 2.0f + float(i) * float(VIEWER_HEIGHT) * SPACE_BETWEEN_CONNECT_BUTTONS
+            - float(VIEWER_HEIGHT) * float(CONNECT_MENU_SIZE - 1) * SPACE_BETWEEN_CONNECT_BUTTONS / 2.0f;
+
+        connect_buttons[i].setPosition(pos);
+    }
+
+    // Setting up connect scene buttons (buttons by themselfes)
+    connect_buttons[2].setString("connect");
+    for (int i = 2; i < NUMBER_OF_CONNECT_BUTTONS; i++)
+    {
+        connect_buttons[i].setFont(font);
+        
         connect_buttons[i].setOrigin(connect_buttons[i].getGlobalBounds().width / 2.0f, connect_buttons[i].getGlobalBounds().height / 2.0f);
         
         sf::Vector2f pos;
         pos.x = float(VIEWER_WIDTH) / 2.0f;
-        pos.y = float(VIEWER_HEIGHT) / 2.0f + float(i + NUMBER_OF_CONNECT_TEXTBOXES) * float(VIEWER_HEIGHT) * SPACE_BETWEEN_CONNECT_BUTTONS
+        pos.y = float(VIEWER_HEIGHT) / 2.0f + float(i) * float(VIEWER_HEIGHT) * SPACE_BETWEEN_CONNECT_BUTTONS
             - float(VIEWER_HEIGHT) * float(CONNECT_MENU_SIZE - 1) * SPACE_BETWEEN_CONNECT_BUTTONS / 2.0f;
         
         connect_buttons[i].setPosition(pos);
     }
-    connect_buttons[0].setString("connect");
 
     // Setting up lobby buttons
     for (int i = 0; i < NUMBER_OF_LOBBY_BUTTONS; i++)
@@ -133,7 +162,7 @@ void Viewer::draw_connect(World& world)
     // Drawing buttons
     for (auto& it : connect_buttons)
     {
-        if (it.first == (connect_selected_button - NUMBER_OF_CONNECT_TEXTBOXES))
+        if (it.first == connect_selected_button)
         {
             it.second.setColor(sf::Color::Red);
         }
@@ -144,6 +173,9 @@ void Viewer::draw_connect(World& world)
 
         sf::RenderWindow::draw(it.second);
     }
+
+    // DEBUG
+    sf::RenderWindow::draw(this->debugcirc);
 
     // Displaying
     display();

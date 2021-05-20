@@ -118,6 +118,11 @@ std::string Textbox::getText()
 	return text.str();
 }
 
+void Textbox::setText(std::string str)
+{
+	this->textbox.setString(str);
+}
+
 void Textbox::drawTo(sf::RenderWindow& window)
 {
 	window.draw(textbox);
