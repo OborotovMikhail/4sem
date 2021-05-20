@@ -266,7 +266,7 @@ void Client::events_connect(Viewer& viewer)
     }
 
     // Pressing connect button
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && (viewer.get_connect_selected_button() == 2))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && (viewer.get_connect_selected_button() == 3))
     {
         this->connect();
         world.SetScene(Scene::Lobby);

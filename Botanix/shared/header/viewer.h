@@ -11,18 +11,15 @@ class Viewer : public sf::RenderWindow
     const int VIEWER_WIDTH = 800;
     const int VIEWER_HEIGHT = 800;
 
-    sf::CircleShape debugcirc;
-
     const float HERO_SCALE_FACTOR = 0.7f;
 
     const int NUMBER_OF_HEROES = 3;
     std::map<int, sf::Texture> player_textures; // Map of player textures
 
     sf::Font font; // Text font
-
-    const int CONNECT_MENU_SIZE = 3;
-    const int NUMBER_OF_CONNECT_TEXTBOXES = 2; // Number of textboxes in connect scene
-    const int NUMBER_OF_CONNECT_BUTTONS = 3; // Number of buttons in connect scene
+    
+    const int NUMBER_OF_CONNECT_TEXTBOXES = 3; // Number of textboxes in connect scene
+    const int NUMBER_OF_CONNECT_BUTTONS = 4; // Number of buttons in connect scene (total, with textboxes)
     const float SPACE_BETWEEN_CONNECT_BUTTONS = 0.1f; // Space between connect scene buttons (relative to viewer size)
     std::map<int, Textbox> connect_textboxes; // Map of textboxes in connect scene
     std::map<int, sf::Text> connect_buttons; // Map of buttons in connect scene
