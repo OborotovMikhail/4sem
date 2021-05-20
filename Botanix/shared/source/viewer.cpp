@@ -39,10 +39,12 @@ Viewer::Viewer(const std::string& name) : sf::RenderWindow(sf::VideoMode(800, 80
     {
         connect_buttons[i].setFont(font);
         connect_buttons[i].setOrigin(connect_buttons[i].getGlobalBounds().width / 2.0f, connect_buttons[i].getGlobalBounds().height / 2.0f);
+        
         sf::Vector2f pos;
         pos.x = float(VIEWER_WIDTH) / 2.0f;
-        pos.y = float(VIEWER_HEIGHT) / 2.0f + float(i) * float(VIEWER_HEIGHT) * SPACE_BETWEEN_CONNECT_BUTTONS
+        pos.y = float(VIEWER_HEIGHT) / 2.0f + float(i + NUMBER_OF_CONNECT_TEXTBOXES) * float(VIEWER_HEIGHT) * SPACE_BETWEEN_CONNECT_BUTTONS
             - float(VIEWER_HEIGHT) * float(CONNECT_MENU_SIZE - 1) * SPACE_BETWEEN_CONNECT_BUTTONS / 2.0f;
+        
         connect_buttons[i].setPosition(pos);
     }
     connect_buttons[0].setString("connect");

@@ -230,12 +230,22 @@ void Client::events_connect(Viewer& viewer)
 {
     sf::Event my_event; // Getting event
 
-    // Close window event
+    // Processing events
     while (viewer.pollEvent(my_event))
     {
+        // Close window event
         if (my_event.type == sf::Event::Closed)
         {
             viewer.close();
+        }
+
+        // Text input event
+        if (viewer.get_connect_selected_button() < viewer.get_number_of_textboxes())
+        {
+            if (my_event.type == sf::Event::TextEntered)
+            {
+                viewer.getTextbox()[viewer.get_connect_selected_button()].typedOn(my_event);
+            }
         }
     }
 
@@ -256,23 +266,11 @@ void Client::events_connect(Viewer& viewer)
     }
 
     // Pressing connect button
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && (viewer.get_lobby_selected_button() == 0))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && (viewer.get_connect_selected_button() == 2))
     {
         this->connect();
         world.SetScene(Scene::Lobby);
         while (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {}
-    }
-
-    // Inputing to textboxes
-    if (viewer.get_connect_selected_button() < viewer.get_number_of_textboxes())
-    {
-        while (viewer.pollEvent(my_event))
-        {
-            if (my_event.type == sf::Event::TextEntered)
-            {
-                viewer.getTextbox()[viewer.get_connect_selected_button()].typedOn(my_event);
-            }
-        }
     }
 }
 
