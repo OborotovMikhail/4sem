@@ -13,6 +13,8 @@ class Client
     int port; // Server ort
     float serverTime = 0.0f; // Server time
 
+    std::string clientNickname; // Player nickname for this client
+
     std::atomic<bool> running = false; // Is running, default = false
 
     World& world; // World pointer

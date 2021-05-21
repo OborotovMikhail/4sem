@@ -6,11 +6,13 @@ enum Message
 	ClientDisconnect,
 	ClientReady,
 	ClientHeroSelected,
+	ClientNickname,
 	UpdateWorld,
 	Movement,
 	SceneGameplay,
 	SceneGameover,
 	RemovePlayer,
+	PlayerNicknames,
 	PlayerHeroSelected,
 	ErrorServerFull,
 	ErrorOngoingGame

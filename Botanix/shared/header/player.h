@@ -5,6 +5,8 @@
 
 class Player
 {
+    std::string nickname; // Player nickname
+
     const float RADIUS = 100.0f; // Player radius
     const int FINAL_SCORE = 1; // Score needed to win the game
     const float SPEED = 300.0f; // Pixels per second, used as a reference to calculate velocity
@@ -56,4 +58,7 @@ public:
 
     bool isHeroSelected();
     void setHeroSelectionConfirm(bool x);
+
+    std::string getNickname(); // Get player nickname
+    void setNickname(std::string name); // Set player nickname
 };

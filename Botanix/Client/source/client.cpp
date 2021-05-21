@@ -65,8 +65,38 @@ void Client::recieve()
                 std::cout << std::endl;
 
                 clock.restart();
+
+                // Sending client nickname to server
+                sf::Packet toServer;
+                toServer << Message::ClientNickname << id() << this->clientNickname;
+
+                // Sending packet
+                if (socket.send(toServer) != sf::Socket::Done)
+                {
+                    std::cout << "Can't send client nickname to server\n";
+                }
                 
                 world.SetScene(Scene::Lobby);
+            }
+
+            // Nicknames packet processing
+            if (type == Message::PlayerNicknames)
+            {
+                {
+                    int n; // Number of players
+                    packet >> n; // Getting number of players from packet
+                    std::lock_guard<std::mutex> m(world.mutex);
+
+                    for (int i = 0; i < n; i++)
+                    {
+                        int index; // Player id
+                        std::string nickname; // Player nickname
+
+                        packet >> index >> nickname;
+
+                        world.get_players()[index].setNickname(nickname);
+                    }
+                }
             }
 
             // Update world packet processing
@@ -270,6 +300,7 @@ void Client::events_connect(Viewer& viewer)
     // Pressing connect button
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && (viewer.get_connect_selected_button() == 3))
     {
+        this->clientNickname = viewer.getTextbox()[0].getText(); // Setting up client nickname
         this->ip = viewer.getTextbox()[1].getText(); // Setting up server ip
         this->port = std::stoi(viewer.getTextbox()[2].getText()); // Setting up server port
 

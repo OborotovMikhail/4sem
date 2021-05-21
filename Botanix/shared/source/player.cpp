@@ -116,3 +116,13 @@ void Player::setHeroSelectionConfirm(bool x)
 {
 	this->is_hero_selected = x;
 }
+
+std::string Player::getNickname()
+{
+	return this->nickname;
+}
+
+void Player::setNickname(std::string name)
+{
+	this->nickname = name;
+}
