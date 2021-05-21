@@ -9,9 +9,9 @@
 
 class Client
 {
-    const std::string ip; // Ip adress
-    const int port; // Port
-    float serverTime = 0.f; // Server time
+    std::string ip; // Server ip adress
+    int port; // Server ort
+    float serverTime = 0.0f; // Server time
 
     std::atomic<bool> running = false; // Is running, default = false
 

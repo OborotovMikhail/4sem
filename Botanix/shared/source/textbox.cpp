@@ -44,7 +44,7 @@ void Textbox::inputLogic(int charTyped)
 			deleteLastChar();
 		}
 	}
-	textbox.setString(text.str() + "_");
+	textbox.setString(text.str());
 }
 
 void Textbox::deleteLastChar()
@@ -121,6 +121,7 @@ std::string Textbox::getText()
 void Textbox::setText(std::string str)
 {
 	this->textbox.setString(str);
+	this->text.str(str);
 }
 
 void Textbox::drawTo(sf::RenderWindow& window)

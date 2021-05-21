@@ -43,6 +43,9 @@ Viewer::Viewer(const std::string& name) : sf::RenderWindow(sf::VideoMode(800, 80
     connect_buttons[0].setString("nickname:");
     connect_buttons[1].setString("server ip:");
     connect_buttons[2].setString("server port:");
+    connect_textboxes[0].setText("Player");
+    connect_textboxes[1].setText("127.0.0.1");
+    connect_textboxes[2].setText("1234");
     for (int i = 0; i < NUMBER_OF_CONNECT_TEXTBOXES; i++)
     {
         connect_buttons[i].setFont(font);

@@ -65,6 +65,8 @@ void Client::recieve()
                 std::cout << std::endl;
 
                 clock.restart();
+                
+                world.SetScene(Scene::Lobby);
             }
 
             // Update world packet processing
@@ -268,8 +270,11 @@ void Client::events_connect(Viewer& viewer)
     // Pressing connect button
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && (viewer.get_connect_selected_button() == 3))
     {
+        this->ip = viewer.getTextbox()[1].getText(); // Setting up server ip
+        this->port = std::stoi(viewer.getTextbox()[2].getText()); // Setting up server port
+
         this->connect();
-        world.SetScene(Scene::Lobby);
+
         while (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {}
     }
 }
